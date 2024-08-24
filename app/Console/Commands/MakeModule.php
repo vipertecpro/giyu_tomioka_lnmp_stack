@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
 
 class MakeModule extends Command
 {
@@ -37,7 +38,6 @@ class MakeModule extends Command
     public function handle()
     {
         $name = ucfirst($this->argument('name'));
-
         // Always create a migration by default
         $this->createMigration($name);
 
@@ -80,62 +80,57 @@ class MakeModule extends Command
         if ($this->option('listener')) {
             $this->createListener($name);
         }
-
         $this->info("Module {$name} created successfully!");
-
         return 0;
     }
-
-    protected function createMigration($name)
+    protected function createMigration($name): void
     {
-        $tableName = strtolower($name) . 's';
+        $parts = preg_split('/(?=[A-Z])/', $name, -1, PREG_SPLIT_NO_EMPTY);
+        $tableName = strtolower(implode('_', $parts));
+        $lastPart = end($parts);
+        if (!str_ends_with($lastPart, 's')) {
+            $parts[count($parts) - 1] = Str::plural($lastPart);
+            $tableName = strtolower(implode('_', $parts));
+        }
         Artisan::call("make:migration create_{$tableName}_table --create={$tableName}");
         $this->info("Migration for {$name} created successfully!");
     }
-
-    protected function createModel($name)
+    protected function createModel($name): void
     {
         Artisan::call("make:model {$name}");
         $this->info("Model {$name} created successfully!");
     }
-
-    protected function createController($name)
+    protected function createController($name): void
     {
         Artisan::call("make:controller {$name}Controller");
         $this->info("Controller {$name}Controller created successfully!");
     }
-
-    protected function createSeeder($name)
+    protected function createSeeder($name): void
     {
         Artisan::call("make:seeder {$name}Seeder");
         $this->info("Seeder {$name}Seeder created successfully!");
     }
-
-    protected function createFactory($name)
+    protected function createFactory($name): void
     {
         Artisan::call("make:factory {$name}Factory");
         $this->info("Factory {$name}Factory created successfully!");
     }
-
-    protected function createObserver($name)
+    protected function createObserver($name): void
     {
         Artisan::call("make:observer {$name}Observer --model={$name}");
         $this->info("Observer {$name}Observer created successfully!");
     }
-
-    protected function createNotification($name)
+    protected function createNotification($name): void
     {
         Artisan::call("make:notification {$name}Notification");
         $this->info("Notification {$name}Notification created successfully!");
     }
-
-    protected function createEvent($name)
+    protected function createEvent($name): void
     {
         Artisan::call("make:event {$name}Event");
         $this->info("Event {$name}Event created successfully!");
     }
-
-    protected function createListener($name)
+    protected function createListener($name): void
     {
         Artisan::call("make:listener {$name}Listener");
         $this->info("Listener {$name}Listener created successfully!");

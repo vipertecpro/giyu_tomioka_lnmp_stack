@@ -33,6 +33,22 @@ You can extend these command further by adding additional options or modifying e
 
 This approach keeps your codebase clean and organized, especially when modules are no longer needed.
 
+
+Sample project structure:
+```
+php artisan make:module Role --model --seeder --controller
+php artisan make:module Permission --model --seeder --controller
+php artisan make:module Page --model --seeder --controller
+php artisan make:module Blog --model --seeder --controller
+php artisan make:module Tag --model --seeder --controller
+php artisan make:module BlogTag
+php artisan make:module BlogCategory
+php artisan make:module Category --model --seeder --controller
+php artisan make:module Comment --model --seeder --controller
+php artisan make:module Metadata --model --seeder
+php artisan make:module GlobalSetting --model --seeder --controller
+```
+
 -------
 # I AM WORKING ON IT  :D
 
