@@ -14,6 +14,18 @@ class ClientPagesController extends Controller
         return view('client.pages.auth.login');
     }
     /**
+     * Register Page
+     * */
+    public function register(){
+        return view('client.pages.auth.register');
+    }
+    /**
+     * Forget Password
+     * */
+    public function forgetPassword(){
+        return view('client.pages.auth.forgetPassword');
+    }
+    /**
      * Home Page
      * */
     public function home(){

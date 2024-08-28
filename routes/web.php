@@ -28,7 +28,11 @@ Route::group([
     Route::get('/category/{category_slug}',[ClientPagesController::class,'categoryForBlogs'])->name('categoryForBlogs');
     Route::get('/tag/{tag_slug}',[ClientPagesController::class,'tagForBlogs'])->name('tagForBlogs');
     Route::get('/login',[ClientPagesController::class,'login'])->name('login');
-    Route::post('/login',[ClientPagesController::class,'login'])->name('submitLogin');
+    Route::post('/login',[ClientPagesController::class,'submitLogin'])->name('submitLogin');
+    Route::get('/register',[ClientPagesController::class,'register'])->name('register');
+    Route::post('/register',[ClientPagesController::class,'submitRegister'])->name('submitRegister');
+    Route::get('/forget-password',[ClientPagesController::class,'forgetPassword'])->name('forgetPassword');
+    Route::post('/forget-password',[ClientPagesController::class,'submitForgetPassword'])->name('submitForgetPassword');
     Route::group([
         'prefix'    => 'dashboard',
         'as'        => 'dashboard.',
