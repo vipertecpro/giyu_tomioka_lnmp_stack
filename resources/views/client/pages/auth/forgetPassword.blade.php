@@ -20,7 +20,7 @@
                 </form>
                 <div class="flex flex-col xl:flex-row items-center justify-between">
                     <p class="text-sm font-light text-gray-500 dark:text-gray-300">
-                        Don’t have an account? <a href="{{ route('client.register') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>.
+                        Don’t have an account? <a href="{{ route('client.register') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Register here</a>.
                     </p>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-300">
                         Already have an account? <a href="{{ route('client.login') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>.
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="mr-auto place-self-center lg:col-span-6 px-10">
-                <img class="hidden mx-auto lg:flex rounded-lg" src="{{ asset('assets/images/forget_password.jpg') }}" alt="illustration">
+                <img class="hidden mx-auto lg:flex rounded-lg" src="{{ asset('assets/images/forget_password.svg') }}" alt="illustration">
             </div>
         </div>
     </section>

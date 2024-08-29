@@ -73,7 +73,7 @@
                 </p>
             </div>
             <div class="mr-auto place-self-center lg:col-span-6 px-10">
-                <img class="hidden mx-auto lg:flex rounded-lg" src="{{ asset('assets/images/register.jpg') }}" alt="illustration">
+                <img class="hidden mx-auto lg:flex rounded-lg" src="{{ asset('assets/images/register.svg') }}" alt="illustration">
             </div>
         </div>
     </section>
