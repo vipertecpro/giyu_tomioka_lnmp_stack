@@ -6,6 +6,8 @@
     <title>{{ env('APP_NAME') }} {{ @$pageTitle ? ' | '.@$pageTitle : '' }}</title>
     @stack('stylesAndScripts')
 </head>
-    @yield('content')
-    @stack('bodyStylesAndScripts')
+<body class="dark:bg-gray-900">
+   @yield('content')
+   @stack('bodyStylesAndScripts')
+</body>
 </html>

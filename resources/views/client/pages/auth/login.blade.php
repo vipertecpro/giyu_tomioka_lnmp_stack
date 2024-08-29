@@ -1,9 +1,9 @@
 @extends('client.layouts.app')
 
 @section('appContent')
-    <section class="grid lg:grid-cols-12 mx-auto">
-        <div class="place-self-center lg:col-span-6">
-            <div class="p-4 mx-auto bg-white rounded-lg shadow dark:bg-gray-800 sm:max-w-xl">
+    <section class="bg-white dark:bg-gray-900 antialiased">
+        <div class="grid lg:grid-cols-12">
+            <div class="place-self-center w-full h-full p-4 bg-white rounded-lg shadow dark:bg-gray-800  lg:col-span-6 flex flex-col justify-between">
                 <form class="my-4 space-y-6 sm:my-6" action="#">
                     <div class="grid gap-6 sm:grid-cols-2">
                         <div>
@@ -51,9 +51,9 @@
                    Don’t have an account? <a href="{{ route('client.register') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Register Here</a>.
                 </p>
             </div>
-        </div>
-        <div class="mr-auto place-self-center lg:col-span-6">
-            <img class="hidden mx-auto lg:flex" src="{{ asset('assets/images/login.jpg') }}" alt="illustration">
+            <div class="mr-auto place-self-start lg:col-span-6">
+                <img class="hidden mx-auto lg:flex" src="{{ asset('assets/images/login.jpg') }}" alt="illustration">
+            </div>
         </div>
     </section>
 @endsection

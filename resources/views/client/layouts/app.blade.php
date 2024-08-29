@@ -6,15 +6,15 @@
 
 @endpush
 @section('content')
-    <div class="flex justify-between flex-col dark:bg-gray-900">
-        <div>
+    <div class="flex flex-col justify-between h-screen">
+        <main class="w-full">
             @include('client.layouts.fragments.header')
-            <section class="max-w-screen-xl mx-auto shadow-lg dark:shadow-gray-800 dark:shadow">
-                <div class=" px-5 py-3  border-b border-gray-200 dark:border-gray-800">
+            <div class="max-w-screen-xl mx-auto flex flex-col w-full">
+                <div class="px-5 py-3  border-b border-gray-200 dark:border-gray-800">
                     <h1 class="inline-block mb-1 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white" id="content">Categories</h1>
                     <p class="mb-2 text-sm text-gray-600 dark:text-gray-400">Learn how to configure and build a dark mode switcher for Tailwind CSS using Flowbite and start developing with the components from the library</p>
                 </div>
-                <nav class="flex px-5 py-3 text-gray-700" aria-label="Breadcrumb">
+                <nav class="px-5 py-3 flex text-gray-700" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                         <li class="inline-flex items-center">
                             <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
@@ -42,11 +42,11 @@
                         </li>
                     </ol>
                 </nav>
-                <div  class="py-10 px-3 md:px-6">
+                <div class="px-5 py-3">
                     @yield('appContent')
                 </div>
-            </section>
-        </div>
+            </div>
+        </main>
         @include('client.layouts.fragments.footer')
     </div>
 @endsection
