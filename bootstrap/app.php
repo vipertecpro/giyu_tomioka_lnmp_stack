@@ -23,10 +23,15 @@ return Application::configure(basePath: dirname(__DIR__))
                     'message' => 'Record not found.'
                 ], 404);
             }
+
+            $pageData = [
+                'pageTitle'         => 'Page Not Found - 404 Error',
+                'pageDescription'   => 'Sorry, the page you are trying to access does not exist. Return to the home page or use the search feature to find what you’re looking for.',
+            ];
             if ($request->getHost() === env('APP_ADMIN_DOMAIN')) {
-                return response()->view('restricted.errors.4xx');
+                return response()->view('restricted.errors.4xx',$pageData);
             }
-            return response()->view('client.errors.4xx');
+            return response()->view('client.errors.4xx',$pageData);
         });
 
     })->create();
