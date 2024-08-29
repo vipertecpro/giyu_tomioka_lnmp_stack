@@ -51,8 +51,8 @@
                    Don’t have an account? <a href="{{ route('client.register') }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Register Here</a>.
                 </p>
             </div>
-            <div class="mr-auto place-self-start lg:col-span-6">
-                <img class="hidden mx-auto lg:flex" src="{{ asset('assets/images/login.jpg') }}" alt="illustration">
+            <div class="mr-auto place-self-center lg:col-span-6 px-10">
+                <img class="hidden mx-auto lg:flex rounded-lg" src="{{ asset('assets/images/login.jpg') }}" alt="illustration">
             </div>
         </div>
     </section>

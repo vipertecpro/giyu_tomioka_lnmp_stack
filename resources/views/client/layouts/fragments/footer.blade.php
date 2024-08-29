@@ -1,5 +1,6 @@
-<footer class="p-2 py-4 bg-white md:p-4 lg:p-8 dark:bg-gray-800 relative">
-    <div class="mx-auto max-w-screen-xl text-center">
+<footer class="relative">
+    <div class="border-gray-200 dark:border-gray-600 dark:bg-gray-800 shadow-[0_-4px_10px_rgba(0,0,0,0.1)] p-2 py-4 bg-white md:p-4 lg:p-8 ">
+        <div class="mx-auto max-w-screen-xl text-center ">
         <div class="grid lg:grid-cols-3">
             <a href="#" class="flex items-center mb-4 text-2xl font-semibold text-gray-900 lg:mb-0 dark:text-white">
                 <img src="{{ asset('assets/images/logo.jpg') }}" class="mr-3 h-6 sm:h-9" alt="{{ env('APP_NAME') }} Logo" />
@@ -50,5 +51,6 @@
                 </a>
             </div>
         </div>
+    </div>
     </div>
 </footer>
