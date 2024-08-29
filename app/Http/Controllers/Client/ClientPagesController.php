@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 
 class ClientPagesController extends Controller
 {
-
     /**
      * Login Page
      * */
@@ -48,6 +47,12 @@ class ClientPagesController extends Controller
      * */
     public function terms(){
         return view('client.pages.terms');
+    }
+    /**
+     * Categories
+     * */
+    public function categories(){
+        return view('client.pages.categories');
     }
     /**
      * Privacy Policy

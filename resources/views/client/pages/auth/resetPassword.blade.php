@@ -1,5 +1,7 @@
 @extends('client.layouts.app')
 
 @section('appContent')
-    <h1>About Us Page</h1>
+    <section class="grid lg:grid-cols-12 mx-auto">
+        <h1>RESET PASSWORD</h1>
+    </section>
 @endsection

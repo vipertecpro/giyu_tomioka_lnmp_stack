@@ -22,6 +22,7 @@ Route::group([
     Route::post('/contact',[ClientPagesController::class,'contact'])->name('submitContact');
     Route::get('/about',[ClientPagesController::class,'about'])->name('about');
     Route::get('/terms',[ClientPagesController::class,'terms'])->name('terms');
+    Route::get('/categories',[ClientPagesController::class,'categories'])->name('categories');
     Route::get('/privacy',[ClientPagesController::class,'privacy'])->name('privacy');
     Route::get('/blogs',[ClientPagesController::class,'blogs'])->name('blogs');
     Route::get('/blogs/{blog_slug}',[ClientPagesController::class,'singleBlog'])->name('singleBlog');
