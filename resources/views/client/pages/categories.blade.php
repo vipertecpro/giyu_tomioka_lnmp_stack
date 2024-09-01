@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
 
 @section('appContent')
-    <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900">
+    <section class=" py-4 antialiased dark:bg-gray-900">
         <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <a href="#" class="flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                 <svg class="me-2 h-4 w-4 shrink-0 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

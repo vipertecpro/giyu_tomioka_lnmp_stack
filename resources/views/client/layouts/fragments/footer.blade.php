@@ -1,5 +1,5 @@
 <footer class="relative">
-    <div class="border-gray-200 dark:border-gray-600 dark:bg-gray-800 shadow-[0_-4px_10px_rgba(0,0,0,0.1)] p-2 py-4 bg-white md:p-4 lg:p-8 ">
+    <div class="border-gray-200 dark:border-gray-600 dark:bg-gray-800 shadow-[0_-4px_10px_rgba(0,0,0,0.1)] p-2 py-4 bg-white">
         <div class="mx-auto max-w-screen-xl text-center ">
         <div class="grid lg:grid-cols-3">
             <a href="#" class="flex items-center mb-4 text-2xl font-semibold text-gray-900 lg:mb-0 dark:text-white">
@@ -29,9 +29,9 @@
                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                         </svg>
                     </div>
-                    <input type="email" id="email" class="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your email" required>
+                    <input type="email" id="email" class="block p-2 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your email" required>
                 </div>
-                <button type="submit" class="py-3 px-5 text-sm text-center text-white rounded-r-lg border cursor-pointer bg-primary-600 border-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Subscribe</button>
+                <button type="submit" class="py-2 px-5 text-sm text-center text-white rounded-r-lg border cursor-pointer bg-primary-600 border-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Subscribe</button>
             </form>
         </div>
         <hr class="my-3 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-6">

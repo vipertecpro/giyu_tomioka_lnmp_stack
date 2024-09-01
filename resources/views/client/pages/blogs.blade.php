@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
 
 @section('appContent')
-    <section class="bg-gray-50 py-2 antialiased dark:bg-gray-900">
+    <section class=" py-2 antialiased dark:bg-gray-900">
         <div class="gap-8 lg:flex">
             <aside id="sidebar" class="hidden h-full w-80 shrink-0 border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 lg:block lg:rounded-lg">
                 <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">

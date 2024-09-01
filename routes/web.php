@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Client\ClientDashboardPagesController;
@@ -38,7 +39,7 @@ Route::group([
         'prefix'    => 'dashboard',
         'as'        => 'dashboard.',
     ],function(){
-        Route::get('/',[ClientDashboardPagesController::class,'dashboard'])->name('dashboard');
+        Route::get('/',[ClientDashboardPagesController::class,'dashboard'])->name('index');
         Route::post('/logout',[ClientDashboardPagesController::class,'logout'])->name('logout');
     });
 });
@@ -47,13 +48,14 @@ Route::group([
     'domain'    => env('APP_ADMIN_DOMAIN'),
     'as'        => 'app.',
 ],function(){
-    Route::get('/',[DashboardController::class,'login'])->name('login');
-    Route::post('/login',[DashboardController::class,'login'])->name('submitLogin');
+    Route::get('/',[AuthController::class,'login'])->name('login');
+    Route::post('/login',[AuthController::class,'submitLogin'])->name('submitLogin');
     Route::group([
         'prefix'    => 'dashboard',
         'as'        => 'dashboard.',
     ],function(){
-        Route::get('/',[DashboardController::class,'dashboard'])->name('dashboard');
+        Route::get('/',[DashboardController::class,'dashboard'])->name('index');
+        Route::post('/logout',[DashboardController::class,'logout'])->name('logout');
         Route::group([
             'prefix'    => 'globalSettings',
             'as'        => 'globalSettings.',
@@ -82,6 +84,8 @@ Route::group([
             Route::post('/form',[UsersController::class,'form'])->name('form');
             Route::delete('/delete',[UsersController::class,'delete'])->name('delete');
             Route::delete('/deleteAll',[UsersController::class,'deleteAll'])->name('deleteAll');
+            Route::post('/import',[UsersController::class,'import'])->name('import');
+            Route::post('/export',[UsersController::class,'export'])->name('export');
         });
         Route::group([
             'prefix'    => 'tags',

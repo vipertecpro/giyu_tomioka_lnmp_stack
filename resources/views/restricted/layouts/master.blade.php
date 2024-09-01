@@ -3,9 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ env('APP_NAME') }} {{ @$pageTitle ? ' | '.@$pageTitle : '' }}</title>
+    <title>{{ @$pageTitle }} {{ env('APP_NAME') ? ' | ' . env('APP_NAME') : '' }}</title>
     @stack('stylesAndScripts')
 </head>
-    @yield('content')
-    @stack('bodyStylesAndScripts')
+<body class="dark:bg-gray-900">
+@yield('content')
+@stack('bodyStylesAndScripts')
+</body>
 </html>

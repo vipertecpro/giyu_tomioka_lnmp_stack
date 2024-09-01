@@ -1,12 +1,12 @@
 @extends('client.layouts.app')
 
 @section('appContent')
-    <section class="border-t border-b border-gray-100 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-        <div class="px-4 py-8 mx-auto sm:py-16 lg:py-24 pt-20 sm:pt-24 lg:pt-32">
+    <section class="border-b border-gray-100 dark:border-gray-700">
+        <div class="p-4 mx-auto">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-20">
                 <article>
                     <a href="#" title="">
-                        <img class="object-cover w-full rounded-lg" src="/images/hero/blog-image.png" alt="blog image">
+                        <img class="object-cover w-full rounded-lg" src="{{ asset('assets/images/placeholder_800x600.svg') }}" alt="blog image">
                     </a>
 
                     <div class="mt-5 space-y-4">
@@ -280,7 +280,7 @@
                     <div class="mt-8 space-y-12 sm:mt-12">
                         <div class="flex flex-col items-start gap-8 xl:flex-row">
                             <div class="relative aspect-[16/9] sm:aspect-[2/1] w-full xl:aspect-[4/3] xl:w-80 lg:shrink-0">
-                                <img src="/images/blog/blog-thumbnail-1.png" alt=""
+                                <img src="{{ asset('assets/images/placeholder_800x600.svg') }}" alt=""
                                      class="absolute inset-0 object-cover w-full h-full bg-gray-200 rounded-lg">
                             </div>
 
@@ -304,7 +304,7 @@
 
                                 <div class="flex items-center gap-3">
                                     <img class="w-8 h-8 rounded-full"
-                                         src="/images/users/michael-gough.png" alt="">
+                                         src="{{ asset('assets/images/placeholder_800x600.svg') }}" alt="">
                                     <div class="text-lg font-medium leading-tight text-gray-900 dark:text-white">
                                         <div>
                                             Micheal Gough
@@ -360,7 +360,7 @@
 
                         <div class="flex flex-col items-start gap-8 xl:flex-row">
                             <div class="relative aspect-[16/9] sm:aspect-[2/1] w-full xl:aspect-[4/3] xl:w-80 lg:shrink-0">
-                                <img src="/images/blog/blog-thumbnail-2.png" alt=""
+                                <img src="{{ asset('assets/images/placeholder_800x600.svg') }}" alt=""
                                      class="absolute inset-0 object-cover w-full h-full bg-gray-200 rounded-lg">
                             </div>
 
@@ -703,7 +703,7 @@
 
                                 <div class="flex items-center gap-3">
                                     <img class="w-8 h-8 rounded-full"
-                                         src="/images/users/michael-gough.png" alt="">
+                                         src="{{ asset('assets/images/placeholder_800x600.svg') }}" alt="">
                                     <div class="text-lg font-medium leading-tight text-gray-900 dark:text-white">
                                         <div>
                                             Micheal Gough

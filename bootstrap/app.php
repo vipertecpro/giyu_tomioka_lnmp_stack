@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Middleware\AppAuthenticate;
+use App\Http\Middleware\AppRedirectIfAuthenticated;
+use App\Http\Middleware\ClientAuthenticate;
+use App\Http\Middleware\ClientRedirectIfAuthenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,7 +17,22 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->group('client', [
+            'auth' => ClientAuthenticate::class,
+            'guest' => ClientRedirectIfAuthenticated::class,
+        ]);
+
+        $middleware->group('app', [
+            'auth' => AppAuthenticate::class,
+            'guest' => AppRedirectIfAuthenticated::class,
+        ]);
+        $middleware->redirectGuestsTo(function ($request) {
+            return $request->is('client/*') ? route('client.login') : route('app.login');
+        });
+
+        $middleware->redirectUsersTo(function ($request) {
+            return $request->is('client/*') ? route('client.dashboard.index') : route('app.dashboard.index');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
