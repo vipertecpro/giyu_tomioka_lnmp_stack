@@ -38,6 +38,7 @@ Route::group([
     Route::group([
         'prefix'    => 'dashboard',
         'as'        => 'dashboard.',
+        'middleware' => ['auth']
     ],function(){
         Route::get('/',[ClientDashboardPagesController::class,'dashboard'])->name('index');
         Route::post('/logout',[ClientDashboardPagesController::class,'logout'])->name('logout');
@@ -53,6 +54,7 @@ Route::group([
     Route::group([
         'prefix'    => 'dashboard',
         'as'        => 'dashboard.',
+        'middleware' => ['auth']
     ],function(){
         Route::get('/',[DashboardController::class,'dashboard'])->name('index');
         Route::post('/logout',[DashboardController::class,'logout'])->name('logout');
@@ -82,7 +84,8 @@ Route::group([
             Route::get('/create',[UsersController::class,'create'])->name('create');
             Route::get('/edit/{user_id}',[UsersController::class,'edit'])->name('edit');
             Route::post('/form',[UsersController::class,'form'])->name('form');
-            Route::delete('/delete',[UsersController::class,'delete'])->name('delete');
+            Route::get('/details/{user_id}',[UsersController::class,'details'])->name('details');
+            Route::delete('/delete/{user_id}',[UsersController::class,'delete'])->name('delete');
             Route::delete('/deleteAll',[UsersController::class,'deleteAll'])->name('deleteAll');
             Route::post('/import',[UsersController::class,'import'])->name('import');
             Route::post('/export',[UsersController::class,'export'])->name('export');

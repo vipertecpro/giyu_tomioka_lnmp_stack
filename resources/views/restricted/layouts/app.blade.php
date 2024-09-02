@@ -11,7 +11,7 @@
         @include('restricted.layouts.appFragments.sidebar')
         <main class="md:ml-48 h-auto pt-14 bg-gray-50 dark:bg-gray-900">
             @include('restricted.layouts.appFragments.pageHeader')
-            <div class="p-4">
+            <div class="p-2">
                 @yield('appContent')
             </div>
         </main>

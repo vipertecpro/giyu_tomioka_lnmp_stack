@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Exception;
+
 class UsersController extends Controller
 {
     public function list()
@@ -18,6 +21,7 @@ class UsersController extends Controller
                 ['title' => 'Import', 'route' => route('app.dashboard.users.import'), 'method' => 'POST', 'color' => 'green'],
                 ['title' => 'Export', 'route' => route('app.dashboard.users.export'), 'method' => 'POST', 'color' => 'teal'],
             ],
+            'api'            => route('internal.users'),
         ];
         return view('restricted.appPages.users.list',$pageData);
     }
@@ -44,10 +48,31 @@ class UsersController extends Controller
     {
         return redirect()->route('users.list');
     }
+    public function view(){
+        return view('restricted.appPages.users.details');
+    }
 
-    public function delete()
+    public function delete($user_id)
     {
-        return redirect()->route('users.list');
+        try{
+            $findUser = User::find($user_id);
+            if(!$findUser){
+                return response()->json([
+                    'status'    => 'error',
+                    'message'   => 'User not found'
+                ],400);
+            }
+            $findUser->delete();
+            return response()->json([
+                'status'    => 'success',
+                'message'   => 'User deleted successfully'
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'    => 'error',
+                'message'   => $exception->getMessage()
+            ],500);
+        }
     }
 
     public function deleteAll()
