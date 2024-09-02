@@ -2,10 +2,16 @@ import {initFlowbite} from "flowbite";
 
 const dataTables = document.getElementById('dataTables');
 const loadingSpinner = document.getElementById('loadingSpinner');
-
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        const context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+const tableSource = dataTables ? dataTables.getAttribute('data-source-api') : '';
 if (dataTables) {
-    const tableSource = dataTables.getAttribute('data-source-api');
-
     function renderTableOnPage(getActionUrl, data = {}) {
         dataTables.innerHTML = '';
         loadingSpinner.style.display = 'block';
@@ -28,21 +34,7 @@ if (dataTables) {
                 loadingSpinner.style.display = 'none';
             });
     }
-
     renderTableOnPage(tableSource);
-    /**
-     * Pagination link click render table
-     * */
-    document.addEventListener('click', function (e) {
-        if (e.target.classList.contains('page-link') || e.target.closest('.page-link')) {
-            e.preventDefault();
-            const getActionUrl = e.target.closest('.page-link').getAttribute('data-action-url');
-            renderTableOnPage(getActionUrl);
-        }
-    });
-    /**
-     * Table row actions
-     * */
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('tableRowAction') || e.target.closest('.tableRowAction')) {
             e.preventDefault();
@@ -92,5 +84,96 @@ if (dataTables) {
                     });
             }
         }
+    });
+
+    function gatherTableData() {
+        const filters = {};
+        // const filterInputs = document.querySelectorAll('input[name^="dataTable[filter]"]');
+        //
+        // filterInputs.forEach(input => {
+        //     const nameParts = input.getAttribute('name').match(/dataTable\[filter\]\[([^\]]+)\]/);
+        //     if (nameParts && nameParts[1]) {
+        //         const column = nameParts[1];
+        //         let value = input.value;
+        //         if (input.type === 'checkbox' || input.type === 'radio') {
+        //             value = input.checked ? input.value : '';
+        //         }
+        //         if (value !== null && value !== '') {
+        //             if (!filters[column]) {
+        //                 filters[column] = [];
+        //             }
+        //             filters[column].push(value);
+        //         }
+        //     }
+        // });
+        //
+        // const searchInput = document.querySelector('input[name="dataTable[search]"]');
+        // if (searchInput) {
+        //     filters.search = searchInput.value;
+        // }
+        // // this filters should return an object like this:
+        //         // {
+        //         //     search: 'search value',
+        //         //     filters : [
+        //         //      {
+        //         //        'status' : 'value1,
+        //         //        'create_at': 'value2,
+        //         //        .....
+        //         //      }
+        //         //    ]
+        //         // }
+        //         //
+
+        const searchInput = document.querySelector('input[name="dataTable[search]"]');
+        if (searchInput) {
+            filters.search = searchInput.value;
+        }
+        const filterInputs = document.querySelectorAll('input[name^="dataTable[filter]"]');
+        filterInputs.forEach(input => {
+            const nameParts = input.getAttribute('name').match(/dataTable\[filter\]\[([^\]]+)\]/);
+            if (nameParts && nameParts[1]) {
+                const column = nameParts[1];
+                let value = input.value;
+                if (input.type === 'checkbox' || input.type === 'radio') {
+                    value = input.checked ? input.value : '';
+                }
+                if (value !== null && value !== '') {
+                    if (!filters.filters) {
+                        filters.filters = [];
+                    }
+                    filters.filters.push({
+                        [column]: value
+                    });
+                }
+            }
+        });
+        return filters;
+    }
+
+
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('page-link') || e.target.closest('.page-link')) {
+            e.preventDefault();
+            const getActionUrl = e.target.closest('.page-link').getAttribute('data-action-url');
+            const tableData = gatherTableData();
+            renderTableOnPage(getActionUrl, tableData);
+        }
+    });
+
+    const searchInput = document.querySelector('input[name="dataTable[search]"]');
+    if (searchInput) {
+        const debouncedSearchHandler = debounce(function() {
+            const tableData = gatherTableData();
+            renderTableOnPage(tableSource, tableData);
+        }, 300);
+        searchInput.addEventListener('input', debouncedSearchHandler);
+    }
+
+    const filterInputs = document.querySelectorAll('input[name^="dataTable[filter]"]');
+    filterInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const tableData = gatherTableData();
+            renderTableOnPage(tableSource, tableData);
+        });
     });
 }

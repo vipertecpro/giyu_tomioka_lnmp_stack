@@ -1,7 +1,7 @@
 @extends('restricted.layouts.app')
 
 @section('appContent')
-    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-md">
+    <div class="p-2 bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700 relative">
         @include('restricted.appPages.users._table.filters')
         <div id="dataTables" data-source-api="{{ $api }}"></div>
         <div id="loadingSpinner" class="flex justify-center items-center p-4">

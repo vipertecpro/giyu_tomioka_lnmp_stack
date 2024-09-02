@@ -7,7 +7,7 @@
     <title>{{ @$pageTitle }} {{ env('APP_NAME') ? ' | ' . env('APP_NAME') : '' }}</title>
     @stack('stylesAndScripts')
 </head>
-<body class="dark:bg-gray-900">
+<body class="antialiased bg-gray-50 dark:bg-gray-900">
 @yield('content')
 @stack('bodyStylesAndScripts')
 </body>

@@ -10,7 +10,7 @@ class UsersController extends Controller
     public function list()
     {
         $pageData = [
-            'pageTitle'         => 'Users List',
+            'pageTitle'         => 'List of users',
             'pageDescription'   => 'List of all users in the system',
             'crumbs'            => [
                 ['title' => 'Users', 'route' => route('app.dashboard.users.list')],
@@ -29,11 +29,11 @@ class UsersController extends Controller
     public function create()
     {
         $pageData = [
-            'pageTitle'         => 'Add New User',
+            'pageTitle'         => 'Add new user',
             'pageDescription'   => 'Add a new user to the system',
             'crumbs'            => [
                 ['title' => 'Users', 'route' => route('app.dashboard.users.list')],
-                ['title' => 'Add New User', 'route' => route('app.dashboard.users.create')]
+                ['title' => 'Add new user', 'route' => '']
             ],
         ];
         return view('restricted.appPages.users.form',$pageData);
@@ -41,15 +41,31 @@ class UsersController extends Controller
 
     public function edit($user_id)
     {
-        return view('restricted.appPages.users.form');
+        $pageData = [
+            'pageTitle'         => 'Edit user',
+            'pageDescription'   => 'Edit an existing user in the system',
+            'crumbs'            => [
+                ['title' => 'Users', 'route' => route('app.dashboard.users.list')],
+                ['title' => 'Edit User', 'route' => '']
+            ],
+        ];
+        return view('restricted.appPages.users.form',$pageData);
     }
 
     public function form()
     {
         return redirect()->route('users.list');
     }
-    public function view(){
-        return view('restricted.appPages.users.details');
+    public function details(){
+        $pageData = [
+            'pageTitle'         => 'User details',
+            'pageDescription'   => 'Detailed information about the user',
+            'crumbs'            => [
+                ['title' => 'Users', 'route' => route('app.dashboard.users.list')],
+                ['title' => 'User details', 'route' => '']
+            ],
+        ];
+        return view('restricted.appPages.users.details',$pageData);
     }
 
     public function delete($user_id)

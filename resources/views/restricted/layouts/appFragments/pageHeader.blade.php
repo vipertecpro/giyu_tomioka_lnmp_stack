@@ -1,5 +1,5 @@
 @if(@$pageTitle || @$pageDescription)
-    <div class="p-2  bg-gray-50 dark:bg-gray-800">
+    <div class="p-2 bg-gray-100 dark:bg-gray-800">
         @if(@$pageTitle)
             <h1 class="inline-block text-xl font-extrabold tracking-tight text-gray-900 dark:text-white" id="content">
                 {{ @$pageTitle }}
@@ -11,7 +11,7 @@
             </p>
         @endif
     </div>
-    <nav class="flex p-2 text-gray-700 flex-col md:flex-row justify-between bg-gray-50 dark:bg-gray-800" aria-label="Breadcrumb">
+    <nav class="flex p-2 text-gray-700 flex-col md:flex-row justify-between bg-gray-100 dark:bg-gray-800" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-1 rtl:space-x-reverse  py-2">
             <li class="inline-flex items-center">
                 <a href="{{ route('app.dashboard.index') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
