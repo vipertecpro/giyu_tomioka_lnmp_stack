@@ -48,6 +48,7 @@ class UsersController extends Controller
                 ['title' => 'Users', 'route' => route('app.dashboard.users.list')],
                 ['title' => 'Edit User', 'route' => '']
             ],
+            'pageData'          => User::find($user_id)
         ];
         return view('restricted.appPages.users.form',$pageData);
     }
@@ -105,5 +106,4 @@ class UsersController extends Controller
     {
         return redirect()->route('app.dashboard.users.list');
     }
-
 }

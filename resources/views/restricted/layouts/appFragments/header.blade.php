@@ -86,7 +86,7 @@
                         <div class="flex-shrink-0">
                             <img
                                 class="w-11 h-11 rounded-full"
-                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                                src="{{ asset('assets/images/avatar.png') }}"
                                 alt="Bonnie Green avatar"
                             />
                             <div
@@ -336,7 +336,7 @@
             </div>
             <button
                 type="button"
-                class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 ring-2 ring-primary-500 focus:ring-3 focus:ring-primary-700 dark:focus:ring-primary-700"
                 id="user-menu-button"
                 aria-expanded="false"
                 data-dropdown-toggle="dropdown"
@@ -344,7 +344,7 @@
                 <span class="sr-only">Open user menu</span>
                 <img
                     class="w-8 h-8 rounded-full"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+                    src="{{ asset('assets/images/avatar.png') }}"
                     alt="user photo"
                 />
             </button>
