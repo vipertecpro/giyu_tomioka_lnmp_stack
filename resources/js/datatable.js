@@ -1,4 +1,5 @@
 import {initFlowbite} from "flowbite";
+import Alert from "./alert.js";
 
 const dataTables = document.getElementById('dataTables');
 const loadingSpinner = document.getElementById('loadingSpinner');
@@ -46,25 +47,29 @@ if (dataTables) {
             if (action === 'redirect') {
                 window.location.href = url;
             } else if (action === 'delete') {
-                const isConfirmed = confirm('Are you sure you want to delete?');
-                if (isConfirmed) {
-                    fetch(url, {
-                        method: method,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        }
-                    })
-                        .then(response => response.json())
-                        .then(response => {
-                            if (response.status === 'success') {
-                                parentRow.closest('tr').remove();
+                // const isConfirmed = confirm('Are you sure you want to delete?');
+                // Here we need to use the alert.js to show the confirmation modal
+                new Alert({
+                    message: 'Are you sure you want to delete?',
+                    onConfirm: () => {
+                        fetch(url, {
+                            method: method,
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                             }
                         })
-                        .catch(error => {
-                            console.error('Error deleting data:', error);
-                        });
-                }
+                            .then(response => response.json())
+                            .then(response => {
+                                if (response.status === 'success') {
+                                    parentRow.closest('tr').remove();
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error deleting data:', error);
+                            });
+                    }
+                }, 'confirm');
             } else if (action === 'submit') {
                 fetch(url, {
                     method: method,

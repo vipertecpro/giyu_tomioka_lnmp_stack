@@ -11,7 +11,12 @@
         "flowbite": "^2.5.1",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.41",
+        "sass-embedded": "^1.78.0",
         "tailwindcss": "^3.4.10",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "jquery": "^3.7.1",
+        "select2": "^4.1.0-rc.0"
     }
 }

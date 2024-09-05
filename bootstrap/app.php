@@ -53,5 +53,15 @@ return Application::configure(basePath: dirname(__DIR__))
             }
             return response()->view('client.errors.4xx',$pageData);
         });
+        $exceptions->render(function (\TypeError $e, Request $request) {
+            $pageData = [
+                'pageTitle'         => 'Internal Server Error - 500',
+                'pageDescription'   => 'Type Error : Meaning that the code is trying to access a property or method on an object that does not exist or is not accessible. Please contact the administrator.',
+            ];
+            if ($request->getHost() === env('APP_ADMIN_DOMAIN')) {
+                return response()->view('restricted.errors.5xx',$pageData);
+            }
+            return response()->view('client.errors.5xx',$pageData);
+        });
 
     })->create();

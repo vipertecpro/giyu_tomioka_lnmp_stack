@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -39,7 +41,7 @@ class UsersController extends Controller
         return view('restricted.appPages.users.form',$pageData);
     }
 
-    public function edit($user_id)
+    public function edit(int $user_id)
     {
         $pageData = [
             'pageTitle'         => 'Edit user',
@@ -48,14 +50,36 @@ class UsersController extends Controller
                 ['title' => 'Users', 'route' => route('app.dashboard.users.list')],
                 ['title' => 'Edit User', 'route' => '']
             ],
-            'pageData'          => User::find($user_id)
+            'pageData'          => User::findOrFail($user_id)
         ];
         return view('restricted.appPages.users.form',$pageData);
     }
 
-    public function form()
-    {
-        return redirect()->route('users.list');
+    public function form(Request $request){
+        try{
+            $validator = Validator::make($request->all(),[
+                'status'     => 'required',
+                'fullName'   => 'required',
+                'email'      => 'required|email',
+            ]);
+            if($validator->fails()){
+                return response()->json([
+                    'status'    => 'form-error',
+                    'message'   => $validator->errors(),
+                    'fields'    => $validator->errors()->keys()
+                ],400);
+            }
+            return response()->json([
+                'status'    => 'success',
+                'message'   => 'User saved successfully',
+                'redirect'  => route('app.dashboard.users.list')
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'     => 'exception',
+                'message'    => $exception->getMessage(),
+            ],400);
+        }
     }
     public function details(){
         $pageData = [
@@ -92,9 +116,19 @@ class UsersController extends Controller
         }
     }
 
-    public function deleteAll()
-    {
-        return redirect()->route('app.dashboard.users.list');
+    public function deleteAll(Request $request){
+        try{
+            return response()->json([
+                'status'    => 'success',
+                'message'   => 'All users has been removed successfully',
+                'redirect'  => route('app.dashboard.users.list')
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'     => 'exception',
+                'message'    => $exception->getMessage(),
+            ],400);
+        }
     }
 
     public function import()

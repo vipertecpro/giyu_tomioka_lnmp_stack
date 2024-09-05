@@ -2,9 +2,6 @@
 @push('stylesAndScripts')
     @vite(['resources/css/app.css','resources/js/app.js'])
 @endpush
-@push('bodyStylesAndScripts')
-
-@endpush
 @section('content')
     @include('restricted.layouts.appFragments.header')
     @include('restricted.layouts.appFragments.sidebar')

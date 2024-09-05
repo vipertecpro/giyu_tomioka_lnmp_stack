@@ -35,41 +35,23 @@
                     <li class="me-2" role="presentation">
                         <button class="inline-block p-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="activities-tab" data-tabs-target="#activities" type="button" role="tab" aria-controls="activities" aria-selected="false">Activities</button>
                     </li>
+                    <li class="me-2" role="presentation">
+                        <button class="inline-block p-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="password-reset-tab" data-tabs-target="#password-reset" type="button" role="tab" aria-controls="password-reset" aria-selected="false">Password reset</button>
+                    </li>
                 </ul>
             </div>
             <div id="default-tab-content">
                 <div class="hidden p-2 rounded-md" id="general" role="tabpanel" aria-labelledby="general-tab">
-                    <form action="#">
-                        <div class="grid gap-2 mb-2 sm:grid-cols-2">
-                            <div>
-                                <label for="full-name" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
-                                <input type="text" name="fullName" id="full-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="" placeholder="John Doe">
-                            </div>
-                            <div>
-                                <label for="email" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Email Address</label>
-                                <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="" placeholder="johndoe@gmail.com" required="">
-                            </div>
-                            <div>
-                                <label for="password" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="" placeholder="•••••••••">
-                            </div>
-                            <div class="sm:col-span-2">
-                                <label for="biography" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Biography</label>
-                                <textarea id="biography" rows="2" class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write biography here..."></textarea>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-2 border-t border-t-gray-300 dark:border-t-gray-700  py-2 justify-end">
-                            <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-md text-sm p-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                Update user
-                            </button>
-                        </div>
-                    </form>
+                    @include('restricted.appPages.users._form_components.general')
                 </div>
-                <div class="hidden p-2 rounded-md bg-gray-50 dark:bg-gray-800" id="roles-and-permissions" role="tabpanel" aria-labelledby="roles-and-permissions-tab">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Roles & Permission tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                <div class="hidden p-2 rounded-md" id="roles-and-permissions" role="tabpanel" aria-labelledby="roles-and-permissions-tab">
+                    @include('restricted.appPages.users._form_components.rolesAndPermissions')
                 </div>
-                <div class="hidden p-2 rounded-md bg-gray-50 dark:bg-gray-800" id="activities" role="tabpanel" aria-labelledby="activities-tab">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Activities tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                <div class="hidden p-2 rounded-md" id="activities" role="tabpanel" aria-labelledby="activities-tab">
+                    @include('restricted.appPages.users._form_components.activities')
+                </div>
+                <div class="hidden p-2 rounded-md" id="password-reset" role="tabpanel" aria-labelledby="password-reset-tab">
+                    @include('restricted.appPages.users._form_components.passwordReset')
                 </div>
             </div>
         </div>
