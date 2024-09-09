@@ -55,7 +55,7 @@ class Alert {
     }
 
     showSuccessAlert() {
-        const { message } = this.responseData;
+        const { message, redirect } = this.responseData;
         const duration = 2000;
         const interval = 100;
 
@@ -80,12 +80,17 @@ class Alert {
         this.insertAlert(successHtml);
 
         const progressBar = new ProgressBar(duration, interval);
-        progressBar.onComplete = () => this.removeAlert('success-alert');
+        progressBar.onComplete = () => {
+            this.removeAlert('success-alert');
+            if (redirect){
+                window.location.href = redirect;
+            }
+        };
         progressBar.startProgress();
     }
 
     showErrorAlert() {
-        const { message } = this.responseData;
+        const { message, redirect } = this.responseData;
         const duration = 2000;
         const interval = 100;
 
@@ -111,7 +116,12 @@ class Alert {
         this.insertAlert(errorHtml);
 
         const progressBar = new ProgressBar(duration, interval);
-        progressBar.onComplete = () => this.removeAlert('error-alert');
+        progressBar.onComplete = () => {
+            this.removeAlert('error-alert');
+            if (redirect){
+                window.location.href = redirect;
+            }
+        };
         progressBar.startProgress();
     }
 

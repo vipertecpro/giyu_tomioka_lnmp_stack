@@ -84,6 +84,8 @@ Route::group([
             Route::get('/create',[UsersController::class,'create'])->name('create');
             Route::get('/edit/{user_id}',[UsersController::class,'edit'])->name('edit');
             Route::post('/form',[UsersController::class,'form'])->name('form');
+            Route::post('/updateAvatar',[UsersController::class,'updateAvatar'])->name('updateAvatar');
+            Route::delete('/removeAvatar',[UsersController::class,'removeAvatar'])->name('removeAvatar');
             Route::get('/details/{user_id}',[UsersController::class,'details'])->name('details');
             Route::delete('/delete/{user_id}',[UsersController::class,'delete'])->name('delete');
             Route::delete('/deleteAll',[UsersController::class,'deleteAll'])->name('deleteAll');
@@ -100,6 +102,8 @@ Route::group([
             Route::post('/form',[TagController::class,'form'])->name('form');
             Route::delete('/delete',[TagController::class,'delete'])->name('delete');
             Route::delete('/deleteAll',[TagController::class,'deleteAll'])->name('deleteAll');
+            Route::post('/import',[TagController::class,'import'])->name('import');
+            Route::post('/export',[TagController::class,'export'])->name('export');
         });
         Route::group([
             'prefix'    => 'categories',

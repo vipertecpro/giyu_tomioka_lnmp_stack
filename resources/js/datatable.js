@@ -47,8 +47,6 @@ if (dataTables) {
             if (action === 'redirect') {
                 window.location.href = url;
             } else if (action === 'delete') {
-                // const isConfirmed = confirm('Are you sure you want to delete?');
-                // Here we need to use the alert.js to show the confirmation modal
                 new Alert({
                     message: 'Are you sure you want to delete?',
                     onConfirm: () => {
@@ -93,41 +91,6 @@ if (dataTables) {
 
     function gatherTableData() {
         const filters = {};
-        // const filterInputs = document.querySelectorAll('input[name^="dataTable[filter]"]');
-        //
-        // filterInputs.forEach(input => {
-        //     const nameParts = input.getAttribute('name').match(/dataTable\[filter\]\[([^\]]+)\]/);
-        //     if (nameParts && nameParts[1]) {
-        //         const column = nameParts[1];
-        //         let value = input.value;
-        //         if (input.type === 'checkbox' || input.type === 'radio') {
-        //             value = input.checked ? input.value : '';
-        //         }
-        //         if (value !== null && value !== '') {
-        //             if (!filters[column]) {
-        //                 filters[column] = [];
-        //             }
-        //             filters[column].push(value);
-        //         }
-        //     }
-        // });
-        //
-        // const searchInput = document.querySelector('input[name="dataTable[search]"]');
-        // if (searchInput) {
-        //     filters.search = searchInput.value;
-        // }
-        // // this filters should return an object like this:
-        //         // {
-        //         //     search: 'search value',
-        //         //     filters : [
-        //         //      {
-        //         //        'status' : 'value1,
-        //         //        'create_at': 'value2,
-        //         //        .....
-        //         //      }
-        //         //    ]
-        //         // }
-        //         //
 
         const searchInput = document.querySelector('input[name="dataTable[search]"]');
         if (searchInput) {
@@ -154,8 +117,6 @@ if (dataTables) {
         });
         return filters;
     }
-
-
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('page-link') || e.target.closest('.page-link')) {
             e.preventDefault();
@@ -176,6 +137,22 @@ if (dataTables) {
 
     const filterInputs = document.querySelectorAll('input[name^="dataTable[filter]"]');
     filterInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            const tableData = gatherTableData();
+            renderTableOnPage(tableSource, tableData);
+        });
+    });
+    // Here i want to handle sort
+    // @foreach($columns as $column)
+    //                                 <li>
+    //                                     <div class="flex items-center ps-2">
+    //                                         <input id="filter-sort-{{ $column }}" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" value="1" name="dataTable[sort][{{ $column }}]">
+    //                                         <label for="filter-sort-{{ $column }}" class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $column }}</label>
+    //                                     </div>
+    //                                 </li>
+    //                             @endforeach
+    const sortInputs = document.querySelectorAll('input[name^="dataTable[sort]"]');
+    sortInputs.forEach(input => {
         input.addEventListener('change', function() {
             const tableData = gatherTableData();
             renderTableOnPage(tableSource, tableData);

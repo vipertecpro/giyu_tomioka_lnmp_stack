@@ -1,11 +1,11 @@
-<div class="overflow-x-auto">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+<div class="overflow-x-auto border-2 rounded-md border-primary-500 border-opacity-50">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="p-2  w-[20px]"></th>
                 <th scope="col" class="p-2">Name</th>
                 <th scope="col" class="p-2">Email</th>
-                <th scope="col" class="p-2">Status</th>
+                <th scope="col" class="p-2 w-[80px]">Status</th>
                 <th scope="col" class="p-2 w-[180px]">Created At</th>
                 <th scope="col" class="p-2 w-[180px]">Last Updated At</th>
             </tr>

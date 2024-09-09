@@ -22,7 +22,9 @@ class InternalController extends Controller
             $search = $request->get('search');
             $filters = $request->get('filters');
             $getTableColumnsFromSchema = Schema::getColumnListing('users');
+            $sort = $request->get('sort');
             $users = (new User)->newQuery();
+            $users->whereNot('id',1);
             if($search){
                 $users->where(function($query) use ($search, $getTableColumnsFromSchema){
                     foreach($getTableColumnsFromSchema as $column){
@@ -37,6 +39,11 @@ class InternalController extends Controller
                         $users->where($column,'=', $value);
                     }
                 }
+            }
+            if($sort){
+                $users->orderBy($sort['column'],$sort['order']);
+            }else{
+                $users->orderBy('id','desc');
             }
             $users = $users->paginate(10);
             $renderTable = view('restricted.appPages.users._table.data', ['users' => $users])->render();

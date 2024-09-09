@@ -37,6 +37,8 @@ This approach keeps your codebase clean and organized, especially when modules a
 Sample project structure:
 ```
 php artisan make:module Role --model --seeder --controller
+php artisan make:module UserRole --model --seeder --controller
+php artisan make:module RolePermission --model --seeder --controller
 php artisan make:module Permission --model --seeder --controller
 php artisan make:module Page --model --seeder --controller
 php artisan make:module Blog --model --seeder --controller
