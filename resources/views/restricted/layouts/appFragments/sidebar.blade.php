@@ -86,5 +86,80 @@
                 </ul>
             </li>
         </ul>
+        <ul class=" space-y-1">
+            <li>
+                <button
+                    type="button"
+                    class="flex items-center p-2 w-full text-sm font-medium text-gray-900  transition duration-75 group dark:text-white
+                    {{ (request()->routeIs('app.dashboard.blogs.*') || request()->routeIs('app.dashboard.tags.*') || request()->routeIs('app.dashboard.categories.*')) ? 'bg-gray-200 dark:bg-gray-700' : '' }}
+                    "
+                    aria-controls="dropdown-pages-blogs"
+                    data-collapse-toggle="dropdown-pages-blogs"
+                    aria-expanded="{{ (request()->routeIs('app.dashboard.blogs.*') || request()->routeIs('app.dashboard.tags.*') || request()->routeIs('app.dashboard.categories.*')) ? 'true' : 'false' }}"
+                >
+                    <svg
+                        aria-hidden="true"
+                        class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                            clip-rule="evenodd"
+                        ></path>
+                    </svg>
+                    <span class="flex-1 ml-3 text-left whitespace-nowrap">Blogs</span>
+                    <svg
+                        aria-hidden="true"
+                        class="w-5 h-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        ></path>
+                    </svg>
+                </button>
+                <ul id="dropdown-pages-blogs" class="{{ !((request()->routeIs('app.dashboard.blogs.*') || request()->routeIs('app.dashboard.tags.*') || request()->routeIs('app.dashboard.categories.*'))) ? 'hidden' : '' }} py-1 space-y-1 bg-gray-50 dark:bg-gray-900">
+                    <li>
+                        <a
+                            href="{{ route('app.dashboard.blogs.list') }}"
+                            class="flex items-center p-2 pl-11 w-full text-sm font-medium text-gray-900  transition duration-75 group {{ request()->routeIs('app.dashboard.blogs.create') ? 'text-gray-300 dark:text-gray-200 bg-gray-200 dark:bg-gray-700' : 'text-black dark:text-gray-400 text-opacity-40' }}
+                            ">
+                            All Blogs
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="{{ route('app.dashboard.blogs.create') }}"
+                            class="flex items-center p-2 pl-11 w-full text-sm font-medium text-gray-900  transition duration-75 group {{ request()->routeIs('app.dashboard.blogs.list') ? 'text-gray-300 dark:text-gray-200 bg-gray-200 dark:bg-gray-700' : 'text-black dark:text-gray-400 text-opacity-40' }}
+                            ">
+                            Add New
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="{{ route('app.dashboard.categories.list') }}"
+                            class="flex items-center p-2 pl-11 w-full text-sm font-medium text-gray-900  transition duration-75 group {{ request()->routeIs('app.dashboard.categories.list') ? 'text-gray-300 dark:text-gray-200 bg-gray-200 dark:bg-gray-700' : 'text-black dark:text-gray-400 text-opacity-40' }}
+                            ">
+                            Categories
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="{{ route('app.dashboard.tags.list') }}"
+                            class="flex items-center p-2 pl-11 w-full text-sm font-medium text-gray-900  transition duration-75 group {{ request()->routeIs('app.dashboard.tags.list') ? 'text-gray-300 dark:text-gray-200 bg-gray-200 dark:bg-gray-700' : 'text-black dark:text-gray-400 text-opacity-40' }}
+                            ">
+                            Tags
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </aside>

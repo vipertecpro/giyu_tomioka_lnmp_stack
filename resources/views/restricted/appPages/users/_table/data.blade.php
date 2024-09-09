@@ -72,4 +72,4 @@
         </tbody>
     </table>
 </div>
-{{ $users->links('restricted.appPages.users._table.pagination') }}
+{{ $users->links('restricted.layouts.appFragments.pagination') }}

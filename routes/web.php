@@ -98,9 +98,8 @@ Route::group([
         ],function(){
             Route::get('/',[TagController::class,'list'])->name('list');
             Route::get('/create',[TagController::class,'create'])->name('create');
-            Route::get('/edit/{user_id}',[TagController::class,'edit'])->name('edit');
             Route::post('/form',[TagController::class,'form'])->name('form');
-            Route::delete('/delete',[TagController::class,'delete'])->name('delete');
+            Route::delete('/delete/{tag_id}',[TagController::class,'delete'])->name('delete');
             Route::delete('/deleteAll',[TagController::class,'deleteAll'])->name('deleteAll');
             Route::post('/import',[TagController::class,'import'])->name('import');
             Route::post('/export',[TagController::class,'export'])->name('export');

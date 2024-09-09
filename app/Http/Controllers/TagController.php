@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,62 +14,30 @@ class TagController extends Controller
 {
     public function list(){
         $exceptionColumns = ['password','remember_token','email_verified_at', 'is_password_update'];
-        $moduleSchemaColumns = Schema::getColumnListing('users');
+        $moduleSchemaColumns = Schema::getColumnListing('tags');
         $moduleSchemaColumns = array_diff($moduleSchemaColumns,$exceptionColumns);
         $pageData = [
-            'pageTitle'         => 'List of users',
-            'pageDescription'   => 'List of all users in the system',
+            'pageTitle'         => 'List of tags',
+            'pageDescription'   => 'List of all tags in the system',
             'crumbs'            => [
-                ['title' => 'Users', 'route' => route('app.dashboard.users.list')],
+                ['title' => 'Tags', 'route' => route('app.dashboard.tags.list')],
             ],
             'actions'           => [
-                ['title' => 'Add New', 'route' => route('app.dashboard.users.create'), 'method' => 'GET', 'color' => 'blue'],
-                ['title' => 'Delete All', 'route' => route('app.dashboard.users.deleteAll'), 'method' => 'DELETE', 'color' => 'red'],
-                ['title' => 'Import', 'route' => route('app.dashboard.users.import'), 'method' => 'POST', 'color' => 'green'],
-                ['title' => 'Export', 'route' => route('app.dashboard.users.export'), 'method' => 'POST', 'color' => 'teal'],
+                ['title' => 'Delete All', 'route' => route('app.dashboard.tags.deleteAll'), 'method' => 'DELETE', 'color' => 'red'],
+                ['title' => 'Import', 'route' => route('app.dashboard.tags.import'), 'method' => 'POST', 'color' => 'green'],
+                ['title' => 'Export', 'route' => route('app.dashboard.tags.export'), 'method' => 'POST', 'color' => 'teal'],
             ],
-            'api'            => route('internal.users'),
+            'api'            => route('internal.tags'),
             'columns'        => $moduleSchemaColumns
         ];
-        return view('restricted.appPages.users.list',$pageData);
-    }
-    public function create(){
-        $pageData = [
-            'pageTitle'         => 'Add new user',
-            'pageDescription'   => 'Add a new user to the system',
-            'crumbs'            => [
-                ['title' => 'Users', 'route' => route('app.dashboard.users.list')],
-                ['title' => 'Add new user', 'route' => '']
-            ],
-        ];
-        return view('restricted.appPages.users.form',$pageData);
-    }
-    public function edit(int $user_id){
-        $pageData = [
-            'pageTitle'         => 'Edit user',
-            'pageDescription'   => 'Edit an existing user in the system',
-            'crumbs'            => [
-                ['title' => 'Users', 'route' => route('app.dashboard.users.list')],
-                ['title' => 'Edit User', 'route' => '']
-            ],
-            'pageData'          => User::with(['profile'])->findOrFail($user_id)
-        ];
-        return view('restricted.appPages.users.form',$pageData);
+        return view('restricted.appPages.tags.list',$pageData);
     }
     public function form(Request $request){
         try{
             $validator = Validator::make($request->all(),[
-                'status'     => 'required',
-                'fullName'   => 'required',
-                'email'      => 'required|email',
+                'name'     => 'required|string',
+                'slug'     => 'required|unique:tags,slug,'.$request->get('id'),
             ]);
-            $validator->after(function ($validator) use ($request) {
-                $email = $request->input('email');
-                $user = User::where('email',$email)->first();
-                if($user && $user->id != $request->get('id')){
-                    $validator->errors()->add('email', 'Email already exists');
-                }
-            });
             if($validator->fails()){
                 return response()->json([
                     'status'    => 'form-error',
@@ -77,23 +46,20 @@ class TagController extends Controller
                 ],400);
             }
             $data = [
-                'status'    => $request->get('status'),
-                'name'      => $request->get('fullName'),
-                'email'     => $request->get('email'),
+                'name'    => $request->get('name'),
+                'slug'    => $request->get('slug'),
             ];
-            $returnMessage = 'User updated successfully';
+            $returnMessage = 'Tag updated successfully';
             if(!$request->get('id')){
-                $data['password'] = bcrypt('password');
-                $data['is_password_update'] = false;
-                $returnMessage = 'User created successfully';
-                User::create($data);
+                $returnMessage = 'Tag created successfully';
+                Tag::create($data);
             }else{
-                User::where('id',$request->get('id'))->update($data);
+                Tag::where('id',$request->get('id'))->update($data);
             }
             return response()->json([
                 'status'    => 'success',
                 'message'   => $returnMessage,
-                'redirect'  => route('app.dashboard.users.list')
+                'redirect'  => route('app.dashboard.tags.list')
             ]);
         }catch (Exception $exception){
             return response()->json([
@@ -114,19 +80,19 @@ class TagController extends Controller
         ];
         return view('restricted.appPages.users.details',$pageData);
     }
-    public function delete($user_id){
+    public function delete($tag_id){
         try{
-            $findUser = User::find($user_id);
-            if(!$findUser){
+            $findTag = Tag::find($tag_id);
+            if(!$findTag){
                 return response()->json([
                     'status'    => 'error',
-                    'message'   => 'User not found'
+                    'message'   => 'Tag not found'
                 ],400);
             }
-            $findUser->delete();
+            $findTag->delete();
             return response()->json([
                 'status'    => 'success',
-                'message'   => 'User deleted successfully'
+                'message'   => 'Tag deleted successfully'
             ]);
         }catch (Exception $exception){
             return response()->json([
@@ -137,20 +103,20 @@ class TagController extends Controller
     }
     public function deleteAll(){
         try{
-            $users = User::where('id','!=',auth()->id());
-            if($users->count() == 0){
+            $tags = Tag::where('id','!=',auth()->id());
+            if($tags->count() == 0){
                 return response()->json([
                     'status'    => 'error',
-                    'message'   => 'No users found'
+                    'message'   => 'No tags found'
                 ],400);
             }
-            $users->each(function($user){
-                $user->delete();
+            $tags->each(function($tag){
+                $tag->delete();
             });
             return response()->json([
                 'status'    => 'success',
-                'message'   => 'All users has been removed successfully',
-                'redirect'  => route('app.dashboard.users.list')
+                'message'   => 'All tags has been removed successfully',
+                'redirect'  => route('app.dashboard.tags.list')
             ]);
         }catch (Exception $exception){
             return response()->json([

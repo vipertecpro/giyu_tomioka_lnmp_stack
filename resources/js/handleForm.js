@@ -5,15 +5,23 @@ class FormHandler {
     constructor(button) {
         this.submitButton = button;
         this.form = button.closest('form');
+        this.formTitle = '';
         this.method = this.form.getAttribute('method');
         this.action = this.form.getAttribute('action');
         this.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         this.loadingElement = this.createLoadingElement();
         this.init();
     }
+
     init() {
         this.submitButton?.addEventListener('click', event => this.handleSubmit(event));
+        const resetButton = this.form.querySelector('[data-form-action="resetForm"]');
+        if (resetButton) {
+            this.formTitle = this.form.querySelector('.formTitle').getAttribute('data-form-title');
+            resetButton.addEventListener('click', event => this.handleReset(event));
+        }
     }
+
     async handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(this.form);
@@ -27,8 +35,7 @@ class FormHandler {
                 await this.submitForm(formData);
             }
         } catch (error) {
-            const errorMessage = error.response?.data?.message || error.message || 'An unknown error occurred. Please try again.';
-            this.showError(errorMessage);
+            this.showError(error.response?.data?.message || error.message || 'An unknown error occurred. Please try again.');
         } finally {
             this.toggleLoading(false);
         }
@@ -47,8 +54,7 @@ class FormHandler {
                     });
                     this.handleSuccess(response.data);
                 } catch (error) {
-                    const response = error.response;
-                    this.handleFormError(response.data);
+                    this.handleFormError(error.response.data);
                 }
             },
         }, 'confirm');
@@ -64,8 +70,7 @@ class FormHandler {
             });
             this.handleSuccess(response.data);
         } catch (error) {
-            const response = error.response;
-            this.handleFormError(response.data);
+            this.handleFormError(error.response.data);
         }
     }
 
@@ -90,6 +95,7 @@ class FormHandler {
     clearErrors() {
         this.form.querySelectorAll('.field-error').forEach(error => error.remove());
     }
+
     displayErrors(fields, messages) {
         fields.forEach(field => {
             const input = this.form.querySelector(`[name="${field}"]`);
@@ -103,6 +109,7 @@ class FormHandler {
             }
         });
     }
+
     toggleLoading(show) {
         if (show) {
             this.form.appendChild(this.loadingElement);
@@ -110,6 +117,7 @@ class FormHandler {
             this.loadingElement.remove();
         }
     }
+
     createLoadingElement() {
         const loadingDiv = document.createElement('div');
         loadingDiv.className = 'flex items-center justify-center w-full h-full border border-gray-200 rounded bg-gray-50 dark:bg-gray-800 dark:border-gray-700 absolute top-0 left-0 right-0 bottom-0 z-50';
@@ -125,15 +133,29 @@ class FormHandler {
         `;
         return loadingDiv;
     }
+
+    handleReset(event) {
+        event.preventDefault();
+        this.form.reset();
+        this.form.querySelectorAll('input, select, textarea').forEach(element => {
+            element.value = '';
+        });
+        this.clearErrors();
+        event.target.classList.add('hidden');
+        event.target.classList.remove('flex');
+        const formTitle = this.form.querySelector('.formTitle');
+        if (formTitle) {
+            formTitle.innerText = this.formTitle;
+        }
+    }
+
     showError(message) {
         new Alert({ message, status: 'error' }, 'error');
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const formSubmitButtons = document.querySelectorAll('.formSubmit');
-    if(!formSubmitButtons) return;
-    formSubmitButtons.forEach(button => {
+    document.querySelectorAll('.formSubmit').forEach(button => {
         new FormHandler(button);
     });
 });

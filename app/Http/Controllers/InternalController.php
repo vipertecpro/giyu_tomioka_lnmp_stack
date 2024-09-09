@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -86,13 +87,78 @@ class InternalController extends Controller
     }
 
     public function tags(Request $request){
-        return response()->json([
-            'status'    => 'success',
-            'message'   => 'Tags data fetched successfully',
-            'data'      => []
-        ]);
+        try{
+            $search = $request->get('search');
+            $filters = $request->get('filters');
+            $getTableColumnsFromSchema = Schema::getColumnListing('tags');
+            $sort = $request->get('sort');
+            $tags = (new Tag)->newQuery();
+            $tags->whereNot('id',1);
+            if($search){
+                $tags->where(function($query) use ($search, $getTableColumnsFromSchema){
+                    foreach($getTableColumnsFromSchema as $column){
+                        $query->orWhere($column, 'like', '%'.$search.'%');
+                    }
+                });
+            }
+            if($filters){
+                foreach($filters as $filter){
+                    foreach($filter as $column => $value){
+                        if($value === 'all') continue;
+                        $tags->where($column,'=', $value);
+                    }
+                }
+            }
+            if($sort){
+                $tags->orderBy($sort['column'],$sort['order']);
+            }else{
+                $tags->orderBy('id','desc');
+            }
+            $tags = $tags->paginate(10);
+            $renderTable = view('restricted.appPages.tags._table.data', ['tags' => $tags])->render();
+            return response()->json([
+                'status'    => 'success',
+                'message'   => 'Tags data fetched successfully',
+                'html'      => $renderTable
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Error fetching tags data',
+                'error'     => $exception->getMessage()
+            ],402);
+        }
     }
-
+    public function tag(Request $request){
+        try{
+            $formFields = [
+                'id',
+                'name',
+                'slug',
+                'description'
+            ];
+            $tag = Tag::find($request->get('id'));
+            if(!$tag){
+                return response()->json([
+                    'status'    => 'error',
+                    'message'   => 'Tag not found'
+                ],400);
+            }
+            $tag = $tag->only($formFields);
+            return response()->json([
+                'status'    => 'success',
+                'module'    => 'Tag',
+                'message'   => 'Tag data fetched successfully',
+                'data'      => $tag
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Error fetching tag data',
+                'error'     => $exception->getMessage()
+            ],402);
+        }
+    }
     public function categories(Request $request){
         return response()->json([
             'status'    => 'success',
