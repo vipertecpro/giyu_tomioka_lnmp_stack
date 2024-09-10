@@ -27,7 +27,7 @@ class UsersController extends Controller
                 ['title' => 'Import', 'route' => route('app.dashboard.users.import'), 'method' => 'POST', 'color' => 'green'],
                 ['title' => 'Export', 'route' => route('app.dashboard.users.export'), 'method' => 'POST', 'color' => 'teal'],
             ],
-            'api'            => route('internal.users'),
+            'api'            => route('internal.blogs'),
             'columns'        => $moduleSchemaColumns
         ];
         return view('restricted.appPages.users.list',$pageData);

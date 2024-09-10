@@ -129,7 +129,7 @@
                     <li>
                         <a
                             href="{{ route('app.dashboard.blogs.list') }}"
-                            class="flex items-center p-2 pl-11 w-full text-sm font-medium text-gray-900  transition duration-75 group {{ request()->routeIs('app.dashboard.blogs.create') ? 'text-gray-300 dark:text-gray-200 bg-gray-200 dark:bg-gray-700' : 'text-black dark:text-gray-400 text-opacity-40' }}
+                            class="flex items-center p-2 pl-11 w-full text-sm font-medium text-gray-900  transition duration-75 group {{ request()->routeIs('app.dashboard.blogs.list') ? 'text-gray-300 dark:text-gray-200 bg-gray-200 dark:bg-gray-700' : 'text-black dark:text-gray-400 text-opacity-40' }}
                             ">
                             All Blogs
                         </a>
@@ -137,7 +137,7 @@
                     <li>
                         <a
                             href="{{ route('app.dashboard.blogs.create') }}"
-                            class="flex items-center p-2 pl-11 w-full text-sm font-medium text-gray-900  transition duration-75 group {{ request()->routeIs('app.dashboard.blogs.list') ? 'text-gray-300 dark:text-gray-200 bg-gray-200 dark:bg-gray-700' : 'text-black dark:text-gray-400 text-opacity-40' }}
+                            class="flex items-center p-2 pl-11 w-full text-sm font-medium text-gray-900  transition duration-75 group {{ request()->routeIs('app.dashboard.blogs.create') ? 'text-gray-300 dark:text-gray-200 bg-gray-200 dark:bg-gray-700' : 'text-black dark:text-gray-400 text-opacity-40' }}
                             ">
                             Add New
                         </a>

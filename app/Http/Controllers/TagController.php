@@ -8,12 +8,11 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
     public function list(){
-        $exceptionColumns = ['password','remember_token','email_verified_at', 'is_password_update'];
+        $exceptionColumns = [];
         $moduleSchemaColumns = Schema::getColumnListing('tags');
         $moduleSchemaColumns = array_diff($moduleSchemaColumns,$exceptionColumns);
         $pageData = [

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
+use App\Models\Category;
 use App\Models\Tag;
 use App\Models\User;
 use Exception;
@@ -79,11 +81,47 @@ class InternalController extends Controller
     }
 
     public function blogs(Request $request){
-        return response()->json([
-            'status'    => 'success',
-            'message'   => 'Blogs data fetched successfully',
-            'data'      => []
-        ]);
+        try{
+            $search = $request->get('search');
+            $filters = $request->get('filters');
+            $getTableColumnsFromSchema = Schema::getColumnListing('blogs');
+            $sort = $request->get('sort');
+            $blogs = (new Blog)->newQuery();
+            $blogs->whereNot('id',1);
+            if($search){
+                $blogs->where(function($query) use ($search, $getTableColumnsFromSchema){
+                    foreach($getTableColumnsFromSchema as $column){
+                        $query->orWhere($column, 'like', '%'.$search.'%');
+                    }
+                });
+            }
+            if($filters){
+                foreach($filters as $filter){
+                    foreach($filter as $column => $value){
+                        if($value === 'all') continue;
+                        $blogs->where($column,'=', $value);
+                    }
+                }
+            }
+            if($sort){
+                $blogs->orderBy($sort['column'],$sort['order']);
+            }else{
+                $blogs->orderBy('id','desc');
+            }
+            $blogs = $blogs->paginate(10);
+            $renderTable = view('restricted.appPages.blogs._table.data', ['blogs' => $blogs])->render();
+            return response()->json([
+                'status'    => 'success',
+                'message'   => 'Blogs data fetched successfully',
+                'html'      => $renderTable
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Error fetching blogs data',
+                'error'     => $exception->getMessage()
+            ],402);
+        }
     }
 
     public function tags(Request $request){
@@ -148,23 +186,91 @@ class InternalController extends Controller
             return response()->json([
                 'status'    => 'success',
                 'module'    => 'Tag',
-                'message'   => 'Tag data fetched successfully',
+                'message'   => 'Tags data fetched successfully',
                 'data'      => $tag
             ]);
         }catch (Exception $exception){
             return response()->json([
                 'status'    => 'error',
-                'message'   => 'Error fetching tag data',
+                'message'   => 'Error fetching tags data',
                 'error'     => $exception->getMessage()
             ],402);
         }
     }
     public function categories(Request $request){
-        return response()->json([
-            'status'    => 'success',
-            'message'   => 'Categories data fetched successfully',
-            'data'      => []
-        ]);
+        try{
+            $search = $request->get('search');
+            $filters = $request->get('filters');
+            $getTableColumnsFromSchema = Schema::getColumnListing('categories');
+            $sort = $request->get('sort');
+            $categories = (new Category)->newQuery();
+            $categories->whereNot('id',1);
+            if($search){
+                $categories->where(function($query) use ($search, $getTableColumnsFromSchema){
+                    foreach($getTableColumnsFromSchema as $column){
+                        $query->orWhere($column, 'like', '%'.$search.'%');
+                    }
+                });
+            }
+            if($filters){
+                foreach($filters as $filter){
+                    foreach($filter as $column => $value){
+                        if($value === 'all') continue;
+                        $categories->where($column,'=', $value);
+                    }
+                }
+            }
+            if($sort){
+                $categories->orderBy($sort['column'],$sort['order']);
+            }else{
+                $categories->orderBy('id','desc');
+            }
+            $categories = $categories->paginate(10);
+            $renderTable = view('restricted.appPages.categories._table.data', ['categories' => $categories])->render();
+            return response()->json([
+                'status'    => 'success',
+                'message'   => 'Categories data fetched successfully',
+                'html'      => $renderTable
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Error fetching categories data',
+                'error'     => $exception->getMessage()
+            ],402);
+        }
+    }
+
+    public function category(Request $request){
+        try{
+            $formFields = [
+                'id',
+                'name',
+                'slug',
+                'description',
+                'parent_id'
+            ];
+            $category = Category::find($request->get('id'));
+            if(!$category){
+                return response()->json([
+                    'status'    => 'error',
+                    'message'   => 'Category not found'
+                ],400);
+            }
+            $category = $category->only($formFields);
+            return response()->json([
+                'status'    => 'success',
+                'module'    => 'Category',
+                'message'   => 'Category data fetched successfully',
+                'data'      => $category
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Error fetching category data',
+                'error'     => $exception->getMessage()
+            ],402);
+        }
     }
 
     public function comments(Request $request){

@@ -14,6 +14,13 @@ class DataTable {
         if (this.dataTables) {
             this.dataTables.appendChild(this.loadingElement);
             this.renderTableOnPage(this.tableSource);
+            const reflectedForm = document.querySelector('main #reflectedForm');
+            if(reflectedForm){
+                const formTitle = reflectedForm.querySelector('.formTitle');
+                if (formTitle) {
+                    formTitle.textContent = formTitle.getAttribute('data-form-title');
+                }
+            }
             this.setupEventListeners();
         }
     }
@@ -143,6 +150,7 @@ class DataTable {
                 console.error('Error submitting data:', error);
             });
         }else if(action === 'reflect'){
+
             axios({
                 method: method,
                 url: url,
@@ -155,20 +163,22 @@ class DataTable {
                 }
             })
             .then(response => {
-
                 const resetButton = reflectedForm.querySelector('[data-form-action="resetForm"]');
                 resetButton.classList.add('flex');
                 resetButton.classList.remove('hidden');
                 if (response.data.status === 'success') {
                     const formFieldsData = response.data.data;
                     const moduleTitle = response.data.module;
-                    const formTitle = reflectedForm.querySelector('.formTitle');
-                    if (formTitle) {
-                        formTitle.textContent = `Edit ${moduleTitle}`;
+                    if(reflectedForm){
+                        const formTitle = reflectedForm.querySelector('.formTitle');
+                        if (formTitle) {
+                            formTitle.textContent = `Edit ${moduleTitle}`;
+                        }
                     }
                     for (const formField of reflectedForm.querySelectorAll('input, select, textarea')) {
                         formField.value = '';
                     }
+                    reflectedForm.querySelectorAll('.field-error').forEach(error => error.remove());
                     for (const [key, value] of Object.entries(formFieldsData)) {
                         const formField = reflectedForm.querySelector(`[name="${key}"]`);
                         if (formField) {

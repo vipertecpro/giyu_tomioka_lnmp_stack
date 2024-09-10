@@ -110,10 +110,11 @@ Route::group([
         ],function(){
             Route::get('/',[CategoryController::class,'list'])->name('list');
             Route::get('/create',[CategoryController::class,'create'])->name('create');
-            Route::get('/edit/{user_id}',[CategoryController::class,'edit'])->name('edit');
             Route::post('/form',[CategoryController::class,'form'])->name('form');
-            Route::delete('/delete',[CategoryController::class,'delete'])->name('delete');
+            Route::delete('/delete/{tag_id}',[CategoryController::class,'delete'])->name('delete');
             Route::delete('/deleteAll',[CategoryController::class,'deleteAll'])->name('deleteAll');
+            Route::post('/import',[CategoryController::class,'import'])->name('import');
+            Route::post('/export',[CategoryController::class,'export'])->name('export');
         });
         Route::group([
             'prefix'    => 'pages',
@@ -134,8 +135,13 @@ Route::group([
             Route::get('/create',[BlogController::class,'create'])->name('create');
             Route::get('/edit/{user_id}',[BlogController::class,'edit'])->name('edit');
             Route::post('/form',[BlogController::class,'form'])->name('form');
-            Route::delete('/delete',[BlogController::class,'delete'])->name('delete');
+            Route::post('/updateAvatar',[BlogController::class,'updateAvatar'])->name('updateAvatar');
+            Route::delete('/removeAvatar',[BlogController::class,'removeAvatar'])->name('removeAvatar');
+            Route::get('/details/{user_id}',[BlogController::class,'details'])->name('details');
+            Route::delete('/delete/{user_id}',[BlogController::class,'delete'])->name('delete');
             Route::delete('/deleteAll',[BlogController::class,'deleteAll'])->name('deleteAll');
+            Route::post('/import',[BlogController::class,'import'])->name('import');
+            Route::post('/export',[BlogController::class,'export'])->name('export');
         });
         Route::group([
             'prefix'    => 'comments',

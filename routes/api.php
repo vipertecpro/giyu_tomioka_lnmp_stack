@@ -13,5 +13,6 @@ Route::group([
        Route::post('/tags',[InternalController::class,'tags'])->name('tags');
        Route::post('/tag',[InternalController::class,'tag'])->name('tag');
        Route::post('/categories',[InternalController::class,'categories'])->name('categories');
+       Route::post('/category',[InternalController::class,'category'])->name('category');
        Route::post('/comments',[InternalController::class,'comments'])->name('comments');
     });
