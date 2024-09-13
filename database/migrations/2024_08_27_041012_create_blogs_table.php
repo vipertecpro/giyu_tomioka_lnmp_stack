@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();
             $table->string('meta_author')->nullable();
+            $table->string('status')->default('draft');
+            $table->boolean('visibility')->default(false);
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
             $table->unsignedBigInteger('updated_by');
