@@ -5,3 +5,4 @@ import './datatable';
 import './alert';
 import './plugins';
 import './handleForm';
+import './widgets';

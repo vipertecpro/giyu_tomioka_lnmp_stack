@@ -1,6 +1,5 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
-import * as path from "node:path";
 
 export default defineConfig({
     plugins: [
@@ -9,6 +8,12 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        host: '127.0.0.1',
+        watch: {
+            usePolling: true,
+        },
+    },
     resolve : {
         alias: {
             '$': 'jQuery',
