@@ -12,10 +12,10 @@
             <input type="file" name="featuredImage" value="{{ @$pageData->featuredImage }}" class="absolute -top-96 -left-96 featuredImage -z-50" />
             <div class="relative group">
                 <div class="h-full min-h-[200px] max-h-[300px] overflow-y-auto">
-                    <img class="rounded-md w-full previewPlaceholder" src="" data-preview-default-url="https://placehold.co/1280x720?text=Placeholder%0A1280x720" alt="Featured Image Placeholder" />
+                    <img class="rounded-md object-contain w-full min-h-[200px] max-h-[300px] previewPlaceholder" src="" data-preview-default-url="https://placehold.co/1280x720?text=Placeholder%0A1280x720" alt="Featured Image Placeholder" />
                 </div>
-                <div class="absolute inset-0 flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gray-800 bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-50 backdrop-blur-sm">
-                <div class="flex space-x-2 mb-2">
+                <div class="absolute inset-0 flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gray-800 bg-opacity-20 dark:bg-gray-800 dark:bg-opacity-20 backdrop-blur-sm rounded-md">
+                    <div class="flex space-x-2 mb-2">
                         <button type="button" class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-md text-sm p-2 text-center items-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 hidden" data-widget-action="edit">
                             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z" clip-rule="evenodd"/>
