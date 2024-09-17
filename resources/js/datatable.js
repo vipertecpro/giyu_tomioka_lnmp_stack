@@ -1,7 +1,5 @@
 import { initFlowbite } from "flowbite";
 import Alert from "./alert.js";
-import axios from "axios";
-
 class DataTable {
     constructor(dataTablesId) {
         this.dataTables = document.querySelector(dataTablesId);

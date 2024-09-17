@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Alert from './alert.js';
 
 class FormHandler {

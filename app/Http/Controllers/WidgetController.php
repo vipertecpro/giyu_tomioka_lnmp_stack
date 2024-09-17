@@ -66,7 +66,8 @@ class WidgetController extends Controller
                 'status'        => 'success',
                 'message'       => 'Categories data fetched successfully',
                 'html'          => $renderTable,
-                'pagination'    => $renderTablePagination
+                'pagination'    => $renderTablePagination,
+                'totalCount'    => (new Category)->count()
             ]);
         }catch (Exception $exception){
             return response()->json([

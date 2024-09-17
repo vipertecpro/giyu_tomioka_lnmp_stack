@@ -1,0 +1,18 @@
+{
+  "resources/js/alert.js": [],
+  "resources/js/app.js": [],
+  "resources/js/bootstrap.js": [
+    "/build/assets/themeToggle-CfnEXkQY.js"
+  ],
+  "resources/js/client.js": [],
+  "resources/js/datatable.js": [],
+  "resources/js/handleForm.js": [],
+  "resources/js/plugins.js": [],
+  "resources/js/progressBar.js": [],
+  "resources/js/themeToggle.js": [
+    "/build/assets/themeToggle-CfnEXkQY.js"
+  ],
+  "resources/js/widgets/Categories.js": [],
+  "resources/js/widgets/FeaturedImage.js": [],
+  "resources/js/widgets/index.js": []
+}
