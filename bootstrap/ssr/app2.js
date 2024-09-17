@@ -625,6 +625,7 @@ class Categories {
     this.checkAllState = false;
     this.totalCount = 0;
     this.searchQuery = "";
+    this.hiddenInput = null;
     this.init().then(() => {
       console.log("Categories widget initialized");
     });
@@ -641,6 +642,7 @@ class Categories {
         this.defaultValues = this.widgetElement.getAttribute("data-widget-default-values").split(",");
         this.searchInput = this.widgetElement.querySelector('[data-widget-action="search"]');
         this.paginationators = this.widgetElement.querySelector("[data-widget-render-pagination]");
+        this.createHiddenInput();
         await this.loadList(this.widgetApiListSource);
         this.handleTableEvents();
         this.restoreDefaultValues();
@@ -648,6 +650,13 @@ class Categories {
         this.updateCheckedItemsCount();
       }
     }
+  }
+  createHiddenInput() {
+    this.hiddenInput = document.createElement("input");
+    this.hiddenInput.type = "hidden";
+    this.hiddenInput.name = "categories";
+    this.hiddenInput.value = this.widgetElement.getAttribute("data-widget-default-values");
+    this.widgetElement.appendChild(this.hiddenInput);
   }
   async loadWidget(dataSource) {
     try {
@@ -750,7 +759,7 @@ class Categories {
   }
   updateWidgetUpdatedValues() {
     const updatedValues = Object.keys(this.checkboxState).filter((id) => this.checkboxState[id]);
-    this.widgetElement.setAttribute("data-widget-updated-values", this.checkAllState ? "all" : updatedValues.join(","));
+    this.hiddenInput.value = this.checkAllState ? "all" : updatedValues.join(",");
   }
   handleSearchEvent() {
     if (this.searchInput) {
@@ -770,6 +779,11 @@ function debounce(func, wait) {
   };
 }
 document.addEventListener("DOMContentLoaded", () => {
-  new FeaturedImage();
-  new Categories();
+  if (document.querySelector(".featuredImage")) {
+    new FeaturedImage();
+  }
+  if (document.querySelector('[data-render-widget="categories"]')) {
+    new Categories();
+  }
 });
+initFlowbite();

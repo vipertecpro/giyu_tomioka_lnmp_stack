@@ -2,6 +2,10 @@ import FeaturedImage from './FeaturedImage';
 import Categories from "./Categories";
 
 document.addEventListener('DOMContentLoaded', () => {
-    new FeaturedImage();
-    new Categories();
+    if(document.querySelector('.featuredImage')){
+        new FeaturedImage();
+    }
+    if(document.querySelector('[data-render-widget="categories"]')){
+        new Categories();
+    }
 });
