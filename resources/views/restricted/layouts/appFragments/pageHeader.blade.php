@@ -35,16 +35,22 @@
         @if(@$actions)
             <div class="space-x-2 flex justify-end md:p-0">
                 @foreach(@$actions as $action)
-                    <form action="{{ $action['route'] }}" method="{{ $action['method'] }}" class="relative">
-                        @csrf
-                        @method($action['method'])
-                            <button type="button" class="text-white bg-{{ $action['color'] }}-700 hover:bg-{{ $action['color'] }}-800 focus:ring-2 focus:outline-none focus:ring-{{ $action['color'] }}-300 font-medium rounded-md text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-{{ $action['color'] }}-600 dark:hover:bg-{{ $action['color'] }}-700 dark:focus:ring-{{ $action['color'] }}-800 formSubmit">
-                                <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd"/>
-                                </svg>
-                                {{ $action['title'] }}
-                            </button>
-                    </form>
+                    @if(@$action['type']  && @$action['type'] === 'toggle')
+                        <button type="button" class="text-white bg-{{ $action['color'] }}-700 hover:bg-{{ $action['color'] }}-800 focus:ring-2 focus:outline-none focus:ring-{{ $action['color'] }}-300 font-medium rounded-md text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-{{ $action['color'] }}-600 dark:hover:bg-{{ $action['color'] }}-700 dark:focus:ring-{{ $action['color'] }}-800" data-drawer-target="drawer-{{ $action['drawer'] }}" data-drawer-show="drawer-{{ $action['drawer'] }}" data-drawer-placement="right" aria-controls="drawer-{{ $action['drawer'] }}">
+                            <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M9.586 2.586A2 2 0 0 1 11 2h2a2 2 0 0 1 2 2v.089l.473.196.063-.063a2.002 2.002 0 0 1 2.828 0l1.414 1.414a2 2 0 0 1 0 2.827l-.063.064.196.473H20a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-.089l-.196.473.063.063a2.002 2.002 0 0 1 0 2.828l-1.414 1.414a2 2 0 0 1-2.828 0l-.063-.063-.473.196V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-.089l-.473-.196-.063.063a2.002 2.002 0 0 1-2.828 0l-1.414-1.414a2 2 0 0 1 0-2.827l.063-.064L4.089 15H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h.09l.195-.473-.063-.063a2 2 0 0 1 0-2.828l1.414-1.414a2 2 0 0 1 2.827 0l.064.063L9 4.089V4a2 2 0 0 1 .586-1.414ZM8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clip-rule="evenodd"/>
+                            </svg>
+                            {{ $action['title'] }}
+                        </button>
+                    @else
+                        <form action="{{ $action['route'] }}" method="{{ $action['method'] }}" class="relative">
+                            @csrf
+                            @method($action['method'])
+                                <button type="button" class="text-white bg-{{ $action['color'] }}-700 hover:bg-{{ $action['color'] }}-800 focus:ring-2 focus:outline-none focus:ring-{{ $action['color'] }}-300 font-medium rounded-md text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-{{ $action['color'] }}-600 dark:hover:bg-{{ $action['color'] }}-700 dark:focus:ring-{{ $action['color'] }}-800 formSubmit">
+                                    {{ $action['title'] }}
+                                </button>
+                        </form>
+                    @endif
                 @endforeach
             </div>
         @endif

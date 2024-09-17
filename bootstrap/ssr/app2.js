@@ -623,15 +623,16 @@ class Categories {
     this.checkboxState = {};
     this.checkedItemsCount = 0;
     this.checkAllState = false;
-    this.init().then((r) => {
-      console.log("Categories widget initialized", r);
+    this.totalCount = 0;
+    this.searchQuery = "";
+    this.init().then(() => {
+      console.log("Categories widget initialized");
     });
   }
   async init() {
     if (this.widgetElement) {
       this.widgetApiSource = this.widgetElement.getAttribute("data-widget-source-api");
       await this.loadWidget(this.widgetApiSource);
-      this.paginationators = this.widgetElement.querySelector("[data-widget-render-pagination]");
       this.widgetTable = this.widgetElement.querySelector('[id="widget-list"]');
       if (this.widgetTable) {
         this.widgetTbody = this.widgetTable.querySelector("tbody");
@@ -639,11 +640,12 @@ class Categories {
         this.widgetApiListSource = this.widgetTbody.getAttribute("data-render-widget-list-api");
         this.defaultValues = this.widgetElement.getAttribute("data-widget-default-values").split(",");
         this.searchInput = this.widgetElement.querySelector('[data-widget-action="search"]');
-        this.searchQuery = "";
+        this.paginationators = this.widgetElement.querySelector("[data-widget-render-pagination]");
         await this.loadList(this.widgetApiListSource);
         this.handleTableEvents();
         this.restoreDefaultValues();
         this.handleSearchEvent();
+        this.updateCheckedItemsCount();
       }
     }
   }
@@ -652,24 +654,56 @@ class Categories {
       const response = await axios$1.post(dataSource, { widget: "categories" });
       this.widgetElement.innerHTML = response.data.html;
     } catch (error) {
-      console.error(error);
+      console.error("Error loading widget:", error);
     }
   }
   async loadList(dataSource) {
     try {
-      const response = await axios$1.post(dataSource);
+      const response = await axios$1.post(dataSource, { search: this.searchQuery });
       this.widgetTbody.innerHTML = response.data.html;
       this.paginationators.innerHTML = response.data.pagination;
-      this.restoreCheckboxState();
-      this.updateCheckedItemsCount();
+      if (response.data.totalCount !== void 0) {
+        this.totalCount = response.data.totalCount;
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error loading list:", error);
     }
   }
   handleTableEvents() {
     const selectedItemsElement = this.widgetTable.querySelector('[data-widget-action="selected-items-count"]');
     selectedItemsElement.innerHTML = this.checkedItemsCount;
     const checkboxes = this.widgetTbody.querySelectorAll('[data-widget-action="check"]');
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          this.checkboxState[checkbox.getAttribute("data-checkbox-item-id")] = checkbox.checked;
+        } else {
+          delete this.checkboxState[checkbox.getAttribute("data-checkbox-item-id")];
+        }
+        this.updateCheckedItemsCount();
+        this.updateWidgetUpdatedValues();
+      });
+    });
+    this.handleCheckAllInput();
+    this.handlePaginationEvents();
+  }
+  handleCheckAllInput() {
+    this.checkAllInput.addEventListener("change", (event) => {
+      const checkboxes = this.widgetTbody.querySelectorAll('[data-widget-action="check"]');
+      const isChecked = event.target.checked;
+      this.checkAllState = isChecked;
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = isChecked;
+        this.checkboxState[checkbox.getAttribute("data-checkbox-item-id")] = isChecked;
+      });
+      if (!isChecked) {
+        this.checkboxState = {};
+      }
+      this.updateCheckedItemsCount();
+      this.updateWidgetUpdatedValues();
+    });
+  }
+  handlePaginationEvents() {
     const pageLinks = this.paginationators.querySelectorAll(".page-link");
     pageLinks.forEach((pageLink) => {
       pageLink.addEventListener("click", async (event) => {
@@ -680,31 +714,9 @@ class Categories {
         this.handleTableEvents();
       });
     });
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("change", () => {
-        this.checkboxState[checkbox.getAttribute("data-checkbox-item-id")] = checkbox.checked;
-        this.updateCheckedItemsCount();
-        selectedItemsElement.innerHTML = this.checkedItemsCount;
-        this.updateWidgetUpdatedValues();
-      });
-    });
-    this.checkAllInput.addEventListener("change", (event) => {
-      var _a;
-      const checkboxes2 = this.widgetTbody.querySelectorAll('[data-widget-action="check"]');
-      const isChecked = event.target.checked;
-      this.checkAllState = isChecked;
-      checkboxes2.forEach((checkbox) => {
-        checkbox.checked = isChecked;
-        this.checkboxState[checkbox.getAttribute("data-checkbox-item-id")] = isChecked;
-      });
-      if (!isChecked) {
-        this.checkboxState = {};
-      }
-      this.updateCheckedItemsCount();
-      const totalItems = (_a = this.widgetElement.querySelector("[data-widget-pagination-total]")) == null ? void 0 : _a.getAttribute("data-widget-pagination-total");
-      selectedItemsElement.innerHTML = isChecked ? totalItems : 0;
-      this.updateWidgetUpdatedValues();
-    });
+    if (this.checkAllInput.checked) {
+      this.restoreCheckboxState();
+    }
   }
   storeCheckboxState() {
     const checkboxes = this.widgetTbody.querySelectorAll('[data-widget-action="check"]');
@@ -715,7 +727,7 @@ class Categories {
   restoreCheckboxState() {
     const checkboxes = this.widgetTbody.querySelectorAll('[data-widget-action="check"]');
     checkboxes.forEach((checkbox) => {
-      checkbox.checked = this.checkAllState || (this.checkboxState.hasOwnProperty(checkbox.getAttribute("data-checkbox-item-id")) ? this.checkboxState[checkbox.getAttribute("data-checkbox-item-id")] : false);
+      checkbox.checked = this.checkAllState || (this.checkboxState[checkbox.getAttribute("data-checkbox-item-id")] || false);
     });
   }
   restoreDefaultValues() {
@@ -727,9 +739,14 @@ class Categories {
     this.updateWidgetUpdatedValues();
   }
   updateCheckedItemsCount() {
-    this.checkedItemsCount = Object.values(this.checkboxState).filter((checked) => checked).length;
     const selectedItemsElement = this.widgetTable.querySelector('[data-widget-action="selected-items-count"]');
-    selectedItemsElement.innerHTML = this.checkedItemsCount;
+    if (this.checkAllInput.checked) {
+      this.checkedItemsCount = this.totalCount - Object.values(this.checkboxState).filter((checked) => !checked).length;
+      selectedItemsElement.innerHTML = this.checkedItemsCount;
+    } else {
+      this.checkedItemsCount = Object.values(this.checkboxState).filter((checked) => checked).length;
+      selectedItemsElement.innerHTML = this.checkedItemsCount;
+    }
   }
   updateWidgetUpdatedValues() {
     const updatedValues = Object.keys(this.checkboxState).filter((id) => this.checkboxState[id]);

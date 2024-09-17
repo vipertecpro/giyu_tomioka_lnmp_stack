@@ -6,3 +6,6 @@ import './alert';
 import './plugins';
 import './handleForm';
 import './widgets';
+import {initFlowbite} from "flowbite";
+
+initFlowbite();

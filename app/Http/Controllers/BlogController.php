@@ -32,17 +32,7 @@ class BlogController extends Controller
         ];
         return view('restricted.appPages.blogs.list',$pageData);
     }
-    public function create(){
-        $pageData = [
-            'pageTitle'         => 'Add new blog',
-            'pageDescription'   => 'Add a new blog to the system',
-            'crumbs'            => [
-                ['title' => 'Blogs', 'route' => route('app.dashboard.blogs.list')],
-                ['title' => 'Add new blog', 'route' => '']
-            ],
-        ];
-        return view('restricted.appPages.blogs.form',$pageData);
-    }
+
     public function edit(int $blog_id){
         $pageData = [
             'pageTitle'         => 'Edit blog',
@@ -55,6 +45,7 @@ class BlogController extends Controller
         ];
         return view('restricted.appPages.blogs.form',$pageData);
     }
+
     public function form(Request $request){
         try{
             $validator = Validator::make($request->all(),[
@@ -102,6 +93,24 @@ class BlogController extends Controller
             ],400);
         }
     }
+
+    public function create(){
+        $pageData = [
+            'pageTitle'         => 'Add new blog',
+            'pageDescription'   => 'Add a new blog to the system',
+            'crumbs'            => [
+                ['title' => 'Blogs', 'route' => route('app.dashboard.blogs.list')],
+                ['title' => 'Add new blog', 'route' => '']
+            ],
+            'actions'           => [
+                ['title' => 'Publish', 'route' => route('app.dashboard.blogs.form'), 'method' => 'POST', 'color' => 'green'],
+                ['title' => 'Save As Draft', 'route' => route('app.dashboard.blogs.form'), 'method' => 'POST', 'color' => 'gray'],
+                ['title' => 'Blog Settings', 'color' => 'primary', 'type' => 'toggle', 'drawer' => 'blog-settings'],
+            ],
+        ];
+        return view('restricted.appPages.blogs.form',$pageData);
+    }
+
     public function updateAvatar(Request $request){
         try{
             $validator = Validator::make($request->all(),[
@@ -188,27 +197,7 @@ class BlogController extends Controller
         ];
         return view('restricted.appPages.blogs.details',$pageData);
     }
-    public function delete($blog_id){
-        try{
-            $findblog = Blog::find($blog_id);
-            if(!$findblog){
-                return response()->json([
-                    'status'    => 'error',
-                    'message'   => 'blog not found'
-                ],400);
-            }
-            $findblog->delete();
-            return response()->json([
-                'status'    => 'success',
-                'message'   => 'blog deleted successfully'
-            ]);
-        }catch (Exception $exception){
-            return response()->json([
-                'status'    => 'error',
-                'message'   => $exception->getMessage()
-            ],500);
-        }
-    }
+
     public function deleteAll(){
         try{
             $blogs = Blog::where('id','!=',auth()->id());
@@ -233,6 +222,29 @@ class BlogController extends Controller
             ],400);
         }
     }
+
+    public function delete($blog_id){
+        try{
+            $findblog = Blog::find($blog_id);
+            if(!$findblog){
+                return response()->json([
+                    'status'    => 'error',
+                    'message'   => 'blog not found'
+                ],400);
+            }
+            $findblog->delete();
+            return response()->json([
+                'status'    => 'success',
+                'message'   => 'blog deleted successfully'
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'    => 'error',
+                'message'   => $exception->getMessage()
+            ],500);
+        }
+    }
+
     public function import(){
         return redirect()->route('app.dashboard.blogs.list');
     }

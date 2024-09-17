@@ -5,53 +5,7 @@
         @csrf
         @method('POST')
         <div class="grid grid-cols-12 sm:grid-cols-1 md:grid-cols-12 gap-4 ">
-            <div class="col-span-12 lg:col-span-3 space-y-4">
-                <div class="col-span-12">
-                    <div
-                        class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700"
-                        data-accordion="open">
-                        <h2 id="accordion-open-heading-1">
-                            <button type="button"
-                                    class="flex items-center justify-between w-full p-2 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                                    data-accordion-target="#accordion-open-body-1" aria-expanded="true"
-                                    aria-controls="accordion-open-body-1">
-                                <span class="flex items-center">Publish</span>
-                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2" d="M9 5 5 1 1 5"/>
-                                </svg>
-                            </button>
-                        </h2>
-                        <div id="accordion-open-body-1" class="hidden" aria-labelledby="accordion-open-heading-1">
-                            <div class="p-2 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                                <div class="flex justify-between items-center space-x-2">
-                                    <button type="button"
-                                            class="flex w-fit items-center justify-center rounded-md bg-primary-700 p-2 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600  dark:hover:bg-primary-700 dark:focus:ring-primary-800 sm:mt-0 sm:w-auto">
-                                        Publish
-                                    </button>
-                                    <button type="button"
-                                            class="flex w-fit items-center justify-center rounded-md bg-gray-700 p-2 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600  dark:hover:bg-gray-700 dark:focus:ring-gray-800 sm:mt-0 sm:w-auto">
-                                        Save As Draft
-                                    </button>
-                                </div>
-                                <div class="flex justify-center items-center">
-                                    <div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-span-12">
-                    @include('restricted.layouts.widgets.featuredImage')
-                </div>
-                <div class="col-span-12" data-render-widget="categories" data-widget-source-api="{{ route('internal.widgets.append') }}" data-widget-default-values="56,55,51,52,1,5" data-widget-updated-values=""></div>
-                <div class="col-span-12">
-                    @include('restricted.layouts.widgets.tags')
-                </div>
-            </div>
-            <div class="col-span-12 lg:col-span-9">
+            <div class="col-span-12">
                 <div
                     class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700 p-2">
                     <div class="grid gap-2 mb-2 grid-cols-1">
@@ -74,4 +28,26 @@
             </div>
         </div>
     </form>
+    <aside id="drawer-blog-settings" class="fixed top-[60px] right-0 z-40 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 h-screen transition-transform translate-x-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 flex flex-col overflow-y-auto" tabindex="-1" aria-labelledby="drawer-blog-settings">
+    <h5 id="drawer-blog-settings" class="inline-flex items-center p-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+       Blog Settings
+    </h5>
+    <button type="button" data-drawer-hide="drawer-blog-settings" aria-controls="drawer-blog-settings" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-md text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+        </svg>
+        <span class="sr-only">Close menu</span>
+    </button>
+    <div class="flex flex-col justify-start overflow-y-scroll p-2 border-t border-gray-400 dark:border-gray-600 relative scroll-smooth pb-20">
+        <div class="grid grid-cols-1 gap-2">
+            <div class="col-span-12">
+                @include('restricted.layouts.widgets.featuredImage')
+            </div>
+            <div class="col-span-12" data-render-widget="categories" data-widget-source-api="{{ route('internal.widgets.append') }}" data-widget-default-values="" data-widget-updated-values=""></div>
+            <div class="col-span-12">
+                @include('restricted.layouts.widgets.tags')
+            </div>
+        </div>
+    </div>
+</aside>
 @endsection
