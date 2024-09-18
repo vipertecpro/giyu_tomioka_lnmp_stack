@@ -27,11 +27,12 @@ class Categories {
                 this.searchInput = this.widgetElement.querySelector('[data-widget-action="search"]');
                 this.paginationators = this.widgetElement.querySelector('[data-widget-render-pagination]');
                 this.createHiddenInput();
-                await this.loadList(this.widgetApiListSource);  // Load list and total count
+                await this.loadList(this.widgetApiListSource);
                 this.handleTableEvents();
                 this.restoreDefaultValues();
                 this.handleSearchEvent();
                 this.updateCheckedItemsCount();
+                this.initSelectedItemsCount();
             }
         }
     }
@@ -73,11 +74,25 @@ class Categories {
 
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
-                if(checkbox.checked) {
-                    this.checkboxState[checkbox.getAttribute('data-checkbox-item-id')] = checkbox.checked;
-                }else{
+                if (this.checkAllInput.checked) {
+                    // Uncheck all other checkboxes except the one being clicked
+                    checkboxes.forEach(otherCheckbox => {
+                        if (otherCheckbox !== checkbox) {
+                            otherCheckbox.checked = false;
+                            delete this.checkboxState[otherCheckbox.getAttribute('data-checkbox-item-id')];
+                        }
+                    });
+                    // Reset totalCount to 0
+                    this.totalCount = 0;
+                    this.checkboxState = {};
+                }
+                if (checkbox.checked) {
+                    this.checkboxState[checkbox.getAttribute('data-checkbox-item-id')] = true;
+                } else {
                     delete this.checkboxState[checkbox.getAttribute('data-checkbox-item-id')];
                 }
+                this.checkAllInput.checked = false;
+                this.checkAllState = false;
                 this.updateCheckedItemsCount();
                 this.updateWidgetUpdatedValues();
             });
@@ -114,6 +129,7 @@ class Categories {
                 const page = pageLink.getAttribute('data-action-url');
                 await this.loadList(page + (this.searchQuery ? '?search=' + this.searchQuery : ''));
                 this.handleTableEvents();
+                this.restoreCheckboxState();
             });
         });
         if (this.checkAllInput.checked) {
@@ -133,6 +149,7 @@ class Categories {
         checkboxes.forEach(checkbox => {
             checkbox.checked = this.checkAllState || (this.checkboxState[checkbox.getAttribute('data-checkbox-item-id')] || false);
         });
+        this.updateCheckedItemsCount(); // Update the count after restoring the state
     }
 
     restoreDefaultValues() {
@@ -148,11 +165,10 @@ class Categories {
         const selectedItemsElement = this.widgetTable.querySelector('[data-widget-action="selected-items-count"]');
         if (this.checkAllInput.checked){
             this.checkedItemsCount = this.totalCount - Object.values(this.checkboxState).filter(checked => !checked).length;
-            selectedItemsElement.innerHTML = this.checkedItemsCount;
         }else{
             this.checkedItemsCount = Object.values(this.checkboxState).filter(checked => checked).length;
-            selectedItemsElement.innerHTML = this.checkedItemsCount;
         }
+        selectedItemsElement.innerHTML = this.checkedItemsCount;
     }
 
     updateWidgetUpdatedValues() {
@@ -168,6 +184,11 @@ class Categories {
                 this.handleTableEvents();
             }, 300));
         }
+    }
+
+    initSelectedItemsCount() {
+        const selectedItemsElement = this.widgetTable.querySelector('[data-widget-action="selected-items-count"]');
+        selectedItemsElement.innerHTML = 0;
     }
 }
 
