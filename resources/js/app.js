@@ -6,6 +6,6 @@ import './alert';
 import './plugins';
 import './handleForm';
 import './widgets';
-import {initFlowbite} from "flowbite";
-
+import './customEditor.js';
+import {initFlowbite} from "flowbite"
 initFlowbite();

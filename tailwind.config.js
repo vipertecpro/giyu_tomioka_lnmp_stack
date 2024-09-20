@@ -30,6 +30,9 @@ export default {
         'bg-green-700', 'hover:bg-green-800', 'focus:ring-green-300', 'dark:bg-green-600', 'dark:hover:bg-green-700', 'dark:focus:ring-green-800',
         'bg-teal-700', 'hover:bg-teal-800', 'focus:ring-teal-300', 'dark:bg-teal-600', 'dark:hover:bg-teal-700', 'dark:focus:ring-teal-800',
     ],
-    plugins: [require('flowbite/plugin')],
+    plugins: [
+        require('flowbite/plugin'),
+        require('flowbite-typography'),
+    ],
 }
 

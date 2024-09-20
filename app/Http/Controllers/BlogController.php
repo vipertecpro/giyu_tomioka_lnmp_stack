@@ -22,10 +22,8 @@ class BlogController extends Controller
                 ['title' => 'Blogs', 'route' => route('app.dashboard.blogs.list')],
             ],
             'actions'           => [
-                ['title' => 'Add New', 'route' => route('app.dashboard.blogs.create'), 'method' => 'GET', 'color' => 'blue'],
+                ['title' => 'Add New', 'route' => route('app.dashboard.blogs.create'), 'method' => 'GET', 'icon' => 'plus', 'color' => 'blue'],
                 ['title' => 'Delete All', 'route' => route('app.dashboard.blogs.deleteAll'), 'method' => 'DELETE', 'color' => 'red'],
-                ['title' => 'Import', 'route' => route('app.dashboard.blogs.import'), 'method' => 'POST', 'color' => 'green'],
-                ['title' => 'Export', 'route' => route('app.dashboard.blogs.export'), 'method' => 'POST', 'color' => 'teal'],
             ],
             'api'            => route('internal.blogs'),
             'columns'        => $moduleSchemaColumns

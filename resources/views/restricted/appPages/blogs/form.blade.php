@@ -12,16 +12,17 @@
                         <div>
                             <input type="hidden" value="{{ @$pageData->id }}" name="id">
                         </div>
-                        <div>
-                            <input type="text" name="title" id="title"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                   value="{{ @$pageData->title }}" placeholder="Enter the blog title here">
-                        </div>
-                        <div>
-                            <textarea name="title" id="title"
-                                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                      rows="15"
-                                      placeholder="Enter the blog title here">{{ @$pageData->content }}</textarea>
+                        <div class="flex flex-col justify-start items-center w-full p-5 border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500">
+                            <input
+                                type="text"
+                                name="title"
+                                id="title"
+                                class="block max-w-screen-2xl md:w-10/12 2xl:w-11/12 p-5 h-20 text-3xl border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold"
+                                value="{{ @$pageData->title }}"
+                                placeholder="Enter the blog title here" />
+                            <article class="format lg:format-lg max-w-screen-2xl w-full my-6">
+                                <div id="blog-description"></div>
+                            </article>
                         </div>
                     </div>
                 </div>
