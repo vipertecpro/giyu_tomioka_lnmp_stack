@@ -627,7 +627,7 @@ class Categories {
     this.searchQuery = "";
     this.hiddenInput = null;
     this.init().then(() => {
-      console.log("Categories widget initialized");
+      console.log("TableBased widget initialized");
     });
   }
   async init() {

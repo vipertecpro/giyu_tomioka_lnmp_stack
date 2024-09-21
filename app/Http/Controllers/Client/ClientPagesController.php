@@ -87,11 +87,11 @@ class ClientPagesController extends Controller
         return view('client.pages.terms',$pageData);
     }
     /**
-     * Categories
+     * TableBased
      * */
     public function categories(){
         $pageData = [
-            'pageTitle'         => 'Blog Categories - Find Your Interests',
+            'pageTitle'         => 'Blog TableBased - Find Your Interests',
             'pageDescription'   => 'Explore our blog categories to find articles that match your interests. From technology to lifestyle, discover content that matters to you.',
             'crumbs'            => []
         ];

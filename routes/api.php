@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\InternalController;
 use App\Http\Controllers\WidgetController;
+use Illuminate\Support\Facades\Route;
 
 Route::group([
         'prefix'    => 'internal',

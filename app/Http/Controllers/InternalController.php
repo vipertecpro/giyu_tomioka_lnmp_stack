@@ -229,7 +229,7 @@ class InternalController extends Controller
             $renderTable = view('restricted.appPages.categories._table.data', ['categories' => $categories])->render();
             return response()->json([
                 'status'    => 'success',
-                'message'   => 'Categories data fetched successfully',
+                'message'   => 'TableBased data fetched successfully',
                 'html'      => $renderTable
             ]);
         }catch (Exception $exception){

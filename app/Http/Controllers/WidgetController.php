@@ -17,7 +17,7 @@ class WidgetController extends Controller
     public function append(Request $request){
         try{
             $widget = $request->get('widget');
-            $renderWidget = view('restricted.layouts.widgets.'.$widget.'.index')->render();
+            $renderWidget = view('restricted.layouts.widgets.table.'.$widget.'.components.layout')->render();
             return response()->json([
                 'status'    => 'success',
                 'message'   => 'Widget rendered successfully',
@@ -60,11 +60,11 @@ class WidgetController extends Controller
                 $categories->orderBy('id','desc');
             }
             $categories = $categories->paginate(10);
-            $renderTable = view('restricted.layouts.widgets.categories.components.list', ['categories' => $categories])->render();
-            $renderTablePagination = view('restricted.layouts.widgets.categories.components.pagination', ['categories' => $categories])->render();
+            $renderTable = view('restricted.layouts.widgets.table.categories.components.list', ['tableData' => $categories])->render();
+            $renderTablePagination = view('restricted.layouts.widgets.table.categories.components.pagination', ['tableData' => $categories])->render();
             return response()->json([
                 'status'        => 'success',
-                'message'       => 'Categories data fetched successfully',
+                'message'       => 'TableBased data fetched successfully',
                 'html'          => $renderTable,
                 'pagination'    => $renderTablePagination,
                 'totalCount'    => (new Category)->count()
@@ -112,17 +112,26 @@ class WidgetController extends Controller
                 $tags->orderBy('id','desc');
             }
             $tags = $tags->paginate(10);
-            $renderTable = view('restricted.appPages.tags._table.data', ['tags' => $tags])->render();
+            $renderTable = view('restricted.layouts.widgets.table.tags.components.list', ['tableData' => $tags])->render();
+            $renderTablePagination = view('restricted.layouts.widgets.table.tags.components.pagination', ['tableData' => $tags])->render();
             return response()->json([
-                'status'    => 'success',
-                'message'   => 'Tags data fetched successfully',
-                'html'      => $renderTable
+                'status'        => 'success',
+                'message'       => 'Table Based | Tags | data fetched successfully',
+                'html'          => $renderTable,
+                'pagination'    => $renderTablePagination,
+                'totalCount'    => (new Tag)->count()
             ]);
         }catch (Exception $exception){
             return response()->json([
                 'status'    => 'error',
                 'message'   => 'Error fetching tags data',
                 'error'     => $exception->getMessage()
+            ],402);
+        } catch (Throwable $e) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Error fetching tags data',
+                'error'     => $e->getMessage()
             ],402);
         }
     }

@@ -4,10 +4,9 @@
     <form action="{{ route('app.dashboard.blogs.form') }}" method="POST" class="relative p-2">
         @csrf
         @method('POST')
-        <div class="grid grid-cols-12 sm:grid-cols-1 md:grid-cols-12 gap-4 ">
+        <div class="grid grid-cols-12 sm:grid-cols-1 md:grid-cols-12 gap-4">
             <div class="col-span-12">
-                <div
-                    class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700 p-2">
+                <div class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700 p-2 h-screen">
                     <div class="grid gap-2 mb-2 grid-cols-1">
                         <div>
                             <input type="hidden" value="{{ @$pageData->id }}" name="id">
@@ -21,7 +20,7 @@
                                 value="{{ @$pageData->title }}"
                                 placeholder="Enter the blog title here" />
                             <article class="format lg:format-lg max-w-screen-2xl w-full my-6">
-                                <div id="blog-description"></div>
+                                <div id="blog-description">{{ @$pageData->content }}</div>
                             </article>
                         </div>
                     </div>
@@ -44,9 +43,11 @@
             <div class="col-span-12">
                 @include('restricted.layouts.widgets.featuredImage')
             </div>
-            <div class="col-span-12" data-render-widget="categories" data-widget-source-api="{{ route('internal.widgets.append') }}" data-widget-default-values="" data-widget-updated-values=""></div>
             <div class="col-span-12">
-                @include('restricted.layouts.widgets.tags')
+                @include('restricted.layouts.widgets.table.categories.index')
+            </div>
+            <div class="col-span-12">
+                @include('restricted.layouts.widgets.table.tags.index')
             </div>
         </div>
     </div>

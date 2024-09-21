@@ -1,16 +1,37 @@
 import axios from 'axios';
 
-class Categories {
-    constructor() {
-        this.widgetElement = document.querySelector('[data-render-widget="categories"]');
-        this.checkboxState = {};
-        this.checkedItemsCount = 0;
-        this.checkAllState = false;
-        this.totalCount = 0;
-        this.searchQuery = '';
-        this.hiddenInput = null;
-        this.init().then(() => {
-            console.log('Categories widget initialized');
+function observeElement(selector) {
+    return new Promise((resolve) => {
+        const observer = new MutationObserver((mutations, obs) => {
+            const element = document.querySelector(selector);
+            if (element) {
+                obs.disconnect();
+                resolve(element);
+            }
+        });
+        observer.observe(document, {
+            childList: true,
+            subtree: true
+        });
+    });
+}
+
+class TableBased {
+    constructor(moduleName) {
+        this.moduleName = moduleName;
+        observeElement(`[data-render-widget="${moduleName}"]`).then((element) => {
+            this.widgetElement = element;
+            this.checkboxState = {};
+            this.checkedItemsCount = 0;
+            this.checkAllState = false;
+            this.totalCount = 0;
+            this.searchQuery = '';
+            this.hiddenInput = null;
+            this.init().then(() => {
+                console.log(`${moduleName} widget initialized`);
+            });
+        }).catch((error) => {
+            console.error(error);
         });
     }
 
@@ -40,14 +61,14 @@ class Categories {
     createHiddenInput() {
         this.hiddenInput = document.createElement('input');
         this.hiddenInput.type = 'hidden';
-        this.hiddenInput.name = 'categories';
+        this.hiddenInput.name = this.moduleName;
         this.hiddenInput.value = this.widgetElement.getAttribute('data-widget-default-values');
         this.widgetElement.appendChild(this.hiddenInput);
     }
 
     async loadWidget(dataSource) {
         try {
-            const response = await axios.post(dataSource, { widget: 'categories' });
+            const response = await axios.post(dataSource, { widget: this.moduleName });
             this.widgetElement.innerHTML = response.data.html;
         } catch (error) {
             console.error('Error loading widget:', error);
@@ -75,14 +96,12 @@ class Categories {
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 if (this.checkAllInput.checked) {
-                    // Uncheck all other checkboxes except the one being clicked
                     checkboxes.forEach(otherCheckbox => {
                         if (otherCheckbox !== checkbox) {
                             otherCheckbox.checked = false;
                             delete this.checkboxState[otherCheckbox.getAttribute('data-checkbox-item-id')];
                         }
                     });
-                    // Reset totalCount to 0
                     this.totalCount = 0;
                     this.checkboxState = {};
                 }
@@ -149,7 +168,7 @@ class Categories {
         checkboxes.forEach(checkbox => {
             checkbox.checked = this.checkAllState || (this.checkboxState[checkbox.getAttribute('data-checkbox-item-id')] || false);
         });
-        this.updateCheckedItemsCount(); // Update the count after restoring the state
+        this.updateCheckedItemsCount();
     }
 
     restoreDefaultValues() {
@@ -200,4 +219,4 @@ function debounce(func, wait) {
     };
 }
 
-export default Categories;
+export default TableBased;

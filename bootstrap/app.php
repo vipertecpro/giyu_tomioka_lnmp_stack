@@ -22,7 +22,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'auth' => ClientAuthenticate::class,
             'guest' => ClientRedirectIfAuthenticated::class,
         ]);
-
         $middleware->group('app', [
             'auth' => AppAuthenticate::class,
             'guest' => AppRedirectIfAuthenticated::class,

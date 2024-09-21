@@ -18,7 +18,7 @@ class CategoryController extends Controller
             'pageTitle'         => 'List of categories',
             'pageDescription'   => 'List of all categories in the system',
             'crumbs'            => [
-                ['title' => 'Categories', 'route' => route('app.dashboard.categories.list')],
+                ['title' => 'TableBased', 'route' => route('app.dashboard.categories.list')],
             ],
             'actions'           => [
                 ['title' => 'Delete All', 'route' => route('app.dashboard.categories.deleteAll'), 'method' => 'DELETE', 'color' => 'red'],

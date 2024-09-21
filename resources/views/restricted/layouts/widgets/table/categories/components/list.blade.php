@@ -1,9 +1,9 @@
-@if($categories->isEmpty())
-    <tr class="border-b dark:border-gray-700">
-        <td class="py-20 text-center text-2xl" colspan="3">No records found</td>
+@if($tableData->isEmpty())
+    <tr class=" border-b dark:border-gray-700 flex w-full ">
+        <th class="py-10  text-2xl text-center w-full">No records found</th>
     </tr>
 @else
-    @foreach($categories as $category)
+    @foreach($tableData as $category)
         <tr class="border-b dark:border-gray-600 block w-full">
             <td class="w-4 p-2">
                 <div class="flex items-center">

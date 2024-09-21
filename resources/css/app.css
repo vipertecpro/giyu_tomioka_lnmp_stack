@@ -5,7 +5,7 @@
 :root {
     --padding: 10px;
     --max-height: 300px;
-    --color-border: #ccc;
+    --color-border: #B0B0B0 !important;
     --width: 200px;
     --border-radius: 5px;
     --color-shadow: rgba(0, 0, 0, 0.1);
@@ -46,25 +46,28 @@
 .dark .cdx-button {
     @apply text-white bg-gray-700;
 }
-
 .dark .cdx-button:hover {
     @apply bg-gray-600;
 }
-
 .dark .ce-popover,
 .dark .ce-popover-item,
 .dark .ce-popover-item__icon,
 .dark .ce-popover-items,
-.dark .ce-popover-item:hover {
-    @apply bg-gray-700 text-white border-none;
+.dark .ce-popover-item:hover,
+.dark .ce-inline-tool,
+.dark .ce-inline-tool:hover,
+.dark .ce-inline-tool svg{
+    @apply dark:text-white bg-gray-800 hover:bg-gray-700 text-white border-none !important;
 }
-
-.ce-popover--opened > .ce-popover__container {
-    @apply opacity-100 pointer-events-auto border;
+.ce-popover--opened > .ce-popover__container  {
+    @apply opacity-100 pointer-events-auto;
     padding: var(--padding);
     max-height: var(--max-height);
     animation: panelShowing .1s ease;
-    border-color: var(--color-border);
+    border: 1px solid #B0B0B0;
+}
+.dark .ce-popover--opened > .ce-popover__container{
+    @apply bg-gray-800 border border-gray-700;
 }
 
 .ce-popover__container {
@@ -80,7 +83,7 @@
 }
 
 .dark .ce-popover__container {
-    background: var(--color-background-dark);
+    @apply bg-gray-800 border-gray-700;
 }
 
 /* Light mode scrollbar */

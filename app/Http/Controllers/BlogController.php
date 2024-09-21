@@ -39,6 +39,11 @@ class BlogController extends Controller
                 ['title' => 'Blogs', 'route' => route('app.dashboard.blogs.list')],
                 ['title' => 'Edit blog', 'route' => '']
             ],
+            'actions'           => [
+                ['title' => 'Publish', 'route' => route('app.dashboard.blogs.form'), 'method' => 'POST', 'color' => 'green'],
+                ['title' => 'Save As Draft', 'route' => route('app.dashboard.blogs.form'), 'method' => 'POST', 'color' => 'gray'],
+                ['title' => 'Blog Settings', 'color' => 'primary', 'type' => 'toggle', 'drawer' => 'blog-settings'],
+            ],
             'pageData'          => Blog::with(['author','editor','publisher','categories','tags','comments'])->findOrFail($blog_id)
         ];
         return view('restricted.appPages.blogs.form',$pageData);
