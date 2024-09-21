@@ -15,7 +15,6 @@ function observeElement(selector) {
         });
     });
 }
-
 class TableBased {
     constructor(moduleName) {
         this.moduleName = moduleName;
@@ -34,7 +33,6 @@ class TableBased {
             console.error(error);
         });
     }
-
     async init() {
         if (this.widgetElement) {
             this.widgetApiSource = this.widgetElement.getAttribute('data-widget-source-api');
@@ -42,6 +40,7 @@ class TableBased {
             this.widgetTable = this.widgetElement.querySelector('[id="widget-list"]');
             if (this.widgetTable) {
                 this.widgetTbody = this.widgetTable.querySelector('tbody');
+                this.selectedItemsElement = this.widgetTable.querySelector('[data-widget-action="selected-items-count"]');
                 this.checkAllInput = this.widgetTable.querySelector('[data-widget-action="check-all"]');
                 this.widgetApiListSource = this.widgetTbody.getAttribute('data-render-widget-list-api');
                 this.defaultValues = this.widgetElement.getAttribute('data-widget-default-values').split(',');
@@ -53,11 +52,9 @@ class TableBased {
                 this.restoreDefaultValues();
                 this.handleSearchEvent();
                 this.updateCheckedItemsCount();
-                this.initSelectedItemsCount();
             }
         }
     }
-
     createHiddenInput() {
         this.hiddenInput = document.createElement('input');
         this.hiddenInput.type = 'hidden';
@@ -65,7 +62,6 @@ class TableBased {
         this.hiddenInput.value = this.widgetElement.getAttribute('data-widget-default-values');
         this.widgetElement.appendChild(this.hiddenInput);
     }
-
     async loadWidget(dataSource) {
         try {
             const response = await axios.post(dataSource, { widget: this.moduleName });
@@ -74,7 +70,6 @@ class TableBased {
             console.error('Error loading widget:', error);
         }
     }
-
     async loadList(dataSource) {
         try {
             const response = await axios.post(dataSource, { search: this.searchQuery });
@@ -87,40 +82,29 @@ class TableBased {
             console.error('Error loading list:', error);
         }
     }
-
     handleTableEvents() {
-        const selectedItemsElement = this.widgetTable.querySelector('[data-widget-action="selected-items-count"]');
-        selectedItemsElement.innerHTML = this.checkedItemsCount;
         const checkboxes = this.widgetTbody.querySelectorAll('[data-widget-action="check"]');
-
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
-                if (this.checkAllInput.checked) {
-                    checkboxes.forEach(otherCheckbox => {
-                        if (otherCheckbox !== checkbox) {
-                            otherCheckbox.checked = false;
-                            delete this.checkboxState[otherCheckbox.getAttribute('data-checkbox-item-id')];
-                        }
-                    });
-                    this.totalCount = 0;
-                    this.checkboxState = {};
-                }
-                if (checkbox.checked) {
-                    this.checkboxState[checkbox.getAttribute('data-checkbox-item-id')] = true;
+                const itemId = checkbox.getAttribute('data-checkbox-item-id');
+                if (itemId) {
+                    if (checkbox.checked) {
+                        this.checkboxState[itemId] = true;
+                    } else {
+                        delete this.checkboxState[itemId];
+                    }
+                    this.checkAllInput.checked = false;
+                    this.checkAllState = false;
+                    this.updateCheckedItemsCount();
+                    this.updateWidgetUpdatedValues();
                 } else {
-                    delete this.checkboxState[checkbox.getAttribute('data-checkbox-item-id')];
+                    console.error('Checkbox item ID is missing or invalid');
                 }
-                this.checkAllInput.checked = false;
-                this.checkAllState = false;
-                this.updateCheckedItemsCount();
-                this.updateWidgetUpdatedValues();
             });
         });
-
         this.handleCheckAllInput();
         this.handlePaginationEvents();
     }
-
     handleCheckAllInput() {
         this.checkAllInput.addEventListener('change', (event) => {
             const checkboxes = this.widgetTbody.querySelectorAll('[data-widget-action="check"]');
@@ -137,7 +121,6 @@ class TableBased {
             this.updateWidgetUpdatedValues();
         });
     }
-
     handlePaginationEvents() {
         const pageLinks = this.paginationators.querySelectorAll('.page-link');
 
@@ -155,14 +138,12 @@ class TableBased {
             this.restoreCheckboxState();
         }
     }
-
     storeCheckboxState() {
         const checkboxes = this.widgetTbody.querySelectorAll('[data-widget-action="check"]');
         checkboxes.forEach(checkbox => {
             this.checkboxState[checkbox.getAttribute('data-checkbox-item-id')] = checkbox.checked;
         });
     }
-
     restoreCheckboxState() {
         const checkboxes = this.widgetTbody.querySelectorAll('[data-widget-action="check"]');
         checkboxes.forEach(checkbox => {
@@ -170,7 +151,6 @@ class TableBased {
         });
         this.updateCheckedItemsCount();
     }
-
     restoreDefaultValues() {
         this.defaultValues.forEach(id => {
             this.checkboxState[id] = true;
@@ -179,22 +159,19 @@ class TableBased {
         this.updateCheckedItemsCount();
         this.updateWidgetUpdatedValues();
     }
-
     updateCheckedItemsCount() {
-        const selectedItemsElement = this.widgetTable.querySelector('[data-widget-action="selected-items-count"]');
-        if (this.checkAllInput.checked){
-            this.checkedItemsCount = this.totalCount - Object.values(this.checkboxState).filter(checked => !checked).length;
-        }else{
-            this.checkedItemsCount = Object.values(this.checkboxState).filter(checked => checked).length;
+        const validKeys = Object.keys(this.checkboxState).filter(key => key && key !== "0");
+        if (this.checkAllInput.checked) {
+            this.checkedItemsCount = this.totalCount - validKeys.filter(key => !this.checkboxState[key]).length;
+        } else {
+            this.checkedItemsCount = validKeys.filter(key => this.checkboxState[key]).length;
         }
-        selectedItemsElement.innerHTML = this.checkedItemsCount;
+        this.selectedItemsElement.innerHTML = this.checkedItemsCount;
     }
-
     updateWidgetUpdatedValues() {
         const updatedValues = Object.keys(this.checkboxState).filter(id => this.checkboxState[id]);
         this.hiddenInput.value = this.checkAllState ? 'all' : updatedValues.join(',');
     }
-
     handleSearchEvent() {
         if (this.searchInput) {
             this.searchInput.addEventListener('input', debounce(async (event) => {
@@ -204,13 +181,7 @@ class TableBased {
             }, 300));
         }
     }
-
-    initSelectedItemsCount() {
-        const selectedItemsElement = this.widgetTable.querySelector('[data-widget-action="selected-items-count"]');
-        selectedItemsElement.innerHTML = 0;
-    }
 }
-
 function debounce(func, wait) {
     let timeout;
     return function(...args) {
@@ -218,5 +189,4 @@ function debounce(func, wait) {
         timeout = setTimeout(() => func.apply(this, args), wait);
     };
 }
-
 export default TableBased;
