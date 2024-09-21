@@ -10,6 +10,8 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Throwable;
 
 class InternalController extends Controller
@@ -279,5 +281,33 @@ class InternalController extends Controller
             'message'   => 'Comments data fetched successfully',
             'data'      => []
         ]);
+    }
+    public function uploadImage(Request $request){
+        try{
+            if (!$request->hasFile('image')) {
+                throw new Exception('No file uploaded');
+            }
+            $file = $request->file('image');
+            if ($file->getError() == UPLOAD_ERR_INI_SIZE) {
+                throw new Exception('The uploaded file exceeds the upload_max_filesize directive in php.ini');
+            }
+            if (!$file->isValid()) {
+                throw new Exception('Uploaded file is not valid');
+            }
+            $fileName = Str::random(10).'_image'.time().'.'.$file->getClientOriginalExtension();
+            Storage::disk('public')->put('content/images/'.$fileName, file_get_contents($file->getRealPath()));
+
+            return response()->json([
+                'status'    => 'success',
+                'message'   => 'Image uploaded successfully',
+                'url'       => url('storage/content/images/'.$fileName)
+            ]);
+        }catch (Exception $exception){
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Error uploading image',
+                'error'     => $exception->getMessage()
+            ],402);
+        }
     }
 }

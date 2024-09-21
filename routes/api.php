@@ -17,6 +17,7 @@ Route::group([
        Route::post('/categories',[InternalController::class,'categories'])->name('categories');
        Route::post('/category',[InternalController::class,'category'])->name('category');
        Route::post('/comments',[InternalController::class,'comments'])->name('comments');
+       Route::post('/uploadImage',[InternalController::class,'uploadImage'])->name('uploadImage');
        Route::group([
             'prefix'     => 'widgets',
             'as'      => 'widgets.',

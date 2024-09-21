@@ -39,11 +39,6 @@ class BlogController extends Controller
                 ['title' => 'Blogs', 'route' => route('app.dashboard.blogs.list')],
                 ['title' => 'Edit blog', 'route' => '']
             ],
-            'actions'           => [
-                ['title' => 'Publish', 'route' => route('app.dashboard.blogs.form'), 'method' => 'POST', 'color' => 'green'],
-                ['title' => 'Save As Draft', 'route' => route('app.dashboard.blogs.form'), 'method' => 'POST', 'color' => 'gray'],
-                ['title' => 'Blog Settings', 'color' => 'primary', 'type' => 'toggle', 'drawer' => 'blog-settings'],
-            ],
             'pageData'          => Blog::with(['author','editor','publisher','categories','tags','comments'])->findOrFail($blog_id)
         ];
         return view('restricted.appPages.blogs.form',$pageData);
@@ -51,18 +46,11 @@ class BlogController extends Controller
 
     public function form(Request $request){
         try{
+            dd($request->all());
             $validator = Validator::make($request->all(),[
-                'status'     => 'required',
-                'fullName'   => 'required',
-                'email'      => 'required|email',
+                'title'              => 'required',
+                'blog-description'   => 'required',
             ]);
-            $validator->after(function ($validator) use ($request) {
-                $email = $request->input('email');
-                $blog = Blog::where('email',$email)->first();
-                if($blog && $blog->id != $request->get('id')){
-                    $validator->errors()->add('email', 'Email already exists');
-                }
-            });
             if($validator->fails()){
                 return response()->json([
                     'status'    => 'form-error',
@@ -106,8 +94,6 @@ class BlogController extends Controller
                 ['title' => 'Add new blog', 'route' => '']
             ],
             'actions'           => [
-                ['title' => 'Publish', 'route' => route('app.dashboard.blogs.form'), 'method' => 'POST', 'color' => 'green'],
-                ['title' => 'Save As Draft', 'route' => route('app.dashboard.blogs.form'), 'method' => 'POST', 'color' => 'gray'],
                 ['title' => 'Blog Settings', 'color' => 'primary', 'type' => 'toggle', 'drawer' => 'blog-settings'],
             ],
         ];

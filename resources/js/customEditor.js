@@ -13,6 +13,31 @@ import CodeTool from '@editorjs/code';
 import InlineCode from "@editorjs/inline-code";
 
 if(document.getElementById('blog-description')) {
+    const imageUrl = document.getElementById('blog-description').getAttribute('data-image-upload-api');
+    const uploadImageConfig = {
+        uploader: {
+            uploadByFile: function (file) {
+                return new Promise((resolve, reject) => {
+                    const formData = new FormData();
+                    formData.append('image', file);
+                    axios.post(imageUrl, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }).then((response) => {
+                        resolve({
+                            success: 1,
+                            file: {
+                                url: response.data.url
+                            }
+                        });
+                    }).catch((error) => {
+                        reject(error);
+                    });
+                });
+            }
+        }
+    }
     const editor = new EditorJS({
         holder: 'blog-description',
         placeholder : "Add your block here",
@@ -36,10 +61,7 @@ if(document.getElementById('blog-description')) {
             image: {
                 class: ImageTool,
                 config: {
-                    endpoints: {
-                        byFile: 'http://localhost:8000/api/uploadImage', // Your backend file uploader endpoint
-                        byUrl: 'http://localhost:8000/api/fetchUrl', // Your endpoint that provides uploading by Url
-                    }
+                    uploader: uploadImageConfig.uploader
                 }
             },
             delimiter: Delimiter,
@@ -47,7 +69,7 @@ if(document.getElementById('blog-description')) {
             attaches: {
                 class: AttachesTool,
                 config: {
-                    endpoint: 'http://localhost:8008/uploadFile'
+                    uploader: uploadImageConfig.uploader
                 }
             },
             table: Table,

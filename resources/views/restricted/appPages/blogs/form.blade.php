@@ -6,23 +6,27 @@
         @method('POST')
         <div class="grid grid-cols-12 sm:grid-cols-1 md:grid-cols-12 gap-4">
             <div class="col-span-12">
-                <div class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700 p-2 h-screen">
-                    <div class="grid gap-2 mb-2 grid-cols-1">
-                        <div>
-                            <input type="hidden" value="{{ @$pageData->id }}" name="id">
+                <div class="grid gap-2 mb-2 grid-cols-1">
+                    <div class="flex flex-col justify-start items-center w-full border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 rounded-md p-2">
+                        <input type="hidden" value="{{ @$pageData->id }}" name="id">
+                        <div class="flex mb-2 justify-end gap-2 py-2 w-full">
+                            <button type="submit" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                Save as draft
+                            </button>
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Publish
+                            </button>
                         </div>
-                        <div class="flex flex-col justify-start items-center w-full p-5 border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500">
-                            <input
-                                type="text"
-                                name="title"
-                                id="title"
-                                class="block max-w-screen-2xl md:w-10/12 2xl:w-11/12 p-5 h-20 text-3xl border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold"
-                                value="{{ @$pageData->title }}"
-                                placeholder="Enter the blog title here" />
-                            <article class="format lg:format-lg max-w-screen-2xl w-full my-6">
-                                <div id="blog-description">{{ @$pageData->content }}</div>
-                            </article>
-                        </div>
+                        <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            class="block w-full h-20 text-3xl border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold"
+                            value="{{ @$pageData->title }}"
+                            placeholder="Enter the blog title here" />
+                        <article class="format lg:format-lg my-2  max-w-full w-full">
+                            <div id="blog-description" data-image-upload-api="{{ route('internal.uploadImage') }}">{{ @$pageData->content }}</div>
+                        </article>
                     </div>
                 </div>
             </div>
