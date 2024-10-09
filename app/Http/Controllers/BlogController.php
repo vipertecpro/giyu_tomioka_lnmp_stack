@@ -6,6 +6,7 @@ use App\Models\Blog;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -39,17 +40,19 @@ class BlogController extends Controller
                 ['title' => 'Blogs', 'route' => route('app.dashboard.blogs.list')],
                 ['title' => 'Edit blog', 'route' => '']
             ],
+            'actions'           => [
+                ['title' => 'Blog Settings', 'color' => 'primary', 'type' => 'toggle', 'drawer' => 'blog-settings'],
+            ],
             'pageData'          => Blog::with(['author','editor','publisher','categories','tags','comments'])->findOrFail($blog_id)
         ];
         return view('restricted.appPages.blogs.form',$pageData);
     }
 
-    public function form(Request $request){
+    public function form(Request $request, $blog_id = null){
         try{
-            dd($request->all());
             $validator = Validator::make($request->all(),[
-                'title'              => 'required',
-                'blog-description'   => 'required',
+                'title'     => 'required',
+                'content'   => 'required',
             ]);
             if($validator->fails()){
                 return response()->json([
@@ -58,19 +61,34 @@ class BlogController extends Controller
                     'fields'    => $validator->errors()->keys()
                 ],400);
             }
-            $data = [
-                'status'    => $request->get('status'),
-                'name'      => $request->get('fullName'),
-                'email'     => $request->get('email'),
-            ];
-            $returnMessage = 'blog updated successfully';
-            if(!$request->get('id')){
-                $data['password'] = bcrypt('password');
-                $data['is_password_update'] = false;
-                $returnMessage = 'blog created successfully';
-                Blog::create($data);
+            $blog = Blog::find($blog_id);
+            if($request->hasFile('featuredImage')){
+                $file = $request->file('featuredImage');
+                $fileName = 'blog_featured_image'.date('YmdHis').'.'.$file->getClientOriginalExtension();
+                $featured_image = Storage::disk('public')->putFileAs('blogs',$file,$fileName);
             }else{
-                Blog::where('id',$request->get('id'))->update($data);
+                $featured_image = $blog?->featured_image;
+            }
+            $data = [
+                'featured_image'    => $featured_image,
+                'title'             => $request->get('title'),
+                'slug'              => Str::of($request->get('title'))->slug('-'),
+                'excerpt'           => '',
+                'content'           => $request->get('content'),
+                'meta_title'        => 'meta-title',
+                'meta_description'  => 'meta-description',
+                'meta_keywords'     => 'meta-keywords',
+                'meta_author'       => 'meta-author',
+                'status'            => 'draft',
+                'visibility'        => false,
+                'created_by'        => auth()->id(),
+            ];
+            if($blog == null){
+                Blog::create($data);
+                $returnMessage = 'Blog created successfully';
+            }else{
+                $blog->update($data);
+                $returnMessage = 'Blog updated successfully';
             }
             return response()->json([
                 'status'    => 'success',

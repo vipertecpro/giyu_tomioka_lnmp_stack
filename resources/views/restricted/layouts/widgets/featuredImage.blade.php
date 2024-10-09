@@ -9,7 +9,7 @@
     </h2>
     <div id="accordion-open-body-4" class="hidden" aria-labelledby="accordion-open-heading-4">
         <div class="p-2">
-            <input type="file" name="featuredImage" value="{{ @$pageData->featuredImage }}" class="absolute -top-96 -left-96 featuredImage -z-50" />
+            <input type="file" name="featuredImage" class="absolute -top-96 -left-96 featuredImage -z-50" />
             <div class="relative group">
                 <div class="h-full min-h-[200px] max-h-[300px] overflow-y-auto">
                     <img class="rounded-md object-contain w-full min-h-[200px] max-h-[300px] previewPlaceholder" src="" data-preview-default-url="https://placehold.co/1280x720?text=Placeholder%0A1280x720" alt="Featured Image Placeholder" />

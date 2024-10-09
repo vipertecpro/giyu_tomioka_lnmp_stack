@@ -31,8 +31,11 @@ export default {
         'bg-teal-700', 'hover:bg-teal-800', 'focus:ring-teal-300', 'dark:bg-teal-600', 'dark:hover:bg-teal-700', 'dark:focus:ring-teal-800',
     ],
     plugins: [
-        require('flowbite/plugin'),
+        require('flowbite/plugin')({
+            wysiwyg: true,
+        }),
         require('flowbite-typography'),
     ],
+
 }
 

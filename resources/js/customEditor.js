@@ -1,101 +1,190 @@
-import EditorJS from '@editorjs/editorjs';
-import Header from "@editorjs/header";
-import ImageTool from "@editorjs/image";
-import RawTool from '@editorjs/raw';
-import Checklist from '@editorjs/checklist';
-import Table from '@editorjs/table'
-import Underline from '@editorjs/underline';
-import AttachesTool from '@editorjs/attaches';
-import Delimiter from '@editorjs/delimiter';
-import NestedList from '@editorjs/nested-list';
-import Quote from '@editorjs/quote';
-import CodeTool from '@editorjs/code';
-import InlineCode from "@editorjs/inline-code";
+import {Editor} from '@tiptap/core';
+import StarterKit from '@tiptap/starter-kit';
+import Highlight from '@tiptap/extension-highlight';
+import Underline from '@tiptap/extension-underline';
+import Link from '@tiptap/extension-link';
+import TextAlign from '@tiptap/extension-text-align';
+import HorizontalRule from '@tiptap/extension-horizontal-rule';
+import Image from '@tiptap/extension-image';
+import YouTube from '@tiptap/extension-youtube';
+import TextStyle from '@tiptap/extension-text-style';
+import Color from '@tiptap/extension-color';
+import FontFamily from '@tiptap/extension-font-family';
 
-if(document.getElementById('blog-description')) {
-    const imageUrl = document.getElementById('blog-description').getAttribute('data-image-upload-api');
-    const uploadImageConfig = {
-        uploader: {
-            uploadByFile: function (file) {
-                return new Promise((resolve, reject) => {
-                    const formData = new FormData();
-                    formData.append('image', file);
-                    axios.post(imageUrl, formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    }).then((response) => {
-                        resolve({
-                            success: 1,
-                            file: {
-                                url: response.data.url
+
+window.addEventListener('load', function() {
+    if (document.getElementById("wysiwyg-example")) {
+        const FontSizeTextStyle = TextStyle.extend({
+            addAttributes() {
+                return {
+                    fontSize: {
+                        default: null,
+                        parseHTML: element => element.style.fontSize,
+                        renderHTML: attributes => {
+                            if (!attributes.fontSize) {
+                                return {};
                             }
-                        });
-                    }).catch((error) => {
-                        reject(error);
-                    });
-                });
-            }
-        }
-    }
-    const editor = new EditorJS({
-        holder: 'blog-description',
-        placeholder : "Add your block here",
-        tools: {
-            header: {
-                class: Header,
-                inlineToolbar: ['link']
+                            return { style: 'font-size: ' + attributes.fontSize };
+                        },
+                    },
+                };
             },
-            code: CodeTool,
-            list: {
-                class: NestedList,
-                inlineToolbar: true,
-                config: {
-                    defaultStyle: 'unordered'
+        });
+        // tip tap editor setup
+        const editor = new Editor({
+            element: document.querySelector('#wysiwyg-example'),
+            placeholder: 'Type your content here...',
+            extensions: [
+                StarterKit,
+                Highlight,
+                Underline,
+                Link.configure({
+                    openOnClick: false,
+                    autolink: true,
+                    defaultProtocol: 'https',
+                }),
+                TextAlign.configure({
+                    types: ['heading', 'paragraph'],
+                }),
+                HorizontalRule,
+                Image,
+                YouTube,
+                TextStyle,
+                FontSizeTextStyle,
+                Color,
+                FontFamily
+            ],
+            content: document.querySelector('[name="content"]').value,
+            editorProps: {
+                attributes: {
+                    class: 'format lg:format-lg dark:format-invert focus:outline-none format-blue max-w-none',
                 },
             },
-            inlineCode: {
-                class: InlineCode,
-                shortcut: 'CMD+SHIFT+M',
-            },
-            image: {
-                class: ImageTool,
-                config: {
-                    uploader: uploadImageConfig.uploader
-                }
-            },
-            delimiter: Delimiter,
-            underline: Underline,
-            attaches: {
-                class: AttachesTool,
-                config: {
-                    uploader: uploadImageConfig.uploader
-                }
-            },
-            table: Table,
-            raw: RawTool,
-            checklist :{
-                class: Checklist,
-                inlineToolbar: true,
-            },
-            quote: {
-                class: Quote,
-                inlineToolbar: true,
-                shortcut: 'CMD+SHIFT+O',
-                config: {
-                    quotePlaceholder: 'Enter a quote',
-                    captionPlaceholder: 'Quote\'s author',
-                },
+        });
+        document.getElementById('toggleBoldButton').addEventListener('click', () => editor.chain().focus().toggleBold().run());
+        document.getElementById('toggleItalicButton').addEventListener('click', () => editor.chain().focus().toggleItalic().run());
+        document.getElementById('toggleUnderlineButton').addEventListener('click', () => editor.chain().focus().toggleUnderline().run());
+        document.getElementById('toggleStrikeButton').addEventListener('click', () => editor.chain().focus().toggleStrike().run());
+        document.getElementById('toggleHighlightButton').addEventListener('click', () => editor.chain().focus().toggleHighlight({ color: '#ffc078' }).run());
+        document.getElementById('toggleLinkButton').addEventListener('click', () => {
+            const url = window.prompt('Enter image URL:', 'https://flowbite.com');
+            editor.chain().focus().toggleLink({ href: url }).run();
+        });
+        document.getElementById('removeLinkButton').addEventListener('click', () => {
+            editor.chain().focus().unsetLink().run()
+        });
+        document.getElementById('toggleCodeButton').addEventListener('click', () => {
+            editor.chain().focus().toggleCode().run();
+        })
+
+        document.getElementById('toggleLeftAlignButton').addEventListener('click', () => {
+            editor.chain().focus().setTextAlign('left').run();
+        });
+        document.getElementById('toggleCenterAlignButton').addEventListener('click', () => {
+            editor.chain().focus().setTextAlign('center').run();
+        });
+        document.getElementById('toggleRightAlignButton').addEventListener('click', () => {
+            editor.chain().focus().setTextAlign('right').run();
+        });
+        document.getElementById('toggleListButton').addEventListener('click', () => {
+            editor.chain().focus().toggleBulletList().run();
+        });
+        document.getElementById('toggleOrderedListButton').addEventListener('click', () => {
+            editor.chain().focus().toggleOrderedList().run();
+        });
+        document.getElementById('toggleBlockquoteButton').addEventListener('click', () => {
+            editor.chain().focus().toggleBlockquote().run();
+        });
+        document.getElementById('toggleHRButton').addEventListener('click', () => {
+            editor.chain().focus().setHorizontalRule().run();
+        });
+        document.getElementById('addImageButton').addEventListener('click', () => {
+            const url = window.prompt('Enter image URL:', 'https://placehold.co/600x400');
+            if (url) {
+                editor.chain().focus().setImage({ src: url }).run();
             }
-        },
-        onReady: () => {
-            console.log('Editor.js is ready to work!')
-        },
-        onChange: (api, event) => {
-            console.log('Now I know that Editor\'s content changed!', event)
-            editor.save().then((outputData) => {
-                console.log('Article data: ', outputData)
+        });
+        document.getElementById('addVideoButton').addEventListener('click', () => {
+            const url = window.prompt('Enter YouTube URL:', 'https://www.youtube.com/watch?v=KaLxCiilHns');
+            if (url) {
+                editor.commands.setYoutubeVideo({
+                    src: url,
+                    width: 640,
+                    height: 480,
+                })
+            }
+        });
+
+        // typography dropdown
+        const typographyDropdown = FlowbiteInstances.getInstance('Dropdown', 'typographyDropdown');
+
+        document.getElementById('toggleParagraphButton').addEventListener('click', () => {
+            editor.chain().focus().setParagraph().run();
+            typographyDropdown.hide();
+        });
+
+        document.querySelectorAll('[data-heading-level]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const level = button.getAttribute('data-heading-level');
+                editor.chain().focus().toggleHeading({ level: parseInt(level) }).run()
+                typographyDropdown.hide();
             });
-        },
-    });
-}
+        });
+
+        const textSizeDropdown = FlowbiteInstances.getInstance('Dropdown', 'textSizeDropdown');
+
+        // Loop through all elements with the data-text-size attribute
+        document.querySelectorAll('[data-text-size]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const fontSize = button.getAttribute('data-text-size');
+
+                // Apply the selected font size via pixels using the TipTap editor chain
+                editor.chain().focus().setMark('textStyle', { fontSize }).run();
+
+                // Hide the dropdown after selection
+                textSizeDropdown.hide();
+            });
+        });
+
+        // Listen for color picker changes
+        const colorPicker = document.getElementById('color');
+        colorPicker.addEventListener('input', (event) => {
+            const selectedColor = event.target.value;
+
+            // Apply the selected color to the selected text
+            editor.chain().focus().setColor(selectedColor).run();
+        })
+
+        document.querySelectorAll('[data-hex-color]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const selectedColor = button.getAttribute('data-hex-color');
+
+                // Apply the selected color to the selected text
+                editor.chain().focus().setColor(selectedColor).run();
+            });
+        });
+
+        document.getElementById('reset-color').addEventListener('click', () => {
+            editor.commands.unsetColor();
+        })
+
+        const fontFamilyDropdown = FlowbiteInstances.getInstance('Dropdown', 'fontFamilyDropdown');
+
+        // Loop through all elements with the data-font-family attribute
+        document.querySelectorAll('[data-font-family]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const fontFamily = button.getAttribute('data-font-family');
+
+                // Apply the selected font size via pixels using the TipTap editor chain
+                editor.chain().focus().setFontFamily(fontFamily).run();
+
+                // Hide the dropdown after selection
+                fontFamilyDropdown.hide();
+            });
+        });
+        editor.on('update', ({ editor }) => {
+            console.log(editor.getHTML());
+            document.querySelector('input[name="content"]').value = editor.getHTML();
+        });
+    }
+})

@@ -24,13 +24,10 @@ return new class extends Migration
             $table->string('meta_author')->nullable();
             $table->string('status')->default('draft');
             $table->boolean('visibility')->default(false);
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
-            $table->unsignedBigInteger('updated_by');
-            $table->foreign('updated_by')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->unsignedBigInteger('published_by')->nullable();
-            $table->foreign('published_by')->references('id')->on('users')->nullOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

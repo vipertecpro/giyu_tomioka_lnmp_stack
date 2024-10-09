@@ -1,118 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-    --padding: 10px;
-    --max-height: 300px;
-    --color-border: #B0B0B0 !important;
-    --width: 200px;
-    --border-radius: 5px;
-    --color-shadow: rgba(0, 0, 0, 0.1);
-    --popover-top: 50px;
-    --popover-left: 50px;
-    --color-background: #fff;
-    --color-background-dark: rgba(0, 0, 0, 0.4);
-}
-.codex-editor{
-    @apply max-w-full w-full;
-}
-.ce-toolbar__actions{
-    @apply border border-gray-50 dark:border-gray-300 rounded-md me-2 p-1 flex bg-gray-100 dark:bg-gray-800 bg-opacity-85;
-}
-.ce-block__content, .cdx-block, .ce-toolbar__content{
-    @apply max-w-screen-2xl md:w-10/12 2xl:w-11/12;
-}
-/* Default light mode styles */
-.cdx-block,
-.ce-header,
-.inlineToolButton,
-.ce-toolbar__plus,
-.ce-toolbar__settings-btn,
-.ce-popover__search {
-    @apply bg-white text-black;
+/* Placeholder styling */
+[contenteditable="true"].is-empty::before {
+    content: attr(data-placeholder);
+    color: #9CA3AF;
+    opacity: 0.5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: bold;
+    pointer-events: none; /* Prevent interaction */
 }
 
-/* Dark mode styles */
-.dark .cdx-block,
-.dark .ce-header,
-.dark .inlineToolButton,
-.dark .ce-toolbar__plus,
-.dark .ce-toolbar__settings-btn,
-.dark .ce-popover__search {
-    @apply bg-gray-800 text-white;
+/* When focused, hide the placeholder */
+[contenteditable="true"]:focus::before {
+    content: '';
 }
-
-.dark .ce-toolbar__plus:hover,
-.dark .ce-toolbar__settings-btn:hover,
-.dark .cdx-loader,
-.dark .cdx-button {
-    @apply text-white bg-gray-700;
-}
-.dark .cdx-button:hover {
-    @apply bg-gray-600;
-}
-.dark .ce-popover,
-.dark .ce-popover-item,
-.dark .ce-popover-item__icon,
-.dark .ce-popover-items,
-.dark .ce-popover-item:hover,
-.dark .ce-inline-tool,
-.dark .ce-inline-tool:hover,
-.dark .ce-inline-tool svg{
-    @apply dark:text-white bg-gray-800 hover:bg-gray-700 text-white border-none !important;
-}
-.ce-popover--opened > .ce-popover__container  {
-    @apply opacity-100 pointer-events-auto;
-    padding: var(--padding);
-    max-height: var(--max-height);
-    animation: panelShowing .1s ease;
-    border: 1px solid #B0B0B0;
-}
-.dark .ce-popover--opened > .ce-popover__container{
-    @apply bg-gray-800 border border-gray-700;
-}
-
-.ce-popover__container {
-    @apply overflow-hidden box-border absolute flex flex-col z-10 opacity-0 pointer-events-none p-0 border-none;
-    min-width: var(--width);
-    width: var(--width);
-    max-height: var(--max-height);
-    border-radius: var(--border-radius);
-    box-shadow: 0 3px 15px -3px var(--color-shadow);
-    left: var(--popover-left);
-    top: var(--popover-top);
-    background: var(--color-background);
-}
-
-.dark .ce-popover__container {
-    @apply bg-gray-800 border-gray-700;
-}
-
-/* Light mode scrollbar */
-.ce-popover__items::-webkit-scrollbar {
-    width: 4px;
-}
-
-.ce-popover__items::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 10px;
-}
-
-/* Dark mode scrollbar */
-.dark .ce-popover__items::-webkit-scrollbar {
-    width: 4px;
-}
-
-.dark .ce-popover__items::-webkit-scrollbar-thumb {
-    background-color: #555;
-    border-radius: 10px;
-}
-
-.dark .ce-inline-tool svg {
-    color: white;
-}
-
-.dark .ce-inline-tool:hover svg {
-    color: var(--color-background-dark);
+#typographyDropdown{
+    @apply z-40;
 }

@@ -133,12 +133,12 @@ Route::group([
         ],function(){
             Route::get('/',[BlogController::class,'list'])->name('list');
             Route::get('/create',[BlogController::class,'create'])->name('create');
-            Route::get('/edit/{user_id}',[BlogController::class,'edit'])->name('edit');
-            Route::post('/form',[BlogController::class,'form'])->name('form');
+            Route::get('/edit/{blog_id}',[BlogController::class,'edit'])->name('edit');
+            Route::post('/form/{blog_id?}',[BlogController::class,'form'])->name('form');
             Route::post('/updateAvatar',[BlogController::class,'updateAvatar'])->name('updateAvatar');
             Route::delete('/removeAvatar',[BlogController::class,'removeAvatar'])->name('removeAvatar');
-            Route::get('/details/{user_id}',[BlogController::class,'details'])->name('details');
-            Route::delete('/delete/{user_id}',[BlogController::class,'delete'])->name('delete');
+            Route::get('/details/{blog_id}',[BlogController::class,'details'])->name('details');
+            Route::delete('/delete/{blog_id}',[BlogController::class,'delete'])->name('delete');
             Route::delete('/deleteAll',[BlogController::class,'deleteAll'])->name('deleteAll');
             Route::post('/import',[BlogController::class,'import'])->name('import');
             Route::post('/export',[BlogController::class,'export'])->name('export');

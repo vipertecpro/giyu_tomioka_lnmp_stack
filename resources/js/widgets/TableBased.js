@@ -170,7 +170,7 @@ class TableBased {
     }
     updateWidgetUpdatedValues() {
         const updatedValues = Object.keys(this.checkboxState).filter(id => this.checkboxState[id]);
-        this.hiddenInput.value = this.checkAllState ? 'all' : updatedValues.join(',');
+        this.hiddenInput.value = this.checkAllState ? 'all' : updatedValues.join(',').slice(',', -1);
     }
     handleSearchEvent() {
         if (this.searchInput) {
