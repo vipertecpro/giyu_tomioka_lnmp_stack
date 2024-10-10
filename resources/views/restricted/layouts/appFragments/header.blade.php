@@ -131,7 +131,7 @@
                         <div class="flex-shrink-0">
                             <img
                                 class="w-11 h-11 rounded-full"
-                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
+                                src="{{ asset('assets/images/logo.jpg') }}"
                                 alt="Jese Leos avatar"
                             />
                             <div
@@ -177,7 +177,7 @@
                         <div class="flex-shrink-0">
                             <img
                                 class="w-11 h-11 rounded-full"
-                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
+                                src="{{ asset('assets/images/logo.jpg') }}"
                                 alt="Joseph McFall avatar"
                             />
                             <div
@@ -225,7 +225,7 @@
                         <div class="flex-shrink-0">
                             <img
                                 class="w-11 h-11 rounded-full"
-                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
+                                src="{{ asset('assets/images/logo.jpg') }}"
                                 alt="Roberta Casas image"
                             />
                             <div
@@ -274,7 +274,7 @@
                         <div class="flex-shrink-0">
                             <img
                                 class="w-11 h-11 rounded-full"
-                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/robert-brown.png"
+                                src="{{ asset('assets/images/logo.jpg') }}"
                                 alt="Robert image"
                             />
                             <div

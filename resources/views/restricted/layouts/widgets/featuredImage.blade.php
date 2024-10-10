@@ -12,7 +12,12 @@
             <input type="file" name="featuredImage" class="absolute -top-96 -left-96 featuredImage -z-50" />
             <div class="relative group">
                 <div class="h-full min-h-[200px] max-h-[300px] overflow-y-auto">
-                    <img class="rounded-md object-contain w-full min-h-[200px] max-h-[300px] previewPlaceholder" src="" data-preview-default-url="https://placehold.co/1280x720?text=Placeholder%0A1280x720" alt="Featured Image Placeholder" />
+                    @if(@$pageData->featured_image)
+                        <img class="rounded-md object-contain w-full min-h-[200px] max-h-[300px] previewPlaceholder" src="{{ asset('storage/'.@$pageData->featured_image) }}" data-preview-default-url="{{ asset('storage/'.@$pageData->featured_image) }}" alt="Featured Image Placeholder" />
+                    @else
+                        <img class="rounded-md object-contain w-full min-h-[200px] max-h-[300px] previewPlaceholder" src="https://placehold.co/1280x720?text=Placeholder%0A1280x720" data-preview-default-url="https://placehold.co/1280x720?text=Placeholder%0A1280x720" alt="Featured Image Placeholder" />
+                    @endif
+
                 </div>
                 <div class="absolute inset-0 flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gray-800 bg-opacity-20 dark:bg-gray-800 dark:bg-opacity-20 backdrop-blur-sm rounded-md">
                     <div class="flex space-x-2 mb-2">

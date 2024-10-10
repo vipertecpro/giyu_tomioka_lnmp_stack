@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
+use App\Models\Tag;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
@@ -61,6 +63,22 @@ class BlogController extends Controller
                     'fields'    => $validator->errors()->keys()
                 ],400);
             }
+            $categories = $request->get('categories');
+            $tags = $request->get('tags');
+            if($categories){
+                if($categories !== 'all'){
+                    $categories = explode(',',$categories);
+                }else{
+                    $categories = Category::all()->pluck('id')->toArray();
+                }
+            }
+            if($tags){
+                if($tags !== 'all'){
+                    $tags = explode(',',$tags);
+                }else{
+                    $tags = Tag::all()->pluck('id')->toArray();
+                }
+            }
             $blog = Blog::find($blog_id);
             if($request->hasFile('featuredImage')){
                 $file = $request->file('featuredImage');
@@ -90,6 +108,8 @@ class BlogController extends Controller
                 $blog->update($data);
                 $returnMessage = 'Blog updated successfully';
             }
+            $blog->categories()->sync($categories);
+            $blog->tags()->sync($tags);
             return response()->json([
                 'status'    => 'success',
                 'message'   => $returnMessage,

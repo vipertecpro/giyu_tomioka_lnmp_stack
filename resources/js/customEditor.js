@@ -30,7 +30,6 @@ window.addEventListener('load', function() {
                 };
             },
         });
-        // tip tap editor setup
         const editor = new Editor({
             element: document.querySelector('#wysiwyg-example'),
             placeholder: 'Type your content here...',
@@ -76,7 +75,6 @@ window.addEventListener('load', function() {
         document.getElementById('toggleCodeButton').addEventListener('click', () => {
             editor.chain().focus().toggleCode().run();
         })
-
         document.getElementById('toggleLeftAlignButton').addEventListener('click', () => {
             editor.chain().focus().setTextAlign('left').run();
         });
@@ -114,15 +112,11 @@ window.addEventListener('load', function() {
                 })
             }
         });
-
-        // typography dropdown
         const typographyDropdown = FlowbiteInstances.getInstance('Dropdown', 'typographyDropdown');
-
         document.getElementById('toggleParagraphButton').addEventListener('click', () => {
             editor.chain().focus().setParagraph().run();
             typographyDropdown.hide();
         });
-
         document.querySelectorAll('[data-heading-level]').forEach((button) => {
             button.addEventListener('click', () => {
                 const level = button.getAttribute('data-heading-level');
@@ -130,55 +124,33 @@ window.addEventListener('load', function() {
                 typographyDropdown.hide();
             });
         });
-
         const textSizeDropdown = FlowbiteInstances.getInstance('Dropdown', 'textSizeDropdown');
-
-        // Loop through all elements with the data-text-size attribute
         document.querySelectorAll('[data-text-size]').forEach((button) => {
             button.addEventListener('click', () => {
                 const fontSize = button.getAttribute('data-text-size');
-
-                // Apply the selected font size via pixels using the TipTap editor chain
                 editor.chain().focus().setMark('textStyle', { fontSize }).run();
-
-                // Hide the dropdown after selection
                 textSizeDropdown.hide();
             });
         });
-
-        // Listen for color picker changes
         const colorPicker = document.getElementById('color');
         colorPicker.addEventListener('input', (event) => {
             const selectedColor = event.target.value;
-
-            // Apply the selected color to the selected text
             editor.chain().focus().setColor(selectedColor).run();
         })
-
         document.querySelectorAll('[data-hex-color]').forEach((button) => {
             button.addEventListener('click', () => {
                 const selectedColor = button.getAttribute('data-hex-color');
-
-                // Apply the selected color to the selected text
                 editor.chain().focus().setColor(selectedColor).run();
             });
         });
-
         document.getElementById('reset-color').addEventListener('click', () => {
             editor.commands.unsetColor();
         })
-
         const fontFamilyDropdown = FlowbiteInstances.getInstance('Dropdown', 'fontFamilyDropdown');
-
-        // Loop through all elements with the data-font-family attribute
         document.querySelectorAll('[data-font-family]').forEach((button) => {
             button.addEventListener('click', () => {
                 const fontFamily = button.getAttribute('data-font-family');
-
-                // Apply the selected font size via pixels using the TipTap editor chain
                 editor.chain().focus().setFontFamily(fontFamily).run();
-
-                // Hide the dropdown after selection
                 fontFamilyDropdown.hide();
             });
         });

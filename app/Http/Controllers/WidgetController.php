@@ -38,7 +38,6 @@ class WidgetController extends Controller
             $getTableColumnsFromSchema = Schema::getColumnListing('categories');
             $sort = $request->get('sort');
             $categories = (new Category)->newQuery();
-            $categories->whereNot('id',1);
             if($search){
                 $categories->where(function($query) use ($search, $getTableColumnsFromSchema){
                     foreach($getTableColumnsFromSchema as $column){

@@ -20,7 +20,7 @@ class BlogSeeder extends Seeder
         ->count(100)
         ->create()
         ->each(function (Blog $blog) {
-            $blog->categories()->attach(Category::inRandomOrder()->first());
+            $blog->categories()->attach(Category::inRandomOrder()->limit(3)->get());
             $blog->tags()->attach(Tag::inRandomOrder()->limit(3)->get());
             Comment::factory()
                 ->count(5)

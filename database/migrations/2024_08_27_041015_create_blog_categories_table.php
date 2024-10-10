@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('blog_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('blog_id')->constrained('blogs')->cascadeOnDelete();
-            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
-            $table->unique(['blog_id', 'category_id']);
-            $table->timestamps();
+            $table->unsignedBigInteger('blog_id');
+            $table->unsignedBigInteger('category_id');
         });
     }
 
