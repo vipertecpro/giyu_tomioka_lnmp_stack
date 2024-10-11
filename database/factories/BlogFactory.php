@@ -23,7 +23,6 @@ class BlogFactory extends Factory
     public function definition(): array
     {
         return [
-            'featured_image'    => fake()->imageUrl(),
             'title'             => fake()->sentence(),
             'slug'              => fake()->slug(),
             'excerpt'           => fake()->sentence(),

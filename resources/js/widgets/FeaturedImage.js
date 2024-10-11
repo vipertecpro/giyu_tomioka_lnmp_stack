@@ -36,7 +36,7 @@ class FeaturedImage {
     }
 
     setDefaultImage(previewPlaceholder) {
-        const defaultImageUrl = previewPlaceholder.getAttribute('data-preview-default-url');
+        const defaultImageUrl = previewPlaceholder.getAttribute('src');
         if (defaultImageUrl) {
             previewPlaceholder.src = defaultImageUrl;
         } else {

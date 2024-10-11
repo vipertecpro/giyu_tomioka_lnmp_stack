@@ -7,5 +7,5 @@
             </svg>
         </button>
     </h2>
-    <div id="accordion-open-body-tags" class="hidden" aria-labelledby="accordion-open-heading-tags" data-render-widget="tags" data-widget-source-api="{{ route('internal.widgets.append') }}" data-widget-default-values=""></div>
+    <div id="accordion-open-body-tags" class="hidden" aria-labelledby="accordion-open-heading-tags" data-render-widget="tags" data-widget-source-api="{{ route('internal.widgets.append') }}" data-widget-default-values="{{ @$pageData?->tags->pluck('id')->toArray() ? implode(",",@$pageData?->tags->pluck('id')->toArray()) : null }}"></div>
 </div>

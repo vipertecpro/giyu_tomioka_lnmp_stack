@@ -4,13 +4,26 @@ import Highlight from '@tiptap/extension-highlight';
 import Underline from '@tiptap/extension-underline';
 import Link from '@tiptap/extension-link';
 import TextAlign from '@tiptap/extension-text-align';
-import HorizontalRule from '@tiptap/extension-horizontal-rule';
 import Image from '@tiptap/extension-image';
 import YouTube from '@tiptap/extension-youtube';
 import TextStyle from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import FontFamily from '@tiptap/extension-font-family';
-
+import CharacterCount from "@tiptap/extension-character-count";
+import Focus from "@tiptap/extension-focus";
+import Placeholder from "@tiptap/extension-placeholder";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
+import TaskItem from "@tiptap/extension-task-item";
+import TaskList from "@tiptap/extension-task-list";
+import Typography from "@tiptap/extension-typography";
+import Table from '@tiptap/extension-table';
+import TableCell from '@tiptap/extension-table-cell';
+import TableHeader from '@tiptap/extension-table-header';
+import TableRow from '@tiptap/extension-table-row';
+import CodeBlock from '@tiptap/extension-code-block';
+import HorizontalRule from '@tiptap/extension-horizontal-rule';
+import FloatingMenu from '@tiptap/extension-floating-menu';
 
 window.addEventListener('load', function() {
     if (document.getElementById("wysiwyg-example")) {
@@ -20,12 +33,6 @@ window.addEventListener('load', function() {
                     fontSize: {
                         default: null,
                         parseHTML: element => element.style.fontSize,
-                        renderHTML: attributes => {
-                            if (!attributes.fontSize) {
-                                return {};
-                            }
-                            return { style: 'font-size: ' + attributes.fontSize };
-                        },
                     },
                 };
             },
@@ -45,15 +52,32 @@ window.addEventListener('load', function() {
                 TextAlign.configure({
                     types: ['heading', 'paragraph'],
                 }),
-                HorizontalRule,
                 Image,
                 YouTube,
-                TextStyle,
                 FontSizeTextStyle,
                 Color,
-                FontFamily
+                FontFamily,
+                CharacterCount,
+                Focus,
+                Placeholder,
+                Subscript,
+                Superscript,
+                Table.configure({
+                    resizable: true,
+                }),
+                TableRow,
+                TableHeader,
+                TableCell,
+                TaskItem,
+                TaskList,
+                Typography,
+                CodeBlock,
+                HorizontalRule,
+                FloatingMenu.configure({
+                    element: document.querySelector('.menu'),
+                }),
             ],
-            content: document.querySelector('[name="content"]').value,
+            content: document.querySelector('input[name="content"]').value,
             editorProps: {
                 attributes: {
                     class: 'format lg:format-lg dark:format-invert focus:outline-none format-blue max-w-none',
@@ -101,6 +125,12 @@ window.addEventListener('load', function() {
             if (url) {
                 editor.chain().focus().setImage({ src: url }).run();
             }
+        });
+        document.getElementById('toggleBlockquoteButton').addEventListener('click', () => {
+            editor.chain().focus().toggleBlockquote().run();
+        });
+        document.getElementById('toggleHRButton').addEventListener('click', () => {
+            editor.chain().focus().setHorizontalRule().run();
         });
         document.getElementById('addVideoButton').addEventListener('click', () => {
             const url = window.prompt('Enter YouTube URL:', 'https://www.youtube.com/watch?v=KaLxCiilHns');

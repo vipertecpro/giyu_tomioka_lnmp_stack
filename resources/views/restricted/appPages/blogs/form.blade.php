@@ -12,13 +12,16 @@
                             type="text"
                             name="title"
                             id="title"
-                            class="block w-full text-3xl border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded-md h-20"
+                            class="block w-full text-3xl border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded-md h-15"
                             value="{{ @$pageData->title }}"
                             placeholder="Enter the blog title here" />
                     </div>
+                    <div class="flex flex-col justify-start items-center w-full border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:placeholder-gray-500">
+                        <textarea name="excerpt" id="excerpt" class="block w-full text-lg border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded-md" rows="2" placeholder="Enter the blog excerpt here">{{ @$pageData->excerpt }}</textarea>
+                    </div>
                     <input type="hidden" id="content" name="content" value="{{ @$pageData->content }}"/>
                     <div class="grid grid-cols-1">
-                        <div class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                        <div class="w-full border border-gray-200 rounded bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                             <div class="px-3 py-2 border-b dark:border-gray-600">
                                 <div class="flex flex-wrap items-center">
                                     <div class="flex items-center space-x-1 rtl:space-x-reverse flex-wrap">
@@ -28,7 +31,7 @@
                                             </svg>
                                             <span class="sr-only">Bold</span>
                                         </button>
-                                        <div id="tooltip-bold" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-bold" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Toggle bold
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -38,7 +41,7 @@
                                             </svg>
                                             <span class="sr-only">Italic</span>
                                         </button>
-                                        <div id="tooltip-italic" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-italic" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Toggle italic
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -48,7 +51,7 @@
                                             </svg>
                                             <span class="sr-only">Underline</span>
                                         </button>
-                                        <div id="tooltip-underline" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-underline" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Toggle underline
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -58,7 +61,7 @@
                                             </svg>
                                             <span class="sr-only">Strike</span>
                                         </button>
-                                        <div id="tooltip-strike" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-strike" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Toggle strike
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -68,7 +71,7 @@
                                             </svg>
                                             <span class="sr-only">Highlight</span>
                                         </button>
-                                        <div id="tooltip-highlight" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-highlight" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Toggle highlight
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -78,7 +81,7 @@
                                             </svg>
                                             <span class="sr-only">Code</span>
                                         </button>
-                                        <div id="tooltip-code" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-code" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Format code
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -88,7 +91,7 @@
                                             </svg>
                                             <span class="sr-only">Link</span>
                                         </button>
-                                        <div id="tooltip-link" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-link" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Add link
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -98,7 +101,7 @@
                                             </svg>
                                             <span class="sr-only">Remove link</span>
                                         </button>
-                                        <div id="tooltip-remove-link" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-remove-link" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Remove link
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -108,7 +111,7 @@
                                             </svg>
                                             <span class="sr-only">Text size</span>
                                         </button>
-                                        <div id="tooltip-text-size" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-text-size" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Text size
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -146,12 +149,12 @@
                                             </svg>
                                             <span class="sr-only">Text color</span>
                                         </button>
-                                        <div id="tooltip-text-color" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-text-color" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Text color
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
                                         <div id="textColorDropdown" class="z-10 hidden w-48 rounded bg-white p-2 shadow dark:bg-gray-700">
-                                            <div class="grid grid-cols-6 gap-2 group mb-3 items-center p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
+                                            <div class="grid grid-cols-6 gap-2 group mb-3 items-center p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                                 <input type="color" id="color" value="#e66465" class="border-gray-200 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 rounded-md p-px px-1 hover:bg-gray-50 group-hover:bg-gray-50 dark:group-hover:bg-gray-700 w-full h-8 col-span-3" />
                                                 <label for="color" class="text-gray-500 dark:text-gray-400 text-sm font-medium col-span-3 group-hover:text-gray-900 dark:group-hover:text-white">Pick a color</label>
                                             </div>
@@ -193,7 +196,7 @@
                                                 <button type="button" data-hex-color="#F3F4F6" style="background-color: #F3F4F6" class="w-6 h-6 rounded-md"><span class="sr-only">Cloud Gray</span></button>
                                                 <button type="button" data-hex-color="#F9FAFB" style="background-color: #F9FAFB" class="w-6 h-6 rounded-md"><span class="sr-only">Heaven Gray</span></button>
                                             </div>
-                                            <button type="button" id="reset-color" class="py-1.5 text-sm font-medium text-gray-500 focus:outline-none bg-white rounded-lg hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-700 dark:text-gray-400 dark:hover:text-white w-full dark:hover:bg-gray-600">Reset color</button>
+                                            <button type="button" id="reset-color" class="py-1.5 text-sm font-medium text-gray-500 focus:outline-none bg-white rounded hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-700 dark:text-gray-400 dark:hover:text-white w-full dark:hover:bg-gray-600">Reset color</button>
                                         </div>
                                         <button id="toggleFontFamilyButton" data-dropdown-toggle="fontFamilyDropdown" type="button" data-tooltip-target="tooltip-font-family" class="p-1.5 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -201,7 +204,7 @@
                                             </svg>
                                             <span class="sr-only">Font family</span>
                                         </button>
-                                        <div id="tooltip-font-family" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-font-family" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Font Family
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -254,7 +257,7 @@
                                             </svg>
                                             <span class="sr-only">Align left</span>
                                         </button>
-                                        <div id="tooltip-left-align" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-left-align" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Align left
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -264,7 +267,7 @@
                                             </svg>
                                             <span class="sr-only">Align center</span>
                                         </button>
-                                        <div id="tooltip-center-align" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-center-align" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Align center
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
@@ -274,14 +277,15 @@
                                             </svg>
                                             <span class="sr-only">Align right</span>
                                         </button>
-                                        <div id="tooltip-right-align" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltip-right-align" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                             Align right
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="flex items-center gap-2 pt-2 flex-wrap">
-                                    <button id="typographyDropdownButton" data-dropdown-toggle="typographyDropdown" class="flex items-center justify-center rounded-lg bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-50 dark:bg-gray-600 dark:text-gray-400 dark:hover:bg-gray-500 dark:hover:text-white dark:focus:ring-gray-600" type="button">
+                                    <div class="px-1">
+                                        <span class="block w-px h-4 bg-gray-300 dark:bg-gray-600"></span>
+                                    </div>
+                                    <button id="typographyDropdownButton" data-dropdown-toggle="typographyDropdown" class="flex items-center justify-center rounded bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-50 dark:bg-gray-600 dark:text-gray-400 dark:hover:bg-gray-500 dark:hover:text-white dark:focus:ring-gray-600" type="button">
                                         Format
                                         <svg class="-me-0.5 ms-1.5 h-3.5 w-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
@@ -295,63 +299,63 @@
                                             <li>
                                                 <button id="toggleParagraphButton" type="button" class="flex justify-between items-center w-full text-base rounded px-3 py-2 hover:bg-gray-100 text-gray-900 dark:hover:bg-gray-600 dark:text-white">Paragraph
                                                     <div class="space-x-1.5">
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">0</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">0</kbd>
                                                     </div>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button data-heading-level="1" type="button" class="flex justify-between items-center w-full text-base rounded px-3 py-2 hover:bg-gray-100 text-gray-900 dark:hover:bg-gray-600 dark:text-white">Heading 1
                                                     <div class="space-x-1.5">
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">1</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">1</kbd>
                                                     </div>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button  data-heading-level="2" type="button" class="flex justify-between items-center w-full text-base rounded px-3 py-2 hover:bg-gray-100 text-gray-900 dark:hover:bg-gray-600 dark:text-white">Heading 2
                                                     <div class="space-x-1.5">
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">2</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">2</kbd>
                                                     </div>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button  data-heading-level="3" type="button" class="flex justify-between items-center w-full text-base rounded px-3 py-2 hover:bg-gray-100 text-gray-900 dark:hover:bg-gray-600 dark:text-white">Heading 3
                                                     <div class="space-x-1.5">
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">3</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">3</kbd>
                                                     </div>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button  data-heading-level="4" type="button" class="flex justify-between items-center w-full text-base rounded px-3 py-2 hover:bg-gray-100 text-gray-900 dark:hover:bg-gray-600 dark:text-white">Heading 4
                                                     <div class="space-x-1.5">
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">4</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">4</kbd>
                                                     </div>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button data-heading-level="5" type="button" class="flex justify-between items-center w-full text-base rounded px-3 py-2 hover:bg-gray-100 text-gray-900 dark:hover:bg-gray-600 dark:text-white">Heading 5
                                                     <div class="space-x-1.5">
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">5</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">5</kbd>
                                                     </div>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button  data-heading-level="6" type="button" class="flex justify-between items-center w-full text-base rounded px-3 py-2 hover:bg-gray-100 text-gray-900 dark:hover:bg-gray-600 dark:text-white">Heading 6
                                                     <div class="space-x-1.5">
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
-                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">6</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Cmd</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">Alt</kbd>
+                                                        <kbd class="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-100 border border-gray-200 rounded dark:bg-gray-600 dark:text-gray-400 dark:border-gray-500">6</kbd>
                                                     </div>
                                                 </button>
                                             </li>
@@ -364,7 +368,7 @@
                                         </svg>
                                         <span class="sr-only">Add image</span>
                                     </button>
-                                    <div id="tooltip-image" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <div id="tooltip-image" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                         Add image
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
@@ -374,7 +378,7 @@
                                         </svg>
                                         <span class="sr-only">Add video</span>
                                     </button>
-                                    <div id="tooltip-video" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <div id="tooltip-video" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                         Add video
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
@@ -384,7 +388,7 @@
                                         </svg>
                                         <span class="sr-only">Toggle list</span>
                                     </button>
-                                    <div id="tooltip-list" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <div id="tooltip-list" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                         Toggle list
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
@@ -394,7 +398,7 @@
                                         </svg>
                                         <span class="sr-only">Toggle ordered list</span>
                                     </button>
-                                    <div id="tooltip-ordered-list" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <div id="tooltip-ordered-list" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                         Toggle ordered list
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
@@ -404,7 +408,7 @@
                                         </svg>
                                         <span class="sr-only">Toggle blockquote</span>
                                     </button>
-                                    <div id="tooltip-blockquote-list" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <div id="tooltip-blockquote-list" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                         Toggle blockquote
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
@@ -415,7 +419,7 @@
                                         </svg>
                                         <span class="sr-only">Toggle Horizontal Rule</span>
                                     </button>
-                                    <div id="tooltip-hr-list" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <div id="tooltip-hr-list" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                         Toggle Horizontal Rule
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
@@ -439,28 +443,68 @@
             </button>
         </div>
         <aside id="drawer-blog-settings" class="fixed top-[60px] right-0 z-40 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 h-screen transition-transform translate-x-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 flex flex-col overflow-y-auto" tabindex="-1" aria-labelledby="drawer-blog-settings">
-            <h5 id="drawer-blog-settings" class="inline-flex items-center p-4 text-base font-semibold text-gray-500 dark:text-gray-400">
-                Blog Settings
-            </h5>
+            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
+                    <li class="me-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg" id="blog-settings-tab" data-tabs-target="#blog-settings" type="button" role="tab" aria-controls="blog-settings" aria-selected="false">
+                            Blog settings
+                        </button>
+                    </li>
+                    <li class="me-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="meta-data-tab" data-tabs-target="#meta-data" type="button" role="tab" aria-controls="meta-data" aria-selected="false">Meta Data</button>
+                    </li>
+                </ul>
+            </div>
+            <div id="default-tab-content">
+                <div class="hidden px-2 rounded bg-gray-50 dark:bg-gray-800" id="blog-settings" role="tabpanel" aria-labelledby="blog-settings-tab">
+                    <div class="flex flex-col justify-start overflow-y-auto pb-20">
+                        <div class="grid grid-cols-1 gap-2">
+                            <div class="col-span-12">
+                                @include('restricted.layouts.widgets.featuredImage')
+                            </div>
+                            <div class="col-span-12">
+                                @include('restricted.layouts.widgets.table.categories.index')
+                            </div>
+                            <div class="col-span-12">
+                                @include('restricted.layouts.widgets.table.tags.index')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden px-2 rounded bg-gray-50 dark:bg-gray-800" id="meta-data" role="tabpanel" aria-labelledby="meta-data-tab">
+                    <div class="flex flex-col justify-start overflow-y-auto pb-20">
+                        <div class="grid grid-cols-1 gap-2">
+                            <div class="col-span-12">
+                                <div class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
+                                    <h2 id="meta-data-google-accordion">
+                                        <button type="button" class="flex items-center justify-between w-full p-2 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#meta-data-google-accordion-body" aria-expanded="true" aria-controls="meta-data-google-accordion-body">
+                                            <span class="flex items-center">Google</span>
+                                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                            </svg>
+                                        </button>
+                                    </h2>
+                                    <div id="meta-data-google-accordion-body" class="hidden" aria-labelledby="meta-data-google" data-render-widget="meta-data-google-accordion">
+                                        <div class="p-2 flex gap-2 flex-col">
+                                            <input type="text" name="meta_title" id="meta_title" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Title" />
+                                            <input type="text" name="meta_keywords" id="meta_keywords" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Canonical URL" />
+                                            <textarea name="meta_description" id="meta_description" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Description" rows="5"></textarea>
+                                            <div class="text-gray-700 dark:text-gray-200 text-lg">Search Engine Result Preview</div>
+                                            <div id="googleMetaPreview" class="h-[200px] bg-gray-50"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button type="button" data-drawer-hide="drawer-blog-settings" aria-controls="drawer-blog-settings" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-md text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                 </svg>
                 <span class="sr-only">Close menu</span>
             </button>
-            <div class="flex flex-col justify-start overflow-y-scroll p-2 border-t border-gray-400 dark:border-gray-600 relative scroll-smooth pb-20">
-                <div class="grid grid-cols-1 gap-2">
-                    <div class="col-span-12">
-                        @include('restricted.layouts.widgets.featuredImage')
-                    </div>
-                    <div class="col-span-12">
-                        @include('restricted.layouts.widgets.table.categories.index')
-                    </div>
-                    <div class="col-span-12">
-                        @include('restricted.layouts.widgets.table.tags.index')
-                    </div>
-                </div>
-            </div>
         </aside>
     </form>
 @endsection

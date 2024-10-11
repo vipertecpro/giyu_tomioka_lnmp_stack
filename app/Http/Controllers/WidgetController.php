@@ -89,7 +89,6 @@ class WidgetController extends Controller
             $getTableColumnsFromSchema = Schema::getColumnListing('tags');
             $sort = $request->get('sort');
             $tags = (new Tag)->newQuery();
-            $tags->whereNot('id',1);
             if($search){
                 $tags->where(function($query) use ($search, $getTableColumnsFromSchema){
                     foreach($getTableColumnsFromSchema as $column){

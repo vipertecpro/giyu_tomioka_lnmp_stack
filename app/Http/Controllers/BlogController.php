@@ -91,7 +91,7 @@ class BlogController extends Controller
                 'featured_image'    => $featured_image,
                 'title'             => $request->get('title'),
                 'slug'              => Str::of($request->get('title'))->slug('-'),
-                'excerpt'           => '',
+                'excerpt'           => $request->get('excerpt'),
                 'content'           => $request->get('content'),
                 'meta_title'        => 'meta-title',
                 'meta_description'  => 'meta-description',
