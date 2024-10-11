@@ -474,6 +474,7 @@
                 <div class="hidden px-2 rounded bg-gray-50 dark:bg-gray-800" id="meta-data" role="tabpanel" aria-labelledby="meta-data-tab">
                     <div class="flex flex-col justify-start overflow-y-auto pb-20">
                         <div class="grid grid-cols-1 gap-2">
+                            <!-- Google Preview Section -->
                             <div class="col-span-12">
                                 <div class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
                                     <h2 id="meta-data-google-accordion">
@@ -484,13 +485,90 @@
                                             </svg>
                                         </button>
                                     </h2>
-                                    <div id="meta-data-google-accordion-body" class="hidden" aria-labelledby="meta-data-google" data-render-widget="meta-data-google-accordion">
-                                        <div class="p-2 flex gap-2 flex-col">
-                                            <input type="text" name="meta_title" id="meta_title" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Title" />
-                                            <input type="text" name="meta_keywords" id="meta_keywords" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Canonical URL" />
-                                            <textarea name="meta_description" id="meta_description" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Description" rows="5"></textarea>
-                                            <div class="text-gray-700 dark:text-gray-200 text-lg">Search Engine Result Preview</div>
-                                            <div id="googleMetaPreview" class="h-[200px] bg-gray-50"></div>
+                                    <div id="meta-data-google-accordion-body" class="p-2 flex gap-2 flex-col">
+                                        <input type="text" name="meta_title" id="google_meta_title"
+                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Title"/>
+                                            <small id="googleTitleCount" class="text-xs text-gray-500 font-semibold">0 / 60 characters</small>
+                                        <input type="text" name="meta_url" id="google_meta_url"
+                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Canonical URL" />
+                                            <small id="googleURLCount" class="text-xs text-gray-500 font-semibold">0 / 60 characters</small>
+                                        <textarea name="meta_description" id="google_meta_description"
+                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Description" rows="5"></textarea>
+                                            <small id="googleDescriptionCount" class="text-xs text-gray-500 font-semibold">0 / 160 characters</small>
+                                        <div class="text-gray-700 dark:text-gray-200 text-base bold">Search Engine Result Preview</div>
+                                        <div id="googleMetaPreview" class="h-[200px] bg-gray-50 p-4 border rounded shadow-sm overflow-y-auto break-words">
+                                            <div class="preview-crumbs text-green-600 text-sm font-semibold">totheweb.com › ... › your-blog-post</div>
+                                            <div class="preview-title text-blue-600 font-medium text-sm overflow-auto">
+                                                <a href="#" target="_blank">Your Title Here</a>
+                                            </div>
+                                            <div class="preview-description text-gray-500 text-sm font-semibold">
+                                                <span class="preview-date">Oct 2023</span> - Your meta description will appear here.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Meta Preview Section -->
+                            <div class="col-span-12">
+                                <div class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
+                                    <h2 id="meta-data-meta-accordion">
+                                        <button type="button" class="flex items-center justify-between w-full p-2 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#meta-data-meta-accordion-body" aria-expanded="false" aria-controls="meta-data-meta-accordion-body">
+                                            <span class="flex items-center">Meta (OpenGraph/Facebook)</span>
+                                            <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                            </svg>
+                                        </button>
+                                    </h2>
+                                    <div id="meta-data-meta-accordion-body" class="hidden p-2 flex gap-2 flex-col">
+                                        <input type="text" name="meta_title" id="meta_meta_title"
+                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Title" />
+                                        <input type="text" name="meta_url" id="meta_meta_url"
+                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Canonical URL" />
+                                        <textarea name="meta_description" id="meta_meta_description"
+                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Description" rows="5"></textarea>
+                                        <div class="text-gray-700 dark:text-gray-200 text-lg">Meta Preview</div>
+                                        <div id="metaMetaPreview" class="h-[200px] bg-gray-50 p-4 border rounded shadow-sm">
+                                            <div class="preview-title text-blue-600 text-xl font-medium">Your Title Here</div>
+                                            <div class="preview-url text-green-600">https://example.com</div>
+                                            <div class="preview-description text-gray-500">Your meta description will appear here.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Twitter Preview Section -->
+                            <div class="col-span-12">
+                                <div class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
+                                    <h2 id="meta-data-twitter-accordion">
+                                        <button type="button" class="flex items-center justify-between w-full p-2 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#meta-data-twitter-accordion-body" aria-expanded="false" aria-controls="meta-data-twitter-accordion-body">
+                                            <span class="flex items-center">Twitter</span>
+                                            <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                            </svg>
+                                        </button>
+                                    </h2>
+                                    <div id="meta-data-twitter-accordion-body" class="hidden p-2 flex gap-2 flex-col">
+                                        <input type="text" name="meta_title" id="twitter_meta_title"
+                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Title" />
+                                        <input type="text" name="meta_url" id="twitter_meta_url"
+                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Canonical URL" />
+                                        <textarea name="meta_description" id="twitter_meta_description"
+                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Description" rows="5"></textarea>
+                                        <div class="text-gray-700 dark:text-gray-200 text-lg">Twitter Preview</div>
+                                        <div id="twitterMetaPreview" class="h-[200px] bg-gray-50 p-4 border rounded shadow-sm">
+                                            <div class="preview-title text-blue-600 text-xl font-medium">Your Title Here</div>
+                                            <div class="preview-url text-green-600">https://example.com</div>
+                                            <div class="preview-description text-gray-500">Your meta description will appear here.</div>
                                         </div>
                                     </div>
                                 </div>

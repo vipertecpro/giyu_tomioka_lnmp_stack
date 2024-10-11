@@ -9,7 +9,7 @@ import './customEditor.js';
 import { initFlowbite } from 'flowbite';
 import FeaturedImage from "./widgets/FeaturedImage.js";
 import TableBased from "./widgets/TableBased.js";
-
+import MetaPreviews from "./widgets/MetaPreviews.js"
 document.addEventListener('DOMContentLoaded', () => {
     if(document.querySelector('.featuredImage')){
         new FeaturedImage();
@@ -21,4 +21,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     initFlowbite();
+    new MetaPreviews();
 });

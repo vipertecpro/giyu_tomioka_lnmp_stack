@@ -22,3 +22,6 @@
 #typographyDropdown{
     @apply z-40;
 }
+.ProseMirror {
+    @apply h-96 overflow-y-auto;
+}
