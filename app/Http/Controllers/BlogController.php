@@ -88,18 +88,17 @@ class BlogController extends Controller
                 $featured_image = $blog?->featured_image;
             }
             $data = [
-                'featured_image'    => $featured_image,
-                'title'             => $request->get('title'),
-                'slug'              => Str::of($request->get('title'))->slug('-'),
-                'excerpt'           => $request->get('excerpt'),
-                'content'           => $request->get('content'),
-                'meta_title'        => 'meta-title',
-                'meta_description'  => 'meta-description',
-                'meta_keywords'     => 'meta-keywords',
-                'meta_author'       => 'meta-author',
-                'status'            => 'draft',
-                'visibility'        => false,
-                'created_by'        => auth()->id(),
+                'featured_image'              => $featured_image,
+                'title'                       => $request->get('title'),
+                'slug'                        => Str::of($request->get('title'))->slug('-'),
+                'excerpt'                     => $request->get('excerpt'),
+                'content'                     => $request->get('content'),
+                'google_meta_title'           => $request->get('google_meta_title'),
+                'google_meta_url'             => $request->get('google_meta_url'),
+                'google_meta_description'     => $request->get('google_meta_description'),
+                'status'                      => 'draft',
+                'visibility'                  => false,
+                'created_by'                  => auth()->id(),
             ];
             if($blog == null){
                 Blog::create($data);

@@ -486,17 +486,17 @@
                                         </button>
                                     </h2>
                                     <div id="meta-data-google-accordion-body" class="p-2 flex gap-2 flex-col">
-                                        <input type="text" name="meta_title" id="google_meta_title"
+                                        <input type="text" name="google_meta_title" id="google_meta_title"
                                             class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Title"/>
+                                            placeholder="Title" value="{{  @$pageData->google_meta_title ?? @$pageData->title }}" />
                                             <small id="googleTitleCount" class="text-xs text-gray-500 font-semibold">0 / 60 characters</small>
-                                        <input type="text" name="meta_url" id="google_meta_url"
+                                        <input type="text" name="google_meta_url" id="google_meta_url"
                                             class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Canonical URL" />
+                                            placeholder="Canonical URL" value="{{  @$pageData->google_meta_url ?? @$pageData->slug ? route('client.singleBlog',@$pageData->slug) : '' }}" />
                                             <small id="googleURLCount" class="text-xs text-gray-500 font-semibold">0 / 60 characters</small>
-                                        <textarea name="meta_description" id="google_meta_description"
+                                        <textarea name="google_meta_description" id="google_meta_description"
                                             class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Description" rows="5"></textarea>
+                                            placeholder="Description" rows="5">{{  @$pageData->google_meta_description ?? @$pageData->excerpt }}</textarea>
                                             <small id="googleDescriptionCount" class="text-xs text-gray-500 font-semibold">0 / 160 characters</small>
                                         <div class="text-gray-700 dark:text-gray-200 text-base bold">Search Engine Result Preview</div>
                                         <div id="googleMetaPreview" class="h-[200px] bg-gray-50 p-4 border rounded shadow-sm overflow-y-auto break-words">

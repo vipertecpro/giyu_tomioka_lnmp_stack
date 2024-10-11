@@ -18,10 +18,9 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('excerpt');
             $table->longText('content');
-            $table->string('meta_title')->nullable();
-            $table->string('meta_description')->nullable();
-            $table->string('meta_keywords')->nullable();
-            $table->string('meta_author')->nullable();
+            $table->string('google_meta_title')->nullable();
+            $table->string('google_meta_url')->nullable();
+            $table->string('google_meta_description')->nullable();
             $table->string('status')->default('draft');
             $table->boolean('visibility')->default(false);
             $table->unsignedBigInteger('created_by')->nullable();
