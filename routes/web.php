@@ -25,8 +25,8 @@ Route::group([
     Route::get('/terms',[ClientPagesController::class,'terms'])->name('terms');
     Route::get('/categories',[ClientPagesController::class,'categories'])->name('categories');
     Route::get('/privacy',[ClientPagesController::class,'privacy'])->name('privacy');
-    Route::get('/blogs',[ClientPagesController::class,'blogs'])->name('blogs');
-    Route::get('/blogs/{blog_slug}',[ClientPagesController::class,'singleBlog'])->name('singleBlog');
+    Route::get('/blog',[ClientPagesController::class,'blogs'])->name('blogs');
+    Route::get('/blog/{blog_slug}',[ClientPagesController::class,'singleBlog'])->name('singleBlog');
     Route::get('/category/{category_slug}',[ClientPagesController::class,'categoryForBlogs'])->name('categoryForBlogs');
     Route::get('/tag/{tag_slug}',[ClientPagesController::class,'tagForBlogs'])->name('tagForBlogs');
     Route::get('/login',[ClientPagesController::class,'login'])->name('login');

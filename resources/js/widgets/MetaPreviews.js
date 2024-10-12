@@ -21,6 +21,7 @@ export default class MetaPreviews {
         const googleTitle = document.getElementById('google_meta_title');  // Meta Title input
         const googleURL = document.getElementById('google_meta_url');      // Canonical URL input
         const googleDescription = document.getElementById('google_meta_description');  // Meta Description textarea
+        const slugInput = document.getElementById('slug'); // Slug input field
 
         // Preview elements
         const googlePreviewCrumbs = document.querySelector('#googleMetaPreview .preview-crumbs'); // Breadcrumb-style URL
@@ -43,10 +44,11 @@ export default class MetaPreviews {
             if (!url) return "totheweb.com › ... › your-blog-post";
 
             try {
-                const { hostname, pathname } = new URL(url);
-                let formattedPath = pathname.replace(/\/$/, ''); // Remove trailing slash if present
+                // Create a URL object to parse the URL
+                const { protocol, hostname, pathname } = new URL(url);
 
-                // Split the path into segments
+                // Remove trailing slashes in the path and split into segments
+                let formattedPath = pathname.replace(/\/$/, ''); // Remove trailing slash if present
                 const pathSegments = formattedPath.split('/').filter(Boolean);
 
                 // Truncate the middle part of the path with '...'
@@ -56,9 +58,10 @@ export default class MetaPreviews {
                     formattedPath = pathSegments.join(' › ');
                 }
 
-                return `${hostname} › ${formattedPath}`;
+                // Return the formatted URL as "protocol://hostname › path"
+                return `${protocol}//${hostname} › ${formattedPath}`;
             } catch (e) {
-                return "totheweb.com › ... › invalid-url";  // Fallback for invalid URLs
+                return "https://totheweb.com › ... › invalid-url";  // Fallback for invalid URLs
             }
         };
 
@@ -101,6 +104,25 @@ export default class MetaPreviews {
         googleTitle.addEventListener('input', updateGooglePreview);
         googleURL.addEventListener('input', updateGooglePreview);  // This updates the URL and its counter
         googleDescription.addEventListener('input', updateGooglePreview);
+
+        // Add event listener for slug input to update google_meta_url
+        slugInput.addEventListener('input', () => {
+            if (!googleURL.value) {
+                googleURL.value = `${googleURL.getAttribute('data-client-url')}/${slugInput.value}`;
+            } else {
+                const baseUrl = googleURL.value.split('/').slice(0, -1).join('/');
+                googleURL.value = `${baseUrl}/${slugInput.value}`;
+            }
+            updateGooglePreview();
+        });
+
+        // Add event listener for google_meta_url input to update slug
+        googleURL.addEventListener('input', () => {
+            const urlParts = googleURL.value.split('/');
+            const newSlug = urlParts[urlParts.length - 1];
+            slugInput.value = newSlug;
+            updateGooglePreview();
+        });
 
         // Trigger the initial preview update on page load
         updateGooglePreview();

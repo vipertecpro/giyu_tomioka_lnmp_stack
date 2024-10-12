@@ -7,7 +7,7 @@
         <div class="grid grid-cols-12 sm:grid-cols-1 md:grid-cols-12 gap-2">
             <div class="col-span-12">
                 <div class="grid grid-cols-1 gap-2">
-                    <div class="flex flex-col justify-start items-center w-full border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:placeholder-gray-500">
+                    <div class="flex flex-col justify-start items-start w-full border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:placeholder-gray-500">
                         <input
                             type="text"
                             name="title"
@@ -16,7 +16,16 @@
                             value="{{ @$pageData->title }}"
                             placeholder="Enter the blog title here" />
                     </div>
-                    <div class="flex flex-col justify-start items-center w-full border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:placeholder-gray-500">
+                    <div class="flex flex-col justify-start items-start w-full border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:placeholder-gray-500">
+                        <input
+                            type="text"
+                            name="slug"
+                            id="slug"
+                            class="block w-full text-sm border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded-md h-8"
+                            value="{{ @$pageData->slug }}"
+                            placeholder="Enter the blog slug" />
+                    </div>
+                    <div class="flex flex-col justify-start items-start w-full border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:placeholder-gray-500">
                         <textarea name="excerpt" id="excerpt" class="block w-full text-lg border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded-md" rows="2" placeholder="Enter the blog excerpt here">{{ @$pageData->excerpt }}</textarea>
                     </div>
                     <input type="hidden" id="content" name="content" value="{{ @$pageData->content }}"/>
@@ -434,7 +443,7 @@
                 </div>
             </div>
         </div>
-        <div class="fixed bottom-8 md:left-48 right-0  p-2 shadow-[0_-2px_2px_rgba(0,0,0,0.1)] bg-gray-100 dark:bg-gray-700 flex justify-end gap-2 w-full md:w-auto">
+        <div class="fixed bottom-8 md:left-48 right-0  p-2 border-t border-gray-300 bg-gray-100 dark:border-gray-600  dark:bg-gray-700 flex justify-end gap-2 w-full md:w-auto">
             <button type="button" value="publish" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 formSubmit">
                 Save as draft
             </button>
@@ -442,8 +451,8 @@
                 Publish
             </button>
         </div>
-        <aside id="drawer-blog-settings" class="fixed top-[60px] right-0 z-40 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 h-screen transition-transform translate-x-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 flex flex-col overflow-y-auto" tabindex="-1" aria-labelledby="drawer-blog-settings">
-            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+        <aside id="drawer-blog-settings" class="fixed top-[60px] right-0 z-40 w-full md:w-1/2 lg:w-1/3 xl:w-1/3 2xl:w-1/4 h-screen transition-transform translate-x-full bg-gray-200 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 flex flex-col overflow-y-auto" tabindex="-1" aria-labelledby="drawer-blog-settings">
+            <div class="mb-4 border-b border-gray-200 dark:border-gray-700 bg-gray-200 dark:bg-gray-900">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
                     <li class="me-2" role="presentation">
                         <button class="inline-block p-4 border-b-2 rounded-t-lg" id="blog-settings-tab" data-tabs-target="#blog-settings" type="button" role="tab" aria-controls="blog-settings" aria-selected="false">
@@ -456,7 +465,7 @@
                 </ul>
             </div>
             <div id="default-tab-content">
-                <div class="hidden px-2 rounded bg-gray-50 dark:bg-gray-800" id="blog-settings" role="tabpanel" aria-labelledby="blog-settings-tab">
+                <div class="hidden px-2 rounded" id="blog-settings" role="tabpanel" aria-labelledby="blog-settings-tab">
                     <div class="flex flex-col justify-start overflow-y-auto pb-20">
                         <div class="grid grid-cols-1 gap-2">
                             <div class="col-span-12">
@@ -471,7 +480,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="hidden px-2 rounded bg-gray-50 dark:bg-gray-800" id="meta-data" role="tabpanel" aria-labelledby="meta-data-tab">
+                <div class="hidden px-2 rounded" id="meta-data" role="tabpanel" aria-labelledby="meta-data-tab">
                     <div class="flex flex-col justify-start overflow-y-auto pb-20">
                         <div class="grid grid-cols-1 gap-2">
                             <!-- Google Preview Section -->
@@ -492,7 +501,7 @@
                                             <small id="googleTitleCount" class="text-xs text-gray-500 font-semibold">0 / 60 characters</small>
                                         <input type="text" name="google_meta_url" id="google_meta_url"
                                             class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Canonical URL" value="{{  @$pageData->google_meta_url ?? @$pageData->slug ? route('client.singleBlog',@$pageData->slug) : '' }}" />
+                                            placeholder="Canonical URL" value="{{  @$pageData->google_meta_url ?? @$pageData->slug ? route('client.singleBlog',@$pageData->slug) : '' }}" data-client-url="{{  env('APP_URL') }}"/>
                                             <small id="googleURLCount" class="text-xs text-gray-500 font-semibold">0 / 60 characters</small>
                                         <textarea name="google_meta_description" id="google_meta_description"
                                             class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"

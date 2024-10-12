@@ -55,6 +55,7 @@ class BlogController extends Controller
             $validator = Validator::make($request->all(),[
                 'title'     => 'required',
                 'content'   => 'required',
+                'excerpt'   => 'required'
             ]);
             if($validator->fails()){
                 return response()->json([
