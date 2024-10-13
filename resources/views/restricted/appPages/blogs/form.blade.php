@@ -12,7 +12,7 @@
                             type="text"
                             name="title"
                             id="title"
-                            class="block w-full text-3xl border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded-md h-15"
+                            class="block w-full text-3xl border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded h-15"
                             value="{{ @$pageData->title }}"
                             placeholder="Enter the blog title here" />
                     </div>
@@ -21,12 +21,12 @@
                             type="text"
                             name="slug"
                             id="slug"
-                            class="block w-full text-sm border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded-md h-8"
+                            class="block w-full text-sm border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded h-8"
                             value="{{ @$pageData->slug }}"
                             placeholder="Enter the blog slug" />
                     </div>
                     <div class="flex flex-col justify-start items-start w-full border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:placeholder-gray-500">
-                        <textarea name="excerpt" id="excerpt" class="block w-full text-lg border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded-md" rows="2" placeholder="Enter the blog excerpt here">{{ @$pageData->excerpt }}</textarea>
+                        <textarea name="excerpt" id="excerpt" class="block w-full text-lg border-0 dark:text-gray-300 focus:ring-gray-200 dark:focus:ring-gray-600 dark:bg-gray-800 dark:placeholder-gray-500 font-semibold rounded" rows="2" placeholder="Enter the blog excerpt here">{{ @$pageData->excerpt }}</textarea>
                     </div>
                     <input type="hidden" id="content" name="content" value="{{ @$pageData->content }}"/>
                     <div class="grid grid-cols-1">
@@ -164,46 +164,46 @@
                                         </div>
                                         <div id="textColorDropdown" class="z-10 hidden w-48 rounded bg-white p-2 shadow dark:bg-gray-700">
                                             <div class="grid grid-cols-6 gap-2 group mb-3 items-center p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                                <input type="color" id="color" value="#e66465" class="border-gray-200 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 rounded-md p-px px-1 hover:bg-gray-50 group-hover:bg-gray-50 dark:group-hover:bg-gray-700 w-full h-8 col-span-3" />
+                                                <input type="color" id="color" value="#e66465" class="border-gray-200 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 rounded p-px px-1 hover:bg-gray-50 group-hover:bg-gray-50 dark:group-hover:bg-gray-700 w-full h-8 col-span-3" />
                                                 <label for="color" class="text-gray-500 dark:text-gray-400 text-sm font-medium col-span-3 group-hover:text-gray-900 dark:group-hover:text-white">Pick a color</label>
                                             </div>
                                             <div class="grid grid-cols-6 gap-1 mb-3">
-                                                <button type="button" data-hex-color="#1A56DB" style="background-color: #1A56DB" class="w-6 h-6 rounded-md"><span class="sr-only">Blue</span></button>
-                                                <button type="button" data-hex-color="#0E9F6E" style="background-color: #0E9F6E" class="w-6 h-6 rounded-md"><span class="sr-only">Green</span></button>
-                                                <button type="button" data-hex-color="#FACA15" style="background-color: #FACA15" class="w-6 h-6 rounded-md"><span class="sr-only">Yellow</span></button>
-                                                <button type="button" data-hex-color="#F05252" style="background-color: #F05252" class="w-6 h-6 rounded-md"><span class="sr-only">Red</span></button>
-                                                <button type="button" data-hex-color="#FF8A4C" style="background-color: #FF8A4C" class="w-6 h-6 rounded-md"><span class="sr-only">Orange</span></button>
-                                                <button type="button" data-hex-color="#0694A2" style="background-color: #0694A2" class="w-6 h-6 rounded-md"><span class="sr-only">Teal</span></button>
-                                                <button type="button" data-hex-color="#B4C6FC" style="background-color: #B4C6FC" class="w-6 h-6 rounded-md"><span class="sr-only">Light indigo</span></button>
-                                                <button type="button" data-hex-color="#8DA2FB" style="background-color: #8DA2FB" class="w-6 h-6 rounded-md"><span class="sr-only">Indigo</span></button>
-                                                <button type="button" data-hex-color="#5145CD" style="background-color: #5145CD" class="w-6 h-6 rounded-md"><span class="sr-only">Purple</span></button>
-                                                <button type="button" data-hex-color="#771D1D" style="background-color: #771D1D" class="w-6 h-6 rounded-md"><span class="sr-only">Brown</span></button>
-                                                <button type="button" data-hex-color="#FCD9BD" style="background-color: #FCD9BD" class="w-6 h-6 rounded-md"><span class="sr-only">Light orange</span></button>
-                                                <button type="button" data-hex-color="#99154B" style="background-color: #99154B" class="w-6 h-6 rounded-md"><span class="sr-only">Bordo</span></button>
-                                                <button type="button" data-hex-color="#7E3AF2" style="background-color: #7E3AF2" class="w-6 h-6 rounded-md"><span class="sr-only">Dark Purple</span></button>
-                                                <button type="button" data-hex-color="#CABFFD" style="background-color: #CABFFD" class="w-6 h-6 rounded-md"><span class="sr-only">Light</span></button>
-                                                <button type="button" data-hex-color="#D61F69" style="background-color: #D61F69" class="w-6 h-6 rounded-md"><span class="sr-only">Dark Pink</span></button>
-                                                <button type="button" data-hex-color="#F8B4D9" style="background-color: #F8B4D9" class="w-6 h-6 rounded-md"><span class="sr-only">Pink</span></button>
-                                                <button type="button" data-hex-color="#F6C196" style="background-color: #F6C196" class="w-6 h-6 rounded-md"><span class="sr-only">Cream</span></button>
-                                                <button type="button" data-hex-color="#A4CAFE" style="background-color: #A4CAFE" class="w-6 h-6 rounded-md"><span class="sr-only">Light Blue</span></button>
-                                                <button type="button" data-hex-color="#5145CD" style="background-color: #5145CD" class="w-6 h-6 rounded-md"><span class="sr-only">Dark Blue</span></button>
-                                                <button type="button" data-hex-color="#B43403" style="background-color: #B43403" class="w-6 h-6 rounded-md"><span class="sr-only">Orange Brown</span></button>
-                                                <button type="button" data-hex-color="#FCE96A" style="background-color: #FCE96A" class="w-6 h-6 rounded-md"><span class="sr-only">Light Yellow</span></button>
-                                                <button type="button" data-hex-color="#1E429F" style="background-color: #1E429F" class="w-6 h-6 rounded-md"><span class="sr-only">Navy Blue</span></button>
-                                                <button type="button" data-hex-color="#768FFD" style="background-color: #768FFD" class="w-6 h-6 rounded-md"><span class="sr-only">Light Purple</span></button>
-                                                <button type="button" data-hex-color="#BCF0DA" style="background-color: #BCF0DA" class="w-6 h-6 rounded-md"><span class="sr-only">Light Green</span></button>
-                                                <button type="button" data-hex-color="#EBF5FF" style="background-color: #EBF5FF" class="w-6 h-6 rounded-md"><span class="sr-only">Sky Blue</span></button>
-                                                <button type="button" data-hex-color="#16BDCA" style="background-color: #16BDCA" class="w-6 h-6 rounded-md"><span class="sr-only">Cyan</span></button>
-                                                <button type="button" data-hex-color="#E74694" style="background-color: #E74694" class="w-6 h-6 rounded-md"><span class="sr-only">Pink</span></button>
-                                                <button type="button" data-hex-color="#83B0ED" style="background-color: #83B0ED" class="w-6 h-6 rounded-md"><span class="sr-only">Darker Sky Blue</span></button>
-                                                <button type="button" data-hex-color="#03543F" style="background-color: #03543F" class="w-6 h-6 rounded-md"><span class="sr-only">Forest Green</span></button>
-                                                <button type="button" data-hex-color="#111928" style="background-color: #111928" class="w-6 h-6 rounded-md"><span class="sr-only">Black</span></button>
-                                                <button type="button" data-hex-color="#4B5563" style="background-color: #4B5563" class="w-6 h-6 rounded-md"><span class="sr-only">Stone</span></button>
-                                                <button type="button" data-hex-color="#6B7280" style="background-color: #6B7280" class="w-6 h-6 rounded-md"><span class="sr-only">Gray</span></button>
-                                                <button type="button" data-hex-color="#D1D5DB" style="background-color: #D1D5DB" class="w-6 h-6 rounded-md"><span class="sr-only">Light Gray</span></button>
-                                                <button type="button" data-hex-color="#F3F4F6" style="background-color: #F3F4F6" class="w-6 h-6 rounded-md"><span class="sr-only">Cloud Gray</span></button>
-                                                <button type="button" data-hex-color="#F3F4F6" style="background-color: #F3F4F6" class="w-6 h-6 rounded-md"><span class="sr-only">Cloud Gray</span></button>
-                                                <button type="button" data-hex-color="#F9FAFB" style="background-color: #F9FAFB" class="w-6 h-6 rounded-md"><span class="sr-only">Heaven Gray</span></button>
+                                                <button type="button" data-hex-color="#1A56DB" style="background-color: #1A56DB" class="w-6 h-6 rounded"><span class="sr-only">Blue</span></button>
+                                                <button type="button" data-hex-color="#0E9F6E" style="background-color: #0E9F6E" class="w-6 h-6 rounded"><span class="sr-only">Green</span></button>
+                                                <button type="button" data-hex-color="#FACA15" style="background-color: #FACA15" class="w-6 h-6 rounded"><span class="sr-only">Yellow</span></button>
+                                                <button type="button" data-hex-color="#F05252" style="background-color: #F05252" class="w-6 h-6 rounded"><span class="sr-only">Red</span></button>
+                                                <button type="button" data-hex-color="#FF8A4C" style="background-color: #FF8A4C" class="w-6 h-6 rounded"><span class="sr-only">Orange</span></button>
+                                                <button type="button" data-hex-color="#0694A2" style="background-color: #0694A2" class="w-6 h-6 rounded"><span class="sr-only">Teal</span></button>
+                                                <button type="button" data-hex-color="#B4C6FC" style="background-color: #B4C6FC" class="w-6 h-6 rounded"><span class="sr-only">Light indigo</span></button>
+                                                <button type="button" data-hex-color="#8DA2FB" style="background-color: #8DA2FB" class="w-6 h-6 rounded"><span class="sr-only">Indigo</span></button>
+                                                <button type="button" data-hex-color="#5145CD" style="background-color: #5145CD" class="w-6 h-6 rounded"><span class="sr-only">Purple</span></button>
+                                                <button type="button" data-hex-color="#771D1D" style="background-color: #771D1D" class="w-6 h-6 rounded"><span class="sr-only">Brown</span></button>
+                                                <button type="button" data-hex-color="#FCD9BD" style="background-color: #FCD9BD" class="w-6 h-6 rounded"><span class="sr-only">Light orange</span></button>
+                                                <button type="button" data-hex-color="#99154B" style="background-color: #99154B" class="w-6 h-6 rounded"><span class="sr-only">Bordo</span></button>
+                                                <button type="button" data-hex-color="#7E3AF2" style="background-color: #7E3AF2" class="w-6 h-6 rounded"><span class="sr-only">Dark Purple</span></button>
+                                                <button type="button" data-hex-color="#CABFFD" style="background-color: #CABFFD" class="w-6 h-6 rounded"><span class="sr-only">Light</span></button>
+                                                <button type="button" data-hex-color="#D61F69" style="background-color: #D61F69" class="w-6 h-6 rounded"><span class="sr-only">Dark Pink</span></button>
+                                                <button type="button" data-hex-color="#F8B4D9" style="background-color: #F8B4D9" class="w-6 h-6 rounded"><span class="sr-only">Pink</span></button>
+                                                <button type="button" data-hex-color="#F6C196" style="background-color: #F6C196" class="w-6 h-6 rounded"><span class="sr-only">Cream</span></button>
+                                                <button type="button" data-hex-color="#A4CAFE" style="background-color: #A4CAFE" class="w-6 h-6 rounded"><span class="sr-only">Light Blue</span></button>
+                                                <button type="button" data-hex-color="#5145CD" style="background-color: #5145CD" class="w-6 h-6 rounded"><span class="sr-only">Dark Blue</span></button>
+                                                <button type="button" data-hex-color="#B43403" style="background-color: #B43403" class="w-6 h-6 rounded"><span class="sr-only">Orange Brown</span></button>
+                                                <button type="button" data-hex-color="#FCE96A" style="background-color: #FCE96A" class="w-6 h-6 rounded"><span class="sr-only">Light Yellow</span></button>
+                                                <button type="button" data-hex-color="#1E429F" style="background-color: #1E429F" class="w-6 h-6 rounded"><span class="sr-only">Navy Blue</span></button>
+                                                <button type="button" data-hex-color="#768FFD" style="background-color: #768FFD" class="w-6 h-6 rounded"><span class="sr-only">Light Purple</span></button>
+                                                <button type="button" data-hex-color="#BCF0DA" style="background-color: #BCF0DA" class="w-6 h-6 rounded"><span class="sr-only">Light Green</span></button>
+                                                <button type="button" data-hex-color="#EBF5FF" style="background-color: #EBF5FF" class="w-6 h-6 rounded"><span class="sr-only">Sky Blue</span></button>
+                                                <button type="button" data-hex-color="#16BDCA" style="background-color: #16BDCA" class="w-6 h-6 rounded"><span class="sr-only">Cyan</span></button>
+                                                <button type="button" data-hex-color="#E74694" style="background-color: #E74694" class="w-6 h-6 rounded"><span class="sr-only">Pink</span></button>
+                                                <button type="button" data-hex-color="#83B0ED" style="background-color: #83B0ED" class="w-6 h-6 rounded"><span class="sr-only">Darker Sky Blue</span></button>
+                                                <button type="button" data-hex-color="#03543F" style="background-color: #03543F" class="w-6 h-6 rounded"><span class="sr-only">Forest Green</span></button>
+                                                <button type="button" data-hex-color="#111928" style="background-color: #111928" class="w-6 h-6 rounded"><span class="sr-only">Black</span></button>
+                                                <button type="button" data-hex-color="#4B5563" style="background-color: #4B5563" class="w-6 h-6 rounded"><span class="sr-only">Stone</span></button>
+                                                <button type="button" data-hex-color="#6B7280" style="background-color: #6B7280" class="w-6 h-6 rounded"><span class="sr-only">Gray</span></button>
+                                                <button type="button" data-hex-color="#D1D5DB" style="background-color: #D1D5DB" class="w-6 h-6 rounded"><span class="sr-only">Light Gray</span></button>
+                                                <button type="button" data-hex-color="#F3F4F6" style="background-color: #F3F4F6" class="w-6 h-6 rounded"><span class="sr-only">Cloud Gray</span></button>
+                                                <button type="button" data-hex-color="#F3F4F6" style="background-color: #F3F4F6" class="w-6 h-6 rounded"><span class="sr-only">Cloud Gray</span></button>
+                                                <button type="button" data-hex-color="#F9FAFB" style="background-color: #F9FAFB" class="w-6 h-6 rounded"><span class="sr-only">Heaven Gray</span></button>
                                             </div>
                                             <button type="button" id="reset-color" class="py-1.5 text-sm font-medium text-gray-500 focus:outline-none bg-white rounded hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-700 dark:text-gray-400 dark:hover:text-white w-full dark:hover:bg-gray-600">Reset color</button>
                                         </div>
@@ -444,10 +444,10 @@
             </div>
         </div>
         <div class="fixed bottom-8 md:left-48 right-0  p-2 border-t border-gray-300 bg-gray-100 dark:border-gray-600  dark:bg-gray-700 flex justify-end gap-2 w-full md:w-auto">
-            <button type="button" value="publish" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 formSubmit">
+            <button type="button" value="publish" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 formSubmit">
                 Save as draft
             </button>
-            <button type="button" value="draft" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 formSubmit">
+            <button type="button" value="draft" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm p-1 md:p-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 formSubmit">
                 Publish
             </button>
         </div>
@@ -485,7 +485,7 @@
                         <div class="grid grid-cols-1 gap-2">
                             <!-- Google Preview Section -->
                             <div class="col-span-12">
-                                <div class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
+                                <div class="block w-full bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
                                     <h2 id="meta-data-google-accordion">
                                         <button type="button" class="flex items-center justify-between w-full p-2 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#meta-data-google-accordion-body" aria-expanded="true" aria-controls="meta-data-google-accordion-body">
                                             <span class="flex items-center">Google</span>
@@ -508,22 +508,21 @@
                                             placeholder="Description" rows="5">{{  @$pageData->google_meta_description ?? @$pageData->excerpt }}</textarea>
                                             <small id="googleDescriptionCount" class="text-xs text-gray-500 font-semibold">0 / 160 characters</small>
                                         <div class="text-gray-700 dark:text-gray-200 text-base bold">Search Engine Result Preview</div>
-                                        <div id="googleMetaPreview" class="h-[200px] bg-gray-50 p-4 border rounded shadow-sm overflow-y-auto break-words">
-                                            <div class="preview-crumbs text-green-600 text-sm font-semibold">totheweb.com › ... › your-blog-post</div>
-                                            <div class="preview-title text-blue-600 font-medium text-sm overflow-auto">
+                                        <div id="googleMetaPreview" class="h-[200px] bg-gray-50 dark:bg-[#1f1f1f] p-4 border border-gray-400 dark:border-gray-600 rounded shadow-sm overflow-y-auto break-words">
+                                            <div class="preview-crumbs text-[#808386] dark:text-[#bdc1c6] text-[12px] font-normal">totheweb.com › ... › your-blog-post</div>
+                                            <div class="preview-title text-[#1a0dab] dark:text-[#99c3ff] text-[22px] mt-[18px] mb-[3px] font-medium text-sm overflow-auto">
                                                 <a href="#" target="_blank">Your Title Here</a>
                                             </div>
-                                            <div class="preview-description text-gray-500 text-sm font-semibold">
+                                            <div class="preview-description text-[#808386] dark:text-[#bdc1c6] text-[14px] font-semibold">
                                                 <span class="preview-date">Oct 2023</span> - Your meta description will appear here.
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Meta Preview Section -->
                             <div class="col-span-12">
-                                <div class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
+                                <div class="block w-full bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
                                     <h2 id="meta-data-meta-accordion">
                                         <button type="button" class="flex items-center justify-between w-full p-2 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#meta-data-meta-accordion-body" aria-expanded="false" aria-controls="meta-data-meta-accordion-body">
                                             <span class="flex items-center">Meta (OpenGraph/Facebook)</span>
@@ -532,21 +531,31 @@
                                             </svg>
                                         </button>
                                     </h2>
-                                    <div id="meta-data-meta-accordion-body" class="hidden p-2 flex gap-2 flex-col">
-                                        <input type="text" name="meta_title" id="meta_meta_title"
-                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Title" />
-                                        <input type="text" name="meta_url" id="meta_meta_url"
-                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Canonical URL" />
-                                        <textarea name="meta_description" id="meta_meta_description"
-                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Description" rows="5"></textarea>
-                                        <div class="text-gray-700 dark:text-gray-200 text-lg">Meta Preview</div>
-                                        <div id="metaMetaPreview" class="h-[200px] bg-gray-50 p-4 border rounded shadow-sm">
-                                            <div class="preview-title text-blue-600 text-xl font-medium">Your Title Here</div>
-                                            <div class="preview-url text-green-600">https://example.com</div>
-                                            <div class="preview-description text-gray-500">Your meta description will appear here.</div>
+                                    <div id="meta-data-meta-accordion-body" class="hidden p-2 ">
+                                        <div class="flex flex-col gap-2">
+                                            <input type="text" name="facebook_meta_title" id="facebook_meta_title"
+                                                class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="Facebook title" />
+                                            <small id="facebookTitleCount" class="text-xs text-gray-500 font-semibold">0 / 40 characters</small>
+                                            <textarea name="facebook_meta_description" id="facebook_meta_description"
+                                                class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="Facebook description" rows="5"></textarea>
+                                            <small id="facebookDescriptionCount" class="text-xs text-gray-500 font-semibold">0 / 125 characters</small>
+                                            <div class="text-gray-700 dark:text-gray-200 text-base bold">Search Engine Result Preview</div>
+                                            <div id="facebookMetaPreview" class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                                <a href="#">
+                                                    @if(@$pageData->featured_image !== null)
+                                                        <img class="rounded-t-lg previewPlaceholder" src="{{ asset('storage/'.@$pageData->featured_image) }}" data-preview-default-url="https://placehold.co/1280x720?text=Placeholder%0A1280x720" alt="Featured Image Placeholder" />
+                                                    @else
+                                                        <img class="rounded-t-lg previewPlaceholder" src="https://placehold.co/1280x720?text=Placeholder%0A1280x720" data-preview-default-url="https://placehold.co/1280x720?text=Placeholder%0A1280x720" alt="Featured Image Placeholder" />
+                                                    @endif
+                                                </a>
+                                                <div class="p-2">
+                                                    <h5 class="text-[12px] font-bold tracking-tight text-gray-900 dark:text-white uppercase">{{ env('APP_DOMAIN')  }}</h5>
+                                                    <p class="preview_facebook_meta_title text-[16px] font-bold text-gray-700 dark:text-gray-400">Lorem ipsum dolor consectetur</p>
+                                                    <p class="preview_facebook_meta_description text-[14px] font-normal text-gray-700 dark:text-gray-400 break-words">Lorem ipsum, dolor sit amet sit ametconsectetur adipisicing elit.Lorem ipsum, dolor sit amet sit ametconsectetur adipisicing elit.Lorem ipsum, dolor sit amet sit ametconsectetur adipisicing elit.</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -554,8 +563,8 @@
 
                             <!-- Twitter Preview Section -->
                             <div class="col-span-12">
-                                <div class="block w-full bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
-                                    <h2 id="meta-data-twitter-accordion">
+                                <div class="block w-full bg-white border border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700" data-accordion="open">
+                                    <h2 id="twitter-data-meta-accordion">
                                         <button type="button" class="flex items-center justify-between w-full p-2 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#meta-data-twitter-accordion-body" aria-expanded="false" aria-controls="meta-data-twitter-accordion-body">
                                             <span class="flex items-center">Twitter</span>
                                             <svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -563,21 +572,31 @@
                                             </svg>
                                         </button>
                                     </h2>
-                                    <div id="meta-data-twitter-accordion-body" class="hidden p-2 flex gap-2 flex-col">
-                                        <input type="text" name="meta_title" id="twitter_meta_title"
-                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Title" />
-                                        <input type="text" name="meta_url" id="twitter_meta_url"
-                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Canonical URL" />
-                                        <textarea name="meta_description" id="twitter_meta_description"
-                                            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Description" rows="5"></textarea>
-                                        <div class="text-gray-700 dark:text-gray-200 text-lg">Twitter Preview</div>
-                                        <div id="twitterMetaPreview" class="h-[200px] bg-gray-50 p-4 border rounded shadow-sm">
-                                            <div class="preview-title text-blue-600 text-xl font-medium">Your Title Here</div>
-                                            <div class="preview-url text-green-600">https://example.com</div>
-                                            <div class="preview-description text-gray-500">Your meta description will appear here.</div>
+                                    <div id="meta-data-twitter-accordion-body" class="hidden p-2 ">
+                                        <div class="flex flex-col gap-2">
+                                            <input type="text" name="twitter_meta_title" id="twitter_meta_title"
+                                                class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="Twitter title" />
+                                            <small id="twitterTitleCount" class="text-xs text-gray-500 font-semibold">0 / 70 characters</small>
+                                            <textarea name="facebook_meta_description" id="twitter_meta_description"
+                                                class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="Twitter description" rows="5"></textarea>
+                                            <small id="twitterDescriptionCount" class="text-xs text-gray-500 font-semibold">0 / 200 characters</small>
+                                            <div class="text-gray-700 dark:text-gray-200 text-base bold">Search Engine Result Preview</div>
+                                            <div id="twitterMetaPreview" class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                                <a href="#">
+                                                    @if(@$pageData->featured_image !== null)
+                                                        <img class="rounded-t-lg previewPlaceholder" src="{{ asset('storage/'.@$pageData->featured_image) }}" data-preview-default-url="https://placehold.co/1280x720?text=Placeholder%0A1280x720" alt="Featured Image Placeholder" />
+                                                    @else
+                                                        <img class="rounded-t-lg previewPlaceholder" src="https://placehold.co/1280x720?text=Placeholder%0A1280x720" data-preview-default-url="https://placehold.co/1280x720?text=Placeholder%0A1280x720" alt="Featured Image Placeholder" />
+                                                    @endif
+                                                </a>
+                                                <div class="p-2">
+                                                    <p class="preview_twitter_meta_title text-[16px] font-bold text-gray-700 dark:text-gray-400">Lorem ipsum dolor consectetur</p>
+                                                    <p class="preview_twitter_meta_description text-[14px] font-normal text-gray-700 dark:text-gray-400 break-words">Lorem ipsum, dolor sit amet sit ametconsectetur adipisicing elit.Lorem ipsum, dolor sit amet sit ametconsectetur adipisicing elit.</p>
+                                                    <h5 class="text-[12px] font-bold tracking-tight text-gray-900 dark:text-white uppercase">{{ env('APP_DOMAIN')  }}</h5>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -586,7 +605,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" data-drawer-hide="drawer-blog-settings" aria-controls="drawer-blog-settings" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-md text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <button type="button" data-drawer-hide="drawer-blog-settings" aria-controls="drawer-blog-settings" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                 </svg>

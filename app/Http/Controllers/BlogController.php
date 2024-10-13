@@ -54,6 +54,7 @@ class BlogController extends Controller
         try{
             $validator = Validator::make($request->all(),[
                 'title'     => 'required',
+                'slug'      => 'required',
                 'content'   => 'required',
                 'excerpt'   => 'required'
             ]);
@@ -63,6 +64,12 @@ class BlogController extends Controller
                     'message'   => $validator->errors(),
                     'fields'    => $validator->errors()->keys()
                 ],400);
+            }
+            $slug = $request->get('slug');
+            if($slug == null){
+                $slug = Str::of($request->get('title'))->slug('-');
+            }else{
+                $slug = Str::of($slug)->slug('-');
             }
             $categories = $request->get('categories');
             $tags = $request->get('tags');
@@ -91,7 +98,7 @@ class BlogController extends Controller
             $data = [
                 'featured_image'              => $featured_image,
                 'title'                       => $request->get('title'),
-                'slug'                        => Str::of($request->get('title'))->slug('-'),
+                'slug'                        => $slug,
                 'excerpt'                     => $request->get('excerpt'),
                 'content'                     => $request->get('content'),
                 'google_meta_title'           => $request->get('google_meta_title'),

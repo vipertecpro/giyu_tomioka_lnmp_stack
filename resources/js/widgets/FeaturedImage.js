@@ -10,18 +10,25 @@ class FeaturedImage {
     bindEvents() {
         const featuredImageInput = document.querySelector('.featuredImage');
         const previewPlaceholder = document.querySelector('.previewPlaceholder');
+        const previewPlaceholderFacebook = document.querySelector('#facebookMetaPreview .previewPlaceholder');
+        const previewPlaceholderTwitter = document.querySelector('#twitterMetaPreview .previewPlaceholder');
+
         const addBtn = document.querySelector('[data-widget-action="add"]');
         const editBtn = document.querySelector('[data-widget-action="edit"]');
         const removeBtn = document.querySelector('[data-widget-action="remove"]');
 
         if (previewPlaceholder) {
             this.setDefaultImage(previewPlaceholder);
+            this.setDefaultImage(previewPlaceholderFacebook);
+            this.setDefaultImage(previewPlaceholderTwitter);
         }
 
         if (featuredImageInput) {
             featuredImageInput.addEventListener('change', () => {
                 this.toggleButtons(addBtn, editBtn, removeBtn, true);
                 previewPlaceholder.src = URL.createObjectURL(featuredImageInput.files[0]);
+                previewPlaceholderFacebook.src = URL.createObjectURL(featuredImageInput.files[0]);
+                previewPlaceholderTwitter.src = URL.createObjectURL(featuredImageInput.files[0]);
             });
         }
 

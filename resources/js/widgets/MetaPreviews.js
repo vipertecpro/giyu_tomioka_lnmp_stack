@@ -128,50 +128,89 @@ export default class MetaPreviews {
         updateGooglePreview();
     }
 
-
-
-
     // Method to handle Meta (OpenGraph/Facebook) preview
     initMetaPreview() {
-        const metaTitle = document.getElementById('meta_meta_title');
-        const metaURL = document.getElementById('meta_meta_url');
-        const metaDescription = document.getElementById('meta_meta_description');
+        const facebookMetaTitle = document.getElementById('facebook_meta_title');
+        const facebookMetaDescription = document.getElementById('facebook_meta_description');
 
-        const metaPreviewTitle = document.querySelector('#metaMetaPreview .preview-title');
-        const metaPreviewURL = document.querySelector('#metaMetaPreview .preview-url');
-        const metaPreviewDescription = document.querySelector('#metaMetaPreview .preview-description');
+        const metaPreviewTitle = document.querySelector('.preview_facebook_meta_title');
+        const metaPreviewDescription = document.querySelector('.preview_facebook_meta_description');
+
+        const titleMaxLength = 40;
+        const descriptionMaxLength = 125;
 
         const updateMetaPreview = () => {
-            metaPreviewTitle.textContent = metaTitle.value || "Your Meta Title Here";
-            metaPreviewURL.textContent = metaURL.value || "https://example.com";
-            metaPreviewDescription.textContent = metaDescription.value || "Your meta description will appear here.";
+            metaPreviewTitle.textContent = facebookMetaTitle.value || "Lorem ipsum dolor consectetur";
+            metaPreviewDescription.textContent = facebookMetaDescription.value || "Lorem ipsum, dolor sit amet sit ametconsectetur adipisicing elit.";
+
+            updateCounter(facebookMetaTitle, document.getElementById('facebookTitleCount'), titleMaxLength);
+            updateCounter(facebookMetaDescription, document.getElementById('facebookDescriptionCount'), descriptionMaxLength);
+        };
+
+        // Function to update character counters and apply red color when limits are exceeded
+        const updateCounter = (element, counter, maxLength) => {
+            const length = element.value.length;
+            counter.textContent = `${length} / ${maxLength} characters`;
+            if (length > maxLength) {
+                counter.classList.add('text-red-600');
+            } else {
+                counter.classList.remove('text-red-600');
+                counter.classList.add('text-gray-500');
+            }
         };
 
         // Add event listeners to update preview on input change
-        metaTitle.addEventListener('input', updateMetaPreview);
-        metaURL.addEventListener('input', updateMetaPreview);
-        metaDescription.addEventListener('input', updateMetaPreview);
+        facebookMetaTitle.addEventListener('input', updateMetaPreview);
+        facebookMetaDescription.addEventListener('input', updateMetaPreview);
+
+        // Trigger the initial preview update on page load
+        updateMetaPreview();
     }
 
     // Method to handle Twitter preview
     initTwitterPreview() {
         const twitterTitle = document.getElementById('twitter_meta_title');
-        const twitterURL = document.getElementById('twitter_meta_url');
         const twitterDescription = document.getElementById('twitter_meta_description');
 
-        const twitterPreviewTitle = document.querySelector('#twitterMetaPreview .preview-title');
-        const twitterPreviewURL = document.querySelector('#twitterMetaPreview .preview-url');
-        const twitterPreviewDescription = document.querySelector('#twitterMetaPreview .preview-description');
+        const twitterPreviewTitle = document.querySelector('.preview_twitter_meta_title');
+        const twitterPreviewDescription = document.querySelector('.preview_twitter_meta_description');
+
+        const titleMaxLength = 70;
+        const descriptionMaxLength = 200;
 
         const updateTwitterPreview = () => {
-            twitterPreviewTitle.textContent = twitterTitle.value || "Your Twitter Title Here";
-            twitterPreviewURL.textContent = twitterURL.value || "https://example.com";
-            twitterPreviewDescription.textContent = twitterDescription.value || "Your meta description will appear here.";
+            twitterPreviewTitle.textContent = twitterTitle.value || "Lorem ipsum dolor consectetur";
+            twitterPreviewDescription.textContent = twitterDescription.value || "Lorem ipsum, dolor sit amet sit ametconsectetur adipisicing elit.";
+
+            updateCounter(twitterTitle, document.getElementById('twitterTitleCount'), titleMaxLength);
+            updateCounter(twitterDescription, document.getElementById('twitterDescriptionCount'), descriptionMaxLength);
+        };
+
+        // Function to update character counters and apply red color when limits are exceeded
+        const updateCounter = (element, counter, maxLength) => {
+            const length = element.value.length;
+            counter.textContent = `${length} / ${maxLength} characters`;
+            if (length > maxLength) {
+                counter.classList.add('text-red-600');
+            } else {
+                counter.classList.remove('text-red-600');
+                counter.classList.add('text-gray-500');
+            }
         };
 
         // Add event listeners to update preview on input change
         twitterTitle.addEventListener('input', updateTwitterPreview);
-        twitterURL.addEventListener('input', updateTwitterPreview);
         twitterDescription.addEventListener('input', updateTwitterPreview);
+
+        // Trigger the initial preview update on page load
+        updateTwitterPreview();
+    }
+    setDefaultImage(previewPlaceholder) {
+        const defaultImageUrl = previewPlaceholder.getAttribute('src');
+        if (defaultImageUrl) {
+            previewPlaceholder.src = defaultImageUrl;
+        } else {
+            console.error('Default image URL is not set.');
+        }
     }
 }
