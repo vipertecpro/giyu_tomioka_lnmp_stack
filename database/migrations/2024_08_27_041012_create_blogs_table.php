@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('google_meta_title')->nullable();
             $table->string('google_meta_url')->nullable();
             $table->string('google_meta_description')->nullable();
+            $table->string('facebook_meta_title')->nullable();
+            $table->string('facebook_meta_description')->nullable();
+            $table->string('twitter_meta_title')->nullable();
+            $table->string('twitter_meta_description')->nullable();
             $table->string('status')->default('draft');
             $table->boolean('visibility')->default(false);
             $table->unsignedBigInteger('created_by')->nullable();

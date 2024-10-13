@@ -4,6 +4,7 @@
     <form action="{{ route('app.dashboard.blogs.form',@$pageData->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
+        <input type="hidden" name="status" value="{{  @$pageData->status }}" />
         <div class="grid grid-cols-12 sm:grid-cols-1 md:grid-cols-12 gap-2">
             <div class="col-span-12">
                 <div class="grid grid-cols-1 gap-2">
@@ -535,11 +536,11 @@
                                         <div class="flex flex-col gap-2">
                                             <input type="text" name="facebook_meta_title" id="facebook_meta_title"
                                                 class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Facebook title" />
+                                                placeholder="Facebook title" value="{{  @$pageData->facebook_meta_title ?? @$pageData->title }}" />
                                             <small id="facebookTitleCount" class="text-xs text-gray-500 font-semibold">0 / 40 characters</small>
                                             <textarea name="facebook_meta_description" id="facebook_meta_description"
                                                 class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Facebook description" rows="5"></textarea>
+                                                placeholder="Facebook description" rows="5">{{  @$pageData->facebook_meta_description ?? @$pageData->excerpt }}</textarea>
                                             <small id="facebookDescriptionCount" class="text-xs text-gray-500 font-semibold">0 / 125 characters</small>
                                             <div class="text-gray-700 dark:text-gray-200 text-base bold">Search Engine Result Preview</div>
                                             <div id="facebookMetaPreview" class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -576,11 +577,11 @@
                                         <div class="flex flex-col gap-2">
                                             <input type="text" name="twitter_meta_title" id="twitter_meta_title"
                                                 class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Twitter title" />
+                                                placeholder="Twitter title" value="{{  @$pageData->twitter_meta_title ?? @$pageData->title }}"/>
                                             <small id="twitterTitleCount" class="text-xs text-gray-500 font-semibold">0 / 70 characters</small>
                                             <textarea name="facebook_meta_description" id="twitter_meta_description"
                                                 class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Twitter description" rows="5"></textarea>
+                                                placeholder="Twitter description" rows="5">{{  @$pageData->twitter_meta_description ?? @$pageData->excerpt }}</textarea>
                                             <small id="twitterDescriptionCount" class="text-xs text-gray-500 font-semibold">0 / 200 characters</small>
                                             <div class="text-gray-700 dark:text-gray-200 text-base bold">Search Engine Result Preview</div>
                                             <div id="twitterMetaPreview" class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

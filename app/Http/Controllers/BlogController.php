@@ -104,7 +104,11 @@ class BlogController extends Controller
                 'google_meta_title'           => $request->get('google_meta_title'),
                 'google_meta_url'             => $request->get('google_meta_url'),
                 'google_meta_description'     => $request->get('google_meta_description'),
-                'status'                      => 'draft',
+                'facebook_meta_title'         => $request->get('facebook_meta_title'),
+                'facebook_meta_description'   => $request->get('facebook_meta_description'),
+                'twitter_meta_title'          => $request->get('twitter_meta_title'),
+                'twitter_meta_description'    => $request->get('twitter_meta_description'),
+                'status'                      => $request->get('status'),
                 'visibility'                  => false,
                 'created_by'                  => auth()->id(),
             ];

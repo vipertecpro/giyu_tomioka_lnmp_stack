@@ -1,6 +1,6 @@
 <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 border-t dark:border-gray-600 flex flex-col">
     <div class="p-2 flex flex-col">
-        <div class="flex-1 w-full md:max-w-sm md:mr-2">
+        <div class="flex-1 w-full md:mr-2">
             <label for="tags-widget-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
